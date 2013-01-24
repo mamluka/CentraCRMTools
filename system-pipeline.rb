@@ -37,13 +37,15 @@ end
 
 week_old_leads = Lead.where('date_entered < ? and status= ?', 7.day.ago, 'FU')
 
-logger.info "We have found #{week_old_leads.to_s} leads"
+logger.info "We have found #{week_old_leads.length.to_s} leads"
 
 week_old_leads.each do |lead|
   lead.status = 'SP'
   lead.assigned_user_id = '92b0bdb7-bb6c-449f-fa73-510054673707'
 
   lead.save
+
+  custom_data = LeadsCustomData.find(lead.id)
 
   if custom_data.prev_url_c != "http://" && EmailAddressRelation.exists?(:bean_id => lead.id)
     logger.info "loaded custom data for #{lead.first_name} the data has in it #{custom_data.prev_url_c}"
