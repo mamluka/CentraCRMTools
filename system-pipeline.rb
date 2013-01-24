@@ -2,6 +2,7 @@ require 'rubygems'
 require 'active_record'
 require 'active_support/all'
 require 'logging'
+require 'rest_client'
 
 ActiveRecord::Base.establish_connection(
     :adapter => 'mysql2',
