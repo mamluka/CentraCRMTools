@@ -1,8 +1,9 @@
 class Lead < ActiveRecord::Base
   self.primary_key = 'id'
   has_one :leads_custom_data, :primary_key => 'id', :foreign_key => 'id_c'
+  has_one :email_address_relation, :primary_key => 'id', :foreign_key => 'bean_id'
 
-  has_many :email_addresss, :through => :email_address_relations
+  has_many :email_addresss, :through => :email_address_relation
 end
 
 class LeadsCustomData < ActiveRecord::Base
