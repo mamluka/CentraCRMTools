@@ -18,6 +18,7 @@ logger.add_appenders(
 )
 
 logger.level = :info
+logger.layout = Logging.layouts.pattern(:pattern => '[%d]: %m\n')
 
 class Lead < ActiveRecord::Base
 end
