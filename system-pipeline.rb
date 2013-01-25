@@ -1,43 +1,5 @@
-require 'rubygems'
-require 'active_record'
-require 'active_support/all'
-require 'logging'
-require 'rest_client'
-
-ActiveRecord::Base.establish_connection(
-    :adapter => 'mysql2',
-    :database => 'jdeering_centracrm',
-    :username => 'jdeering_david',
-    :password => '0953acb',
-    :host => 'centracorporation.com')
-
-logger = Logging.logger['logger']
-logger.add_appenders(
-    Logging.appenders.stdout,
-    Logging.appenders.file(
-        'centra.log',
-        :layout => Logging.layouts.pattern(:pattern => '[%d]: %m\n')
-    )
-)
-
-logger.level = :info
-
-class Lead < ActiveRecord::Base
-end
-
-class LeadsCustomData < ActiveRecord::Base
-  set_table_name 'leads_cstm'
-  set_primary_key 'id_c'
-end
-
-
-class EmailAddress < ActiveRecord::Base
-  set_table_name 'email_addresses'
-end
-
-class EmailAddressRelation < ActiveRecord::Base
-  set_table_name 'email_addr_bean_rel'
-end
+load 'init'
+load 'active_records_models'
 
 week_old_leads = Lead.where('date_entered < ? and status= ?', 7.day.ago, 'FU')
 
