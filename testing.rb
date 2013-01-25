@@ -3,4 +3,4 @@ load 'active_records_models.rb'
 
 lead = Lead.first
 
-puts lead.company_name_c
+puts lead.leads_custom_data.company_name_c
