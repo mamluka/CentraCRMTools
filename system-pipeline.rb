@@ -14,7 +14,7 @@ week_old_leads.each do |lead|
   if lead.custom_data.prev_url_c != "http://" && lead.emails.any?
     logger.info "loaded custom data for #{lead.first_name} the data has in it #{lead.custom_data.prev_url_c}"
 
-    email = lead.emails.first
+    email = lead.emails.first.email_address
 
     logger.info "it has the email: #{email}"
 
