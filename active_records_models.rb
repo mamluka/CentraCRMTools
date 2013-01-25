@@ -1,5 +1,5 @@
 class Lead < ActiveRecord::Base
-  has_one :leads_custom_data, :primary_key => 'id_c',:foreign_key => 'id'
+  has_one :leads_custom_data, :primary_key => 'id', :foreign_key => 'id_c'
 end
 
 class LeadsCustomData < ActiveRecord::Base
