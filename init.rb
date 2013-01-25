@@ -11,13 +11,18 @@ ActiveRecord::Base.establish_connection(
     :password => '0953acb',
     :host => 'centracorporation.com')
 
-logger = Logging.logger['logger']
-logger.add_appenders(
-    Logging.appenders.stdout,
-    Logging.appenders.file(
-        'centra.log',
-        :layout => Logging.layouts.pattern(:pattern => '[%d]: %m\n')
+class StandardLogger
+  def self.get
+    logger = Logging.logger['logger']
+    logger.add_appenders(
+        Logging.appenders.stdout,
+        Logging.appenders.file(
+            'centra.log',
+            :layout => Logging.layouts.pattern(:pattern => '[%d]: %m\n')
+        )
     )
-)
 
-logger.level = :info
+    logger.level = :info
+    logger
+  end
+end

@@ -1,6 +1,8 @@
 load 'init.rb'
 load 'active_records_models.rb'
 
+logger = StandardLogger.get
+
 week_old_leads = Lead.where('date_entered < ? and status= ?', 7.day.ago, 'FU')
 
 logger.info "We have found #{week_old_leads.length.to_s} leads"
