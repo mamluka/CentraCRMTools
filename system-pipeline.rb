@@ -14,18 +14,20 @@ ActiveRecord::Base.establish_connection(
 logger = Logging.logger['logger']
 logger.add_appenders(
     Logging.appenders.stdout,
-    Logging.appenders.file('centra.log')
+    Logging.appenders.file(
+        'centra.log',
+        :layout => Logging.layouts.pattern(:pattern => '[%d]: %m\n')
+    )
 )
 
 logger.level = :info
-logger.layout = Logging.layouts.pattern(:pattern => '[%d]: %m\n')
 
 class Lead < ActiveRecord::Base
 end
 
 class LeadsCustomData < ActiveRecord::Base
   set_table_name 'leads_cstm'
-  set_primary_key  'id_c'
+  set_primary_key 'id_c'
 end
 
 
@@ -57,7 +59,7 @@ week_old_leads.each do |lead|
 
     logger.info "it has the email: #{email.email_address}"
 
-    res = RestClient.get 'http://apps.centracorporation.com/api/email/first-system-pipeline', {:params=> { :email => email.email_address,:previewUrl =>  custom_data.prev_url_c}}
+    res = RestClient.get 'http://apps.centracorporation.com/api/email/first-system-pipeline', {:params => {:email => email.email_address, :previewUrl => custom_data.prev_url_c}}
 
     logger.info "The api call response: #{res}"
 
