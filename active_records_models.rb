@@ -1,17 +1,17 @@
 class Lead < ActiveRecord::Base
-  has_one :leads_custom_data,:primary_key => 'id_c'
+  has_one :leads_custom_data, :primary_key => 'id_c'
 end
 
 class LeadsCustomData < ActiveRecord::Base
-  self.table_name 'leads_cstm'
-  self.primary_key 'id_c'
+  self.table_name = 'leads_cstm'
+  self.primary_key = 'id_c'
 end
 
 
 class EmailAddress < ActiveRecord::Base
-  self.table_name 'email_addresses'
+  self.table_name = 'email_addresses'
 end
 
 class EmailAddressRelation < ActiveRecord::Base
-  self.table_name 'email_addr_bean_rel'
+  self.table_name = 'email_addr_bean_rel'
 end
