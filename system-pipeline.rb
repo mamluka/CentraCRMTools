@@ -11,7 +11,7 @@ week_old_leads.each do |lead|
   lead.status = 'SP'
   lead.assigned_user_id = '92b0bdb7-bb6c-449f-fa73-510054673707'
 
-  if lead.custom_data.prev_url_c != "http://" && lead.emails.any?
+  if lead.custom_data.prev_url_c != "http://" && lead.emails.any?  && lead.custom_data.system_pipeline_email_1_c == nil
     logger.info "loaded custom data for #{lead.first_name} the data has in it #{lead.custom_data.prev_url_c}"
 
     email = lead.emails.first.email_address
