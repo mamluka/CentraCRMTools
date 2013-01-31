@@ -13,6 +13,10 @@ class ApiEmailer
     RestClient.get "http://apps.centracorporation.com/api/email/#{api}", {:params => apiCallParams}
   end
 
+  def cancellation(email)
+    email 'cancellation', email
+  end
+
   def dead_client(email)
     email 'dead-client', email
   end
