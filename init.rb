@@ -4,6 +4,8 @@ require 'active_support/all'
 require 'logging'
 require 'rest_client'
 
+load 'emailer.rb'
+
 ActiveRecord::Base.establish_connection(
     :adapter => 'mysql2',
     :database => 'jdeering_centracrm',
@@ -26,3 +28,5 @@ class StandardLogger
     logger
   end
 end
+
+$system_pipeline_user_id = '92b0bdb7-bb6c-449f-fa73-510054673707'
