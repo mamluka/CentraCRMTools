@@ -30,3 +30,4 @@ class StandardLogger
 end
 
 $system_pipeline_user_id = '92b0bdb7-bb6c-449f-fa73-510054673707'
+$centra_small_business_user_id = 'b2f5c6ac-4dcf-8c27-e381-51083846f181'
