@@ -4,6 +4,14 @@ class Lead < ActiveRecord::Base
   has_one :email_relation, :primary_key => 'id', :foreign_key => 'bean_id'
 
   has_many :emails, :through => :email_relation
+
+  def is_emailable?
+    custom_data.do_not_email_c
+  end
+
+  def name
+    first_name + " " + last_name
+  end
 end
 
 class CustomData < ActiveRecord::Base

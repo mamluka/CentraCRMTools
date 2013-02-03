@@ -6,7 +6,7 @@ logger = StandardLogger.get
 dead_leads = Lead.where('status = ? and assigned_user_id = ?', 'Dead', $system_pipeline_user_id)
 
 old_dead_leads = dead_leads.select do |lead|
-  !lead.custom_data.nil? && Time.parse(lead.custom_data.dead_status_assigned_date_c) < 7.days.ago && lead.emails.any? && lead.custom_data.dead_client_email_sent_c.nil?
+  !lead.custom_data.nil? && Time.parse(lead.custom_data.dead_status_assigned_date_c) < 7.days.ago && lead.emails.any? && lead.is_emailable? && lead.custom_data.dead_client_email_sent_c.nil?
 end
 
 logger.info "Found #{old_dead_leads.length.to_s} dead leads that are 7 days old and did not got a dead client email"

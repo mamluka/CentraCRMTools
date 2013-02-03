@@ -5,6 +5,10 @@ class ApiEmailer
     email 'first-system-pipeline', email, {:previewUrl => previewUrl}
   end
 
+  def second_system_pipeline(email, previewUrl)
+    email 'second-system-pipeline', email, {:previewUrl => previewUrl}
+  end
+
   def email(api, email, more = nil)
     apiCallParams = {:email => email}
     if not more.nil?
