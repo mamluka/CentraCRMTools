@@ -21,7 +21,7 @@ clients_without_local_listing_data.each do |lead|
   res = mailer.googlelocal_info_request email, lead.first_name, lead.id
 
   if res=="OK"
-    lead.custom_data.mobileweb_info_req_sent_c = Time.now
+    lead.custom_data.googlelocal_info_req_sent_c = Time.now
     lead.save
   else
     logger.info "Api returned error response: " + res
