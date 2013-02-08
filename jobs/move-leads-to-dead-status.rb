@@ -6,7 +6,7 @@ logger = StandardLogger.get
 leads = Lead.all
 
 dead_leads = leads.select do |lead|
-  lead.custom_data.not_billable_c = 1 && lead.custom_data.non_billable_reason_c == "not_interested"
+  !lead.custom_data.nil? && lead.custom_data.not_billable_c = 1 && lead.custom_data.non_billable_reason_c == "not_interested"
 end
 
 logger.info "Found #{dead_leads.length.to_s} leads that are not billable and not interested"
