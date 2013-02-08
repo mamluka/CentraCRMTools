@@ -3,7 +3,7 @@ load File.dirname(__FILE__) + '/lib/active_records_models.rb'
 
 logger = StandardLogger.get
 
-dead_leads = Lead.where('status = ? and assigned_user_id != ?','client',$system_pipeline_user_id)
+dead_leads = Lead.where('status = ? and assigned_user_id != ?', 'client', $centra_small_business_user_id)
 
 logger.info "Found #{dead_leads.length.to_s} clients"
 
