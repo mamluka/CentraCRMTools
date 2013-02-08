@@ -4,7 +4,7 @@ require 'active_support/all'
 require 'logging'
 require 'rest_client'
 
-load File.dirname(__FILE__) +  '/lib/emailer.rb'
+load File.dirname(__FILE__) +  '/emailer.rb'
 
 ActiveRecord::Base.establish_connection(
     :adapter => 'mysql2',
