@@ -9,25 +9,21 @@ logger.info "We have found #{week_old_leads.length.to_s} leads"
 
 week_old_leads.each do |lead|
   lead.status = 'SP'
-  lead.assigned_user_id = $system_pipeline_user_id
+  lead.assigned_user_id = '92b0bdb7-bb6c-449f-fa73-510054673707'
 
-  if lead.custom_data.prev_url_c != "http://" && lead.emails.any? && lead.custom_data.system_pipeline_email_1_c.nil? && !lead.do_not_email
+  if lead.custom_data.prev_url_c != "http://" && lead.emails.any?  && lead.custom_data.system_pipeline_email_1_c == nil
     logger.info "loaded custom data for #{lead.first_name} the data has in it #{lead.custom_data.prev_url_c}"
 
     email = lead.emails.first.email_address
 
     logger.info "it has the email: #{email}"
 
-    mailer = ApiEmailer.new
-
-    res = mailer.first_system_pipeline email, lead.custom_data.prev_url_c
+    res = RestClient.get 'http://apps.centracorporation.com/api/email/first-system-pipeline', {:params => {:email => email, :previewUrl => lead.custom_data.prev_url_c}}
 
     logger.info "The api call response: #{res}"
 
     if res == "OK"
       lead.custom_data.system_pipeline_email_1_c = Time.now
-    else
-      logger.info "Api response was: " + res
     end
 
   end

@@ -5,7 +5,7 @@ class Lead < ActiveRecord::Base
 
   has_many :emails, :through => :email_relation
 
-  def is_emailable?
+  def do_not_email
     custom_data.do_not_email_c
   end
 

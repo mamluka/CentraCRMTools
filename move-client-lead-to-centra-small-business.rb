@@ -3,7 +3,7 @@ load 'active_records_models.rb'
 
 logger = StandardLogger.get
 
-dead_leads = Lead.where('status = ?', 'client')
+dead_leads = Lead.where('status = ? and assigned_user_id != ?','client',$system_pipeline_user_id)
 
 logger.info "Found #{dead_leads.length.to_s} clients"
 
