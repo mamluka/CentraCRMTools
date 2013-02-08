@@ -30,4 +30,4 @@ old_cancelled_leads.each do |lead|
   sleep 20
 end
 
-logger.info "#{cancelled_leads.length.to_s} cancelled leads got an email"
+logger.info "#{old_cancelled_leads.length.to_s} cancelled leads got an email"
