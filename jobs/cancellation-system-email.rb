@@ -1,11 +1,11 @@
-load 'lib/init.rb'
-load 'lib/active_records_models.rb'
+load File.dirname(__FILE__) + '/lib/init.rb'
+load File.dirname(__FILE__) + '/lib/active_records_models.rb'
 
 logger = StandardLogger.get
 
 cancelled_leads = Lead.where('status = ?', 'cancelled')
 
-old_cancelled_leads = cancelled_leads.select do |lead| 
+old_cancelled_leads = cancelled_leads.select do |lead|
   !lead.custom_data.nil? && lead.custom_data.cancellation_change_date_c < 3.days.ago && lead.emails.any? && !lead.do_not_email && lead.custom_data.cancellation_email_sent_c.nil?
 end
 
