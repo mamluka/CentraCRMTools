@@ -1,5 +1,5 @@
-load 'init.rb'
-load 'active_records_models.rb'
+load 'lib/init.rb'
+load 'lib/active_records_models.rb'
 
 logger = StandardLogger.get
 
