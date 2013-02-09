@@ -18,11 +18,11 @@ class ApiEmailer
   end
 
   def mobileweb_info_request(email, name, customerId)
-    email 'mobile-site-client-information-request', email, {:name => name, customerId => customerId}
+    email 'mobile-site-client-information-request', email, {:name => name, :customerId => customerId}
   end
 
   def googlelocal_info_request(email, name, customerId)
-    email 'google-local-listing-client-information-request', email, {:name => name, customerId => customerId}
+    email 'google-local-listing-client-information-request', email, {:name => name, :customerId => customerId}
   end
 
   def email(api, email, more = nil)

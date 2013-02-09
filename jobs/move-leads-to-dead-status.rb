@@ -3,10 +3,10 @@ load File.dirname(__FILE__) + '/lib/active_records_models.rb'
 
 logger = StandardLogger.get
 
-leads = Lead.all
+leads = Lead.where('assigned_user_id != ?', $system_pipeline_user_id)
 
 dead_leads = leads.select do |lead|
-  lead.assigned_user_id != $system_pipeline_user_id && !lead.custom_data.nil? && lead.custom_data.not_billable_c = 1 && lead.custom_data.non_billable_reason_c == "not_interested"
+  !lead.custom_data.nil? && lead.custom_data.not_billable_c = 1 && lead.custom_data.non_billable_reason_c == "not_interested"
 end
 
 logger.info "Found #{dead_leads.length.to_s} leads that are not billable and not interested"
