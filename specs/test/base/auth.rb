@@ -8,7 +8,7 @@ class Auth
   end
 
   def login(username = nil, password = nil)
-    config = JSON.parse(file.read(@config))
+    config = JSON.parse(File.read(@config))
 
     username ||= config['admin_username']
     password ||= config['admin_password']
