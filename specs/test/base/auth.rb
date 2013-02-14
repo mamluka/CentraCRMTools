@@ -1,14 +1,14 @@
 require 'json'
 
 class Auth
-  @config = File.dirname(__FILE__) + '/config_crm.json'
+  @@config = File.dirname(__FILE__) + '/config_crm.json'
 
   def initialize(driver)
     @driver = driver
   end
 
   def login(username = nil, password = nil)
-    config = JSON.parse(File.read(@config))
+    config = JSON.parse(File.read(@@config))
 
     username ||= config['admin_username']
     password ||= config['admin_password']
