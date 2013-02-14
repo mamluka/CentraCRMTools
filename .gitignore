@@ -17,5 +17,5 @@ tmp
 _yardoc
 doc/
 
-.idea/**
-.log
+.idea/*
+centra.log
