@@ -13,8 +13,8 @@ class Auth
     username ||= config['admin_username']
     password ||= config['admin_password']
 
-    b.text_field(:name => 'user_name').set username
-    b.text_field(:name => 'user_password').set password
-    b.button(:name => 'Login').click
+    @driver.text_field(:name => 'user_name').set username
+    @driver.text_field(:name => 'user_password').set password
+    @driver.button(:name => 'Login').click
   end
 end
