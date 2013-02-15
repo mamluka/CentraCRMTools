@@ -16,4 +16,8 @@ class Lead
 
     @id = driver.url.match(/record=(.+?)&/)[1]
   end
+
+  def id
+    @id
+  end
 end
