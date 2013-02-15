@@ -9,7 +9,7 @@ class TestMini < MiniTest::Unit::TestCase
   def setup
     @driver = Watir::Browser.new :phantomjs
 
-    `ruby base/api-interceptor.rb &`
+    `screen -L -dmS api ruby base/api-interceptor.rb`
   end
 
   def test_this_test
