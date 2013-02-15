@@ -8,6 +8,8 @@ class TestMini < MiniTest::Unit::TestCase
 
   def setup
     @driver = Watir::Browser.new :phantomjs
+
+    `ruby base/api-interceptor.rb &`
   end
 
   def test_this_test
@@ -16,7 +18,7 @@ class TestMini < MiniTest::Unit::TestCase
 
     lead = Lead.new @driver
 
-
+    puts lead.id
   end
 end
 	
