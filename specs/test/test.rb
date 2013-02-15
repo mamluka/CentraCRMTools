@@ -29,8 +29,8 @@ class TestMini < CrmTestBase
                     }
 
     assert_api_called({:email => email, :previewUrl => 'http://preview.flowmobileapps.com/compare/testing'})
-    assert lead.get('mobile_preview_email_sent_c') == Date.today.strftime('%m/%d/%Y')
-    assert lead.status == "Assigned"
+    assert_equal lead.get('mobile_preview_email_sent_c'), Date.today.strftime('%m/%d/%Y')
+    assert_equal lead.status, "Assigned"
   end
 end
 	
