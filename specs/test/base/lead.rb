@@ -56,6 +56,8 @@ class Lead
     @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
+    puts @driver.text
+
     @driver.text_field(:name => name).value
   end
 
