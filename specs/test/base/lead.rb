@@ -1,4 +1,5 @@
 class Lead
+  include SecureRandom
   def initialize(driver, information = nil)
     information ||= {:first_name => SecureRandom.uuid, :last_name => SecureRandom.uuid}
 
