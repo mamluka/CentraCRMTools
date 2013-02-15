@@ -12,7 +12,7 @@ class Lead
     driver.text_field(:name => 'first_name').set information[:first_name]
     driver.text_field(:name => 'last_name').set information[:last_name]
 
-    driver.button(:value => 'Submit').click
+    driver.button(:value => 'Save').click
 
     puts driver.url
 
