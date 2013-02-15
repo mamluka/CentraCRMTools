@@ -13,14 +13,15 @@ class Lead
     driver.link(:text => 'Create').click
 
     values.each do |key, value|
-      key = key.to_s
-      action = value.split(' ')[0]
       driver_extentions = DriverExtentions.new(driver)
 
+      name = key.to_s
+      action = value.split(' ')[0]
+
       if driver_extentions.supports?(action)
-        driver_extentions.send(action, key, value)
+        driver_extentions.send(action, name, value.split(' ')[1])
       else
-        driver.text_field(:name => key.to_s).set value
+        driver.text_field(:name => name).set value
       end
     end
 
