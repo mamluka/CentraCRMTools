@@ -8,15 +8,18 @@ class TestMini < MiniTest::Unit::TestCase
 
   def setup
     @driver = Watir::Browser.new :phantomjs
-
     `screen -L -dmS api ruby base/api-interceptor.rb`
+  end
+
+  def teardown
+    `pkill -f api-interceptor.rb`
   end
 
   def test_this_test
     auth = Auth.new @driver
     auth.login
 
-    lead = Lead.new @driver
+    lead = Lead.new @driver, {:prev_url_c => 'http://preview.flowmobileapps.com/compare/lqtravel'}
 
     puts lead.id
   end
