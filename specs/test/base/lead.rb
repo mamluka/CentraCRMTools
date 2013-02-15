@@ -11,7 +11,7 @@ class Lead
     driver.link(:text => 'Create').click
 
     values.each do |key, value|
-      driver.text_field(:name => key).set value
+      driver.text_field(:name => key.to_s).set value
     end
 
     driver.button(:value => 'Save').click
