@@ -56,15 +56,13 @@ class Lead
     @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
-    puts @driver.text
-
-    @driver.text_field(:id => name).value
+    @driver.span(:id => name).value
   end
 
   def status
     @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
-    @driver.select_list(:id => 'status').selected_options[0]
+    @driver.execute_script("$('#status').parent().text().trim()")
   end
 end
