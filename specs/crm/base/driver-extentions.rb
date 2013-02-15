@@ -1,5 +1,5 @@
 class DriverExtentions
-  @@supported_actions = ["email", "select"]
+  @@supported_actions = ["email", "select", "check", "uncheck"]
 
   def initialize(driver)
     @driver = driver
