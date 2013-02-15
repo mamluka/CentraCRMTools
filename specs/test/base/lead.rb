@@ -63,6 +63,6 @@ class Lead
     @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
-    @driver.execute_script("$('#status').parent().text().trim()")
+    @driver.execute_script("return $('#status').parent().text().trim()")
   end
 end
