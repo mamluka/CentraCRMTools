@@ -13,8 +13,7 @@ class DriverExtentions
     @driver.select_list(:name => name).select value
   end
 
-  def email(name,value)
+  def email(name, value)
     @driver.text_field(:name => 'Leads0emailAddress0').set value
-    @driver.button(:id => 'Leads0_email_widget_add').click
   end
 end
