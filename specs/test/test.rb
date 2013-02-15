@@ -10,10 +10,13 @@ class TestMini < MiniTest::Unit::TestCase
   end
 
   def test_this_test
-    auth = Auth.new(@driver)
+    auth = Auth.new @driver
     auth.login
 
-    puts @driver.text
+    leadId = Lead.new @driver
+
+    puts leadId
+
   end
 end
 	
