@@ -49,7 +49,12 @@ class Lead
       action = value.split(' ')[0]
 
       if driver_extentions.supports?(action)
-        driver_extentions.send(action, name, value.split(' ')[1])
+        array = value.split(' ')
+        if array.length > 1
+          driver_extentions.send(action, name, array[1])
+        else
+          driver_extentions.send(action, name)
+        end
       else
         @driver.text_field(:name => name).set value
       end

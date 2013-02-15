@@ -13,6 +13,14 @@ class DriverExtentions
     @driver.select_list(:name => name).select value
   end
 
+  def check(name)
+    @driver.checkbox(:name => name).set
+  end
+
+  def uncheck(name)
+    @driver.checkbox(:name => name).clear
+  end
+
   def email(name, value)
     @driver.text_field(:name => 'Leads0emailAddress0').set value
   end
