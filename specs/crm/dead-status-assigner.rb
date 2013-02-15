@@ -11,7 +11,7 @@ class TestMini < CrmTestBase
     auth = Auth.new @driver
     auth.login
 
-    Lead.new @driver, {:status => 'select Dead'}
+    lead = Lead.new @driver, {:status => 'select Dead'}
 
     assert_equal lead.get('dead_status_assigner_c'), "David MZ"
     assert_equal lead.get('dead_status_assigned_date_c'), today_crm_date
