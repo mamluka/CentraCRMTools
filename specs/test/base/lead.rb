@@ -23,12 +23,12 @@ class Lead
   end
 
   def show_all_panels
-    driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
   end
 
   def set_values(values)
     values.each do |key, value|
-      driver_extentions = DriverExtentions.new(driver)
+      driver_extentions = DriverExtentions.new(@driver)
 
       name = key.to_s
       action = value.split(' ')[0]
@@ -36,8 +36,22 @@ class Lead
       if driver_extentions.supports?(action)
         driver_extentions.send(action, name, value.split(' ')[1])
       else
-        driver.text_field(:name => name).set value
+        @driver.text_field(:name => name).set value
       end
     end
+  end
+
+  def get(name)
+    driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    show_all_panels
+
+    @driver.text_field(:name => name).value
+  end
+
+  def status
+    driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    show_all_panels
+
+    @driver.select_list(:name => 'status').selected_options[0]
   end
 end

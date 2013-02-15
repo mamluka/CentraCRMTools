@@ -21,10 +21,12 @@ class TestMini < MiniTest::Unit::TestCase
 
     lead = Lead.new @driver,
                     {:prev_url_c => 'http://preview.flowmobileapps.com/compare/lqtravel',
-                     :company_name_c => 'testing',
                      :status => 'select Dead',
                      :email => 'email david@david.com'
                     }
+
+    puts lead.get :mobile_preview_email_sent_c
+    puts lead.status
 
     puts lead.id
   end
