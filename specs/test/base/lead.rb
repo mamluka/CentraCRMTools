@@ -56,7 +56,7 @@ class Lead
     @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
-    @driver.span(:id => name).value
+    @driver.span(:id => name).html
   end
 
   def status
