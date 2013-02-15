@@ -14,9 +14,9 @@ class TestMini < MiniTest::Unit::TestCase
     auth = Auth.new @driver
     auth.login
 
-    leadId = Lead.new @driver
+    lead = Lead.new @driver
 
-    puts leadId
+    puts lead.id
 
   end
 end

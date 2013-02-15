@@ -14,8 +14,6 @@ class Lead
 
     driver.button(:value => 'Save').click
 
-    puts driver.url
-
-    driver.url.match(/record=(.+?)&/)[1]
+    @id = driver.url.match(/record=(.+?)&/)[1]
   end
 end
