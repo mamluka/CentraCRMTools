@@ -25,7 +25,7 @@ class Lead
 
     url_match = @driver.url.match(/record=(.+?)&/)
 
-    if url_match.length > 0
+    unless url_match.nil?
       @id = url_match[1]
     end
   end
