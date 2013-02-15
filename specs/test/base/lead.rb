@@ -12,6 +12,8 @@ class Lead
 
     driver.link(:text => 'Create').click
 
+    driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+
     values.each do |key, value|
       driver_extentions = DriverExtentions.new(driver)
 
