@@ -22,7 +22,7 @@ class TestMini < CrmTestBase
     auth = Auth.new @driver
     auth.login
 
-    Lead.new @driver, {:mobileweb_check_c => 'check', :status => 'set Cancelled'}
+    Lead.new @driver, {:mobileweb_check_c => 'check', :status => 'select Cancelled'}
 
     assert_equal @driver.text, "You can't change a lead to cancelled status when you have service checked, the services are located in the Sold Services tab"
 
@@ -33,7 +33,7 @@ class TestMini < CrmTestBase
     auth = Auth.new @driver
     auth.login
 
-    Lead.new @driver, {:googlelocal_check_c => 'check', :status => 'set Cancelled'}
+    Lead.new @driver, {:googlelocal_check_c => 'check', :status => 'select Cancelled'}
 
     assert_equal @driver.text, "You can't change a lead to cancelled status when you have service checked, the services are located in the Sold Services tab"
 
@@ -44,7 +44,7 @@ class TestMini < CrmTestBase
     auth = Auth.new @driver
     auth.login
 
-    Lead.new @driver, {:merch_check_c => 'check', :status => 'set Cancelled'}
+    Lead.new @driver, {:merch_check_c => 'check', :status => 'select Cancelled'}
 
     assert_equal @driver.text, "You can't change a lead to cancelled status when you have service checked, the services are located in the Sold Services tab"
 
