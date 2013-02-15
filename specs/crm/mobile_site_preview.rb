@@ -15,7 +15,7 @@ class TestMini < CrmTestBase
 
   def teardown
     `pkill -f api-interceptor.rb`
-    'rm -rf api-call.json'
+    `rm -rf api-call.json`
   end
 
   def test_when_has_preview_url_should_send_preview_email
