@@ -12,8 +12,6 @@ class Lead
     values ||= Hash.new
     values = values.merge({:first_name => SecureRandom.uuid, :last_name => SecureRandom.uuid})
 
-    puts values[:first_name]
-
     @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=index&parentTab=Sales'
 
     @driver.link(:text => 'Create').click

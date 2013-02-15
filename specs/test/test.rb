@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'watir-webdriver'
+require 'securerandom'
 
 require File.dirname(__FILE__) + '/base/auth.rb'
 require File.dirname(__FILE__) + '/base/lead.rb'
@@ -22,7 +23,7 @@ class TestMini < MiniTest::Unit::TestCase
     lead = Lead.new @driver,
                     {:prev_url_c => 'http://preview.flowmobileapps.com/compare/lqtravel',
                      :status => 'select Dead',
-                     :email => 'email david@david.com'
+                     :email => "email #{SecureRandom.uuid}@david.com"
                     }
 
     puts lead.get :mobile_preview_email_sent_c
