@@ -4,16 +4,20 @@ require File.dirname(__FILE__) + '/driver-extentions.rb'
 
 class Lead
   def initialize(driver, values = nil)
+    @driver = driver
+    create_new_lead(values)
+  end
+
+  def create_new_lead(values)
     values ||= Hash.new
     values = values.merge({:first_name => SecureRandom.uuid, :last_name => SecureRandom.uuid})
-    @driver = driver
 
-    driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=index&parentTab=Sales'
+    @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=index&parentTab=Sales'
 
-    driver.link(:text => 'Create').click
+    @driver.link(:text => 'Create').click
     set_values(values)
 
-    driver.button(:value => 'Save').click
+    @driver.button(:value => 'Save').click
 
     @id = driver.url.match(/record=(.+?)&/)[1]
   end
