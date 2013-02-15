@@ -12,6 +12,8 @@ class Lead
 
     driver.button(:value => 'Submit').click
 
+    puts driver.url
+
     driver.url.match(/record=(.+?)&/)[1]
   end
 end
