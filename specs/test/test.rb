@@ -20,16 +20,12 @@ class TestMini < MiniTest::Unit::TestCase
     auth = Auth.new @driver
     auth.login
 
+    email = "#{SecureRandom.uuid}@david.com"
+
     lead = Lead.new @driver,
-                    {:prev_url_c => 'http://preview.flowmobileapps.com/compare/lqtravel',
-                     :status => 'select Dead',
-                     :email => "email #{SecureRandom.uuid}@david.com"
+                    {:prev_url_c => 'http://preview.flowmobileapps.com/compare/testing',
+                     :email => "email #{email}"
                     }
-
-    puts lead.get 'mobile_preview_email_sent_c'
-    puts lead.status
-
-    puts lead.id
   end
 end
 	
