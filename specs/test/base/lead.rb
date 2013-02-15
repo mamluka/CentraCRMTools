@@ -19,6 +19,8 @@ class Lead
 
     @driver.button(:value => 'Save').click
 
+    puts @driver.url
+
     @id = @driver.url.match(/record=(.+?)&/)[1]
   end
 
