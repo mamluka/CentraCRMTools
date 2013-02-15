@@ -1,6 +1,16 @@
 require 'json'
 
 class CrmTestBase < MiniTest::Unit::TestCase
+  def setup
+    @driver = Watir::Browser.new :phantomjs
+    `screen -L -dmS api ruby base/api-interceptor.rb`
+  end
+
+  def teardown
+    `pkill -f api-interceptor.rb`
+    `rm -rf api-call.json`
+  end
+
   def assert_api_called(params)
     actual_api_call = JSON.parse(File.read('api-call.json'))
 

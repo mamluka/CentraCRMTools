@@ -8,16 +8,6 @@ require File.dirname(__FILE__) + '/base/crm_test_base.rb'
 
 class TestMini < CrmTestBase
 
-  def setup
-    @driver = Watir::Browser.new :phantomjs
-    `screen -L -dmS api ruby base/api-interceptor.rb`
-  end
-
-  def teardown
-    `pkill -f api-interceptor.rb`
-    `rm -rf api-call.json`
-  end
-
   def test_when_has_preview_url_should_send_preview_email
     auth = Auth.new @driver
     auth.login
@@ -50,15 +40,11 @@ class TestMini < CrmTestBase
     auth = Auth.new @driver
     auth.login
 
-    email = "#{SecureRandom.uuid}@david.com"
-
     lead = Lead.new @driver
 
     assert_api_not_called
     assert_equal lead.status, ""
   end
-
-
 end
 	
 
