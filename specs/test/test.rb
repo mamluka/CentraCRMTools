@@ -16,7 +16,7 @@ class TestMini < MiniTest::Unit::TestCase
 
     lead = Lead.new @driver
 
-    puts lead.id
+
   end
 end
 	
