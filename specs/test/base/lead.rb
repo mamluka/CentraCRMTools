@@ -58,13 +58,13 @@ class Lead
 
     puts @driver.text
 
-    @driver.text_field(:name => name).value
+    @driver.text_field(:id => name).value
   end
 
   def status
     @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
-    @driver.select_list(:name => 'status').selected_options[0]
+    @driver.select_list(:id => 'status').selected_options[0]
   end
 end
