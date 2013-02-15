@@ -26,7 +26,7 @@ class TestMini < MiniTest::Unit::TestCase
                      :email => "email #{SecureRandom.uuid}@david.com"
                     }
 
-    puts lead.get :mobile_preview_email_sent_c
+    puts lead.get 'mobile_preview_email_sent_c'
     puts lead.status
 
     puts lead.id
