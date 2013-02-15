@@ -15,9 +15,10 @@ class TestMini < CrmTestBase
 
   def teardown
     `pkill -f api-interceptor.rb`
+    'rm -rf api-call.json'
   end
 
-  def test_this_test
+  def test_when_has_preview_url_should_send_preview_email
     auth = Auth.new @driver
     auth.login
 
@@ -32,6 +33,32 @@ class TestMini < CrmTestBase
     assert_equal lead.get('mobile_preview_email_sent_c'), Date.today.strftime('%m/%d/%Y')
     assert_equal lead.status, "Assigned"
   end
+
+  def test_when_has_no_preview_url_should_not_send_preview_email
+    auth = Auth.new @driver
+    auth.login
+
+    email = "#{SecureRandom.uuid}@david.com"
+
+    lead = Lead.new @driver, {:email => "email #{email}"}
+
+    assert_api_not_called
+    assert_equal lead.status, ""
+  end
+
+  def test_when_has_no_email_should_not_send_preview_email
+    auth = Auth.new @driver
+    auth.login
+
+    email = "#{SecureRandom.uuid}@david.com"
+
+    lead = Lead.new @driver
+
+    assert_api_not_called
+    assert_equal lead.status, ""
+  end
+
+
 end
 	
 
