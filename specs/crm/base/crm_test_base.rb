@@ -1,6 +1,7 @@
 require 'json'
 
 class CrmTestBase < MiniTest::Unit::TestCase
+
   def setup
     @driver = Watir::Browser.new :phantomjs
     `screen -L -dmS api ruby base/api-interceptor.rb`

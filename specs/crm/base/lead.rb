@@ -23,7 +23,7 @@ class Lead
       @driver.button(:value => '  Save  ').click
     end
 
-    url_match = driver.url.match(/record=(.+?)&/)
+    url_match = @driver.url.match(/record=(.+?)&/)
 
     if url_match.length > 0
       @id = url_match[1]
