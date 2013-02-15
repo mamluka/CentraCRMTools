@@ -12,12 +12,16 @@ class Lead
     values ||= Hash.new
     values = values.merge({:first_name => SecureRandom.uuid, :last_name => SecureRandom.uuid})
 
+    puts values[:first_name]
+
     @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=index&parentTab=Sales'
 
     @driver.link(:text => 'Create').click
     set_values(values)
 
     @driver.button(:value => 'Save').click
+
+    puts @driver.text
 
     if @driver.button(:value => 'Save').exists?
       @driver.button(:value => 'Save').click
