@@ -21,10 +21,8 @@ class Lead
 
     @driver.button(:value => 'Save').click
 
-    File.open('source.txt', 'w') { |file| file.write(@driver.html) }
-
-    if @driver.button(:value => 'Save').exists?
-      @driver.button(:value => 'Save').click
+    if @driver.button(:value => '  Save  ').exists?
+      @driver.button(:value => '  Save  ').click
     end
 
     @id = @driver.url.match(/record=(.+?)&/)[1]
