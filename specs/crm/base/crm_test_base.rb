@@ -26,6 +26,6 @@ class CrmTestBase < MiniTest::Unit::TestCase
   end
 
   def today_crm_date
-    time.now.strftime('%Y-%m-%d %H:%M')
+    Time.now.strftime('%Y-%m-%d %H:%M')
   end
 end
