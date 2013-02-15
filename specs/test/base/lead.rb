@@ -13,6 +13,7 @@ class Lead
     driver.link(:text => 'Create').click
 
     values.each do |key, value|
+      key = key.to_s
       action = value.split(' ')[0]
       driver_extentions = DriverExtentions.new(driver)
 
