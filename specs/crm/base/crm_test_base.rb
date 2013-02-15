@@ -25,7 +25,11 @@ class CrmTestBase < MiniTest::Unit::TestCase
     assert !File.exists?('api-call.json'), "Api call file exists"
   end
 
-  def today_crm_date
+  def today_crm_time
     Time.now.strftime('%Y-%m-%d %H:%M')
+    end
+
+  def today_crm_date
+    Date.today.strftime('%m/%d/%Y')
   end
 end
