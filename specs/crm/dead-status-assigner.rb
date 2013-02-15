@@ -7,6 +7,10 @@ require File.dirname(__FILE__) + '/base/crm_test_base.rb'
 
 class TestMini < CrmTestBase
   def test_when_change_status_to_dead_should_update_assigner_user
+
+    auth = Auth.new @driver
+    auth.login
+
     Lead.new @driver, {:status => 'select Dead'}
 
     assert_equal lead.get('dead_status_assigner_c'), "David MZ"
