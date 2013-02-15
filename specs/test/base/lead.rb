@@ -27,6 +27,9 @@ class Lead
   end
 
   def set_values(values)
+
+    show_all_panels
+
     values.each do |key, value|
       driver_extentions = DriverExtentions.new(@driver)
 
