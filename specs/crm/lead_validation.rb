@@ -12,7 +12,7 @@ class TestMini < CrmTestBase
     auth = Auth.new @driver
     auth.login
 
-    lead = Lead.new @driver, {:status => 'select client'}
+    lead = Lead.new @driver, {:status => 'select Client'}
 
     puts @driver.text
   end
