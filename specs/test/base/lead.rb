@@ -19,10 +19,6 @@ class Lead
 
     @driver.button(:value => 'Save').click
 
-    puts @driver.url
-
-    puts @driver.text
-
     @id = @driver.url.match(/record=(.+?)&/)[1]
   end
 
@@ -53,14 +49,14 @@ class Lead
   end
 
   def get(name)
-    driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
     @driver.text_field(:name => name).value
   end
 
   def status
-    driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     show_all_panels
 
     @driver.select_list(:name => 'status').selected_options[0]
