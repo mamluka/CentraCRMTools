@@ -10,6 +10,8 @@ class CancellationSystemEmailTests < JobsTestBase
     reload_database
 
     lead = Lead.new
+    lead.save
+
     lead.add_email "david@david.com"
 
     lead.add_custom_data do |data|
