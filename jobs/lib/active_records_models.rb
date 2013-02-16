@@ -1,9 +1,14 @@
+require 'securerandom'
 class Lead < ActiveRecord::Base
   self.primary_key = 'id'
   has_one :custom_data, :primary_key => 'id', :foreign_key => 'id_c', :autosave => true
   has_one :email_relation, :primary_key => 'id', :foreign_key => 'bean_id'
 
   has_many :emails, :through => :email_relation
+
+  def initialize
+    id = SecureRandom.uuid
+  end
 
   def do_not_email
     custom_data.do_not_email_c
