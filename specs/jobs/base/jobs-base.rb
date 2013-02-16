@@ -32,6 +32,9 @@ class JobsTestBase < MiniTest::Unit::TestCase
   end
 
   def load_job(job_file)
+
+    #File.rename(@@current_dir + '/../../../jobs/lib/database.json', @@current_dir + '/../../../jobs/lib/database.json.bk')
+
     load @@current_dir + '/../../../jobs/' + job_file +'.rb'
   end
 end
