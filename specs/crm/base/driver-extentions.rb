@@ -1,5 +1,5 @@
 class DriverExtentions
-  @@supported_actions = ["email", "select", "check", "uncheck"]
+  @@supported_actions = ["email", "select", "check", "uncheck", "hidden"]
 
   def initialize(driver)
     @driver = driver
@@ -11,6 +11,10 @@ class DriverExtentions
 
   def select(name, value)
     @driver.select_list(:name => name).select value
+  end
+
+  def hidden(name, value)
+    @driver.hidden(:name => name).set value
   end
 
   def check(name)
