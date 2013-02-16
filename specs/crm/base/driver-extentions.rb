@@ -14,7 +14,7 @@ class DriverExtentions
   end
 
   def hidden(name, value)
-    @driver.hidden(:name => name).set value
+    @driver.execute_script("$('input[name=#{name}]').val('#{value}')")
   end
 
   def check(name)
