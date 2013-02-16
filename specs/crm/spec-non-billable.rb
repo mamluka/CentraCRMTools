@@ -67,7 +67,7 @@ class TestMini < CrmTestBase
 
     assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
     assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
-    assert_includes lead.status, 'Pit shop'
+    assert_includes lead.status, 'Pit stop'
   end
 
 
