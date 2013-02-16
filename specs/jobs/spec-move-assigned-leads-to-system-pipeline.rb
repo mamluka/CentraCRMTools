@@ -34,6 +34,6 @@ class MoveAssignedLeadsToSystemPipeline < JobsTestBase
 
     result = lead.reload
 
-    assert result.system_pipeline_email_1_c > 5.minutes.ago
+    assert result.custom_data.system_pipeline_email_1_c > 5.minutes.ago
   end
 end
