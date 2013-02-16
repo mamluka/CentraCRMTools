@@ -14,6 +14,9 @@ class JobsTestBase < MiniTest::Unit::TestCase
   def setup
     reload_database
     ActiveRecord::Base.connection.execute("DELETE FROM leads;")
+    ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
+    ActiveRecord::Base.connection.execute("DELETE FROM email_addresses;")
+    ActiveRecord::Base.connection.execute("DELETE FROM email_addr_bean_rel;")
   end
 
   def reload_database
