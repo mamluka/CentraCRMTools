@@ -8,7 +8,7 @@ class CrmTestBase < MiniTest::Unit::TestCase
     @auth = Auth.new @driver
     @auth.login
 
-    `screen -L -dmS api ruby #{File.dirname(__FILE__)}/base/api-interceptor.rb`
+    `screen -L -dmS api ruby #{File.dirname(__FILE__)}/api-interceptor.rb`
   end
 
   def teardown
