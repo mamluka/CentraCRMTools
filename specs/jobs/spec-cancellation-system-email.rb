@@ -18,7 +18,7 @@ class CancellationSystemEmailTests < JobsTestBase
 
     lead.save
 
-    load_job 'cancellation-system-email.rb'
+    load_job 'cancellation-system-email'
 
   end
 end
