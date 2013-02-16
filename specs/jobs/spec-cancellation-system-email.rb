@@ -22,7 +22,7 @@ class CancellationSystemEmailTests < JobsTestBase
 
     load_job 'cancellation-system-email'
 
-    lead = lead.find(leadId)
+    lead = Lead.find(leadId)
 
     assert_includes lead.custom_data.cancellation_email_sent_c, today_crm_time
   end
@@ -45,7 +45,7 @@ class CancellationSystemEmailTests < JobsTestBase
 
     load_job 'cancellation-system-email'
 
-    lead = lead.find(leadId)
+    lead = Lead.find(leadId)
 
     assert_nil lead.custom_data.cancellation_email_sent_c
   end
