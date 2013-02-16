@@ -9,6 +9,17 @@ class Lead < ActiveRecord::Base
     custom_data.do_not_email_c
   end
 
+  def add_email(email)
+    email = Email.new
+    email.email_address = "test@test.com"
+    emails << email
+  end
+
+  def add_custom_data
+    custom_data = CustomData.new
+    yield custom_data
+  end
+
   def name
     first_name
   end
