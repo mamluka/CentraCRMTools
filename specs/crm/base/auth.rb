@@ -20,4 +20,8 @@ class Auth
     @driver.text_field(:name => 'user_password').set password
     @driver.button(:name => 'Login').click
   end
+
+  def logout
+    @driver.link('Log Out').click
+  end
 end

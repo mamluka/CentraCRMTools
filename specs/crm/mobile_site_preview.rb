@@ -9,9 +9,6 @@ require File.dirname(__FILE__) + '/base/crm_test_base.rb'
 class TestMini < CrmTestBase
 
   def test_when_has_preview_url_should_send_preview_email
-    auth = Auth.new @driver
-    auth.login
-
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = Lead.new @driver,
@@ -25,9 +22,6 @@ class TestMini < CrmTestBase
   end
 
   def test_when_has_no_preview_url_should_not_send_preview_email
-    auth = Auth.new @driver
-    auth.login
-
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = Lead.new @driver, {:email => "email #{email}"}
@@ -37,9 +31,6 @@ class TestMini < CrmTestBase
   end
 
   def test_when_has_no_email_should_not_send_preview_email
-    auth = Auth.new @driver
-    auth.login
-
     lead = Lead.new @driver
 
     assert_api_not_called

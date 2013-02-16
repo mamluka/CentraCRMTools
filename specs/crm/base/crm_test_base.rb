@@ -5,10 +5,15 @@ class CrmTestBase < MiniTest::Unit::TestCase
 
   def setup
     @driver = Watir::Browser.new :phantomjs
+    @auth = Auth.new @driver
+    @auth.login
+
     `screen -L -dmS api ruby base/api-interceptor.rb`
   end
 
   def teardown
+    @auth.logout
+
     `pkill -f api-interceptor.rb`
     `rm -rf api-call.json`
   end
