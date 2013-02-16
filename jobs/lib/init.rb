@@ -3,15 +3,21 @@ require 'active_record'
 require 'active_support/all'
 require 'logging'
 require 'rest_client'
+require 'json'
 
-load File.dirname(__FILE__) +  '/emailer.rb'
+current_path = File.dirname(__FILE__)
+
+load current_path + '/emailer.rb'
+
+config = JSON.parse(File.read("#{current_path}/database.json"))
+
 
 ActiveRecord::Base.establish_connection(
     :adapter => 'mysql2',
-    :database => 'jdeering_centracrm',
-    :username => 'jdeering_david',
-    :password => '0953acb',
-    :host => 'centracorporation.com')
+    :database => config['database'],
+    :username => config['username'],
+    :password => config['password'],
+    :host => config['host'])
 
 class StandardLogger
   def self.get
