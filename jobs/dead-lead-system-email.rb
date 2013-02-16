@@ -1,5 +1,5 @@
-load File.dirname(__FILE__) + '/lib/init.rb'
-load File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require File.dirname(__FILE__) + '/lib/init.rb'
+require File.dirname(__FILE__) + '/lib/active_records_models.rb'
 
 logger = StandardLogger.get
 
