@@ -34,4 +34,11 @@ class TestMini < CrmTestBase
 
   end
 
+  def test_when_set_non_billable_should_have_a_reason_selected
+    Lead.new @driver, {:not_billable_c => 'check'}
+
+    assert_equal @driver.text, "Non billable must have a reason"
+
+  end
+
 end
