@@ -3,7 +3,7 @@ current_dir = File.dirname(__FILE__)
 require current_dir + "/base/jobs-base.rb"
 
 
-class MoveAssignedLeadsToSystemPipeline < JobsTestBase
+class Tests < JobsTestBase
   def test_when_7_days_passed_from_assigned_status_should_move_to_system_pipeline
 
     lead = lead_with do |lead|

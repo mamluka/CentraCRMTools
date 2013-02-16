@@ -3,7 +3,7 @@ current_dir = File.dirname(__FILE__)
 require current_dir + "/base/jobs-base.rb"
 
 
-class DeadSystemEmailTests < JobsTestBase
+class Tests < JobsTestBase
   def test_when_7_days_passed_from_dead_status_set_should_send_email
 
     lead = lead_with do |lead|
