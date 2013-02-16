@@ -20,7 +20,7 @@ class TestMini < CrmTestBase
 
     assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
     assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
-    assert_includes lead.status, 'Pit stop'
+    assert_includes lead.status, 'Pit shop'
   end
 
   def test_when_non_billable_and_reason_not_business_owner_should_send_out_email_and_update_status_and_dates
