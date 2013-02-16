@@ -18,6 +18,12 @@ class CancellationSystemEmailTests < JobsTestBase
 
     lead.save
 
+    puts !lead.custom_data.nil?
+    puts lead.custom_data.cancellation_change_date_c < 3.days.ago
+    puts lead.emails.any?
+    puts !lead.do_not_email
+    puts lead.custom_data.cancellation_email_sent_c.nil?
+
     load_job 'cancellation-system-email'
   end
 end
