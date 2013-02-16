@@ -3,12 +3,14 @@ class Lead < ActiveRecord::Base
   self.primary_key = 'id'
   has_one :custom_data, :primary_key => 'id', :foreign_key => 'id_c', :autosave => true
   has_one :email_relation, :primary_key => 'id', :foreign_key => 'bean_id'
-
   has_many :emails, :through => :email_relation
 
-  def initialize
-    id = SecureRandom.uuid
+  before_create :set_id
+
+  def set_id
+    self.id = SecureRandom.uuid
   end
+
 
   def do_not_email
     custom_data.do_not_email_c
@@ -17,7 +19,7 @@ class Lead < ActiveRecord::Base
   def add_email(email_address)
     email = Email.new
     email.email_address = email_address
-    emails.add(email)
+    self.emails << email
   end
 
   def add_custom_data

@@ -10,6 +10,7 @@ class CancellationSystemEmailTests < JobsTestBase
     reload_database
 
     lead = Lead.new
+    puts lead.id
     lead.save
 
     lead.add_email "david@david.com"
