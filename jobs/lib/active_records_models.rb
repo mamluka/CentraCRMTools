@@ -24,10 +24,11 @@ class Lead < ActiveRecord::Base
   def add_custom_data
     custom_data = CustomData.new
     yield custom_data
+    self.custom_data = custom_data
   end
 
   def name
-    first_name
+    self.first_name
   end
 end
 
