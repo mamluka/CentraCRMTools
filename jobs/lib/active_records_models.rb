@@ -14,10 +14,10 @@ class Lead < ActiveRecord::Base
     custom_data.do_not_email_c
   end
 
-  def add_email(email)
+  def add_email(email_address)
     email = Email.new
-    email.email_address = "test@test.com"
-    emails << email
+    email.email_address = email_address
+    emails.add(email)
   end
 
   def add_custom_data
