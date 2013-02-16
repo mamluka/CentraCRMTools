@@ -51,7 +51,7 @@ class Lead
       if driver_extentions.supports?(action)
         array = value.split(' ')
         if array.length > 1
-          driver_extentions.send(action, name, array[1])
+          driver_extentions.send(action, name, array[action.length+1..-1])
         else
           driver_extentions.send(action, name)
         end
