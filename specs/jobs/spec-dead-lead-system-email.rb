@@ -19,7 +19,7 @@ class DeadSystemEmailTests < JobsTestBase
 
     result = lead.reload
 
-    assert_includes result.custom_data.dead_client_email_sent_c.to_s, today_crm_time
+    assert result.custom_data.dead_client_email_sent_c > 5.minutes.ago
   end
 
   def test_when_4_days_passed_from_dead_status_set_should_not_send_email
@@ -37,7 +37,7 @@ class DeadSystemEmailTests < JobsTestBase
 
     result = lead.reload
 
-    assert_nil result.custom_data.dead_client_email_sent_c.to_s
+    assert_nil result.custom_data.dead_client_email_sent_c
   end
 
   def test_when_dead_status_and_not_billable_should_not_send_email
@@ -56,6 +56,6 @@ class DeadSystemEmailTests < JobsTestBase
 
     result = lead.reload
 
-    assert_nil result.custom_data.dead_client_email_sent_c.to_s
+    assert_nil result.custom_data.dead_client_email_sent_c
   end
 end
