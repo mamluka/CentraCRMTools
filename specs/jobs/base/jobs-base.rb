@@ -50,7 +50,7 @@ class JobsTestBase < MiniTest::Unit::TestCase
     lead.save
     lead.add_email "crmtesting@centracorporation.com"
 
-    lead.id
+    lead
   end
 
 end
