@@ -10,12 +10,16 @@ class CancellationSystemEmailTests < JobsTestBase
     reload_database
 
     lead = Lead.new
+
     email = Email.new
     email.email_address = "test@test.com"
-
     lead.emails << email
-    lead.custom_data.cancellation_change_date_c = 4.days.ago
+
+    custom_data = CustomData.new
+    custom_data.cancellation_change_date_c = 4.days.ago
+    lead.custom_data = custom_data
 
     lead.save
+
   end
 end
