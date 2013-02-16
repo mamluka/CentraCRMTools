@@ -11,7 +11,6 @@ class Lead < ActiveRecord::Base
     self.id = SecureRandom.uuid
   end
 
-
   def do_not_email
     custom_data.do_not_email_c
   end
@@ -41,11 +40,24 @@ end
 class Email < ActiveRecord::Base
   self.table_name = 'email_addresses'
   self.primary_key = 'id'
+
+  before_create :set_id
+
+  def set_id
+    self.id = SecureRandom.uuid
+  end
+
 end
 
 class EmailRelation < ActiveRecord::Base
   self.table_name = 'email_addr_bean_rel'
   self.primary_key = 'id'
+
+  before_create :set_id
+
+  def set_id
+    self.id = SecureRandom.uuid
+  end
 
   belongs_to :lead, :primary_key => 'id', :foreign_key => 'bean_id'
   belongs_to :email, :primary_key => 'id', :foreign_key => 'email_address_id'
