@@ -14,8 +14,6 @@ class CancellationSystemEmailTests < JobsTestBase
       data.cancellation_change_date_c = 4.days.ago
     end
 
-    lead.save
-
     load_job 'cancellation-system-email'
 
     result = lead.reload
@@ -32,8 +30,6 @@ class CancellationSystemEmailTests < JobsTestBase
     lead.add_custom_data do |data|
       data.cancellation_change_date_c = 2.days.ago
     end
-
-    lead.save
 
     load_job 'cancellation-system-email'
 

@@ -25,6 +25,8 @@ class Lead < ActiveRecord::Base
     custom_data = CustomData.new
     yield custom_data
     self.custom_data = custom_data
+
+    self.save
   end
 
   def name
