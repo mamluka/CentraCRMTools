@@ -14,7 +14,7 @@ class Tests < JobsTestBase
 
     result = lead.reload
 
-    assert_equal.custom_data.cancellation_change_date_c > 5.minuets.ago
+    assert result.custom_data.cancellation_change_date_c > 5.minuets.ago
     assert_equal result.assigned_user_id, $system_pipeline_user_id
   end
 end

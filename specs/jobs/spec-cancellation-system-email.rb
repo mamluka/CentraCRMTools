@@ -18,7 +18,7 @@ class Tests < JobsTestBase
 
     result = lead.reload
 
-    assert_includes result.custom_data.cancellation_email_sent_c.to_s, today_crm_time
+    assert result.custom_data.cancellation_email_sent_c > 5.minutes.ago
   end
 
   def test_when_2_days_passed_from_cancellation_status_should_not_send_email
