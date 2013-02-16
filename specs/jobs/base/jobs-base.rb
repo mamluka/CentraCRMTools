@@ -43,4 +43,14 @@ class JobsTestBase < MiniTest::Unit::TestCase
     Date.today.strftime('%m/%d/%Y')
   end
 
+  def lead_with(attr)
+    lead = Lead.new
+    yield attr lead
+
+    lead.save
+    lead.add_email "crmtesting@centracorporation.com"
+
+    lead.id
+  end
+
 end
