@@ -79,8 +79,6 @@ class TestMini < CrmTestBase
         :email => "email #{email}"
     }
 
-    puts @driver.text
-
     assert_equal lead.get('marchent_sale_date_c'), today_crm_date
     assert_equal lead.get('marchent_sale_rep_c'), 'David MZ'
   end
