@@ -22,6 +22,7 @@ class Auth
   end
 
   def logout
-    @driver.link(:text => 'Log Out').click
+    link = @driver.link(:text => 'Log Out')
+    link.click if link.exists?
   end
 end
