@@ -45,6 +45,7 @@ class JobsTestBase < MiniTest::Unit::TestCase
 
   def lead_with
     lead = Lead.new
+    lead.assigned_user_id = '8d71be80-cc24-cda3-e4d6-50d8a70d9d20'
     yield lead
 
     lead.save
