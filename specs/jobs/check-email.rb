@@ -9,5 +9,6 @@ Mail.defaults do
 end
 
 Mail.all.each do |mail|
-  puts mail.to
+  puts mail.body.decoded
+  puts '--------------------------------'
 end
