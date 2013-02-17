@@ -10,13 +10,13 @@ class Tests < JobsTestBase
     end
 
     lead.add_custom_data do |data|
-      data.googlelocal_info_req_sent_c = 4.days.ago
+      data.mobileweb_info_req_sent_c = 4.days.ago
     end
 
     load_job 'reoccuring-mobile-web-information-request-email'
 
     result = lead.reload
 
-    assert result.custom_data.googlelocal_info_req_sent_c > 5.minutes.ago
+    assert result.custom_data.mobileweb_info_req_sent_c > 5.minutes.ago
   end
 end
