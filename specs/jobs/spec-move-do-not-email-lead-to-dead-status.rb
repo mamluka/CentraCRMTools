@@ -3,7 +3,7 @@ current_dir = File.dirname(__FILE__)
 require current_dir + "/base/jobs-base.rb"
 
 class Tests < JobsTestBase
-  def test_when_lead_is_do_not_email_should_move_to_dead_statis
+  def test_when_lead_is_do_not_email_should_move_to_dead_status
 
     lead = lead_with do |lead|
       lead.status = 'SP'
@@ -18,6 +18,6 @@ class Tests < JobsTestBase
     result = lead.reload
 
     assert_equal result.assigned_user_id, $system_pipeline_user_id
-    assert_equal result.custom_data.dead_status_assigner_c, 'System pipeline'
+    assert_equal result.custom_data.dead_status_assigner_c, 'System Pipeline'
   end
 end

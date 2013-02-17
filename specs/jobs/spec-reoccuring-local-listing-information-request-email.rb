@@ -13,7 +13,7 @@ class Tests < JobsTestBase
       data.mobileweb_info_req_sent_c = 4.days.ago
     end
 
-    load_job 'move-do-not-email-lead-to-dead-status'
+    load_job 'reoccuring-local-listing-information-request-email'
 
     result = lead.reload
 
