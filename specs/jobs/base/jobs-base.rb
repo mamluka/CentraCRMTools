@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'active_record'
 require 'active_support/all'
+require 'securerandom'
 
 current_dir = File.dirname(__FILE__)
 
@@ -48,6 +49,9 @@ class JobsTestBase < MiniTest::Unit::TestCase
   def lead_with
     lead = Lead.new
     lead.assigned_user_id =$test_user_id
+    lead.first_name = SecureRandom.uuid
+    lead.last_name = SecureRandom.uuid
+
     yield lead
 
     lead.save
