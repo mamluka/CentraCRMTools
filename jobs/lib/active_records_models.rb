@@ -22,7 +22,6 @@ class Lead < ActiveRecord::Base
   end
 
   def add_custom_data
-    puts self.custom_data
     custom_data = self.custom_data ||= CustomData.new
     if block_given?
       yield custom_data

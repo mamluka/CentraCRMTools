@@ -52,9 +52,6 @@ class JobsTestBase < MiniTest::Unit::TestCase
 
     lead.save
     lead.add_email "crmtesting@centracorporation.com"
-    lead.add_custom_data do |data|
-      data.do_not_email_c = false
-    end
 
     lead.save
     lead
