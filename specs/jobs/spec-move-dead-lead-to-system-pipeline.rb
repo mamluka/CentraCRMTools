@@ -10,6 +10,8 @@ class Tests < JobsTestBase
       lead.status = 'Dead'
     end
 
+    puts lead.custom_data
+
     load_job 'move-dead-lead-to-system-pipeline'
 
     result = lead.reload
