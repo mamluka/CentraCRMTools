@@ -9,7 +9,7 @@ class Tests < JobsTestBase
       lead.status = 'SP'
     end
 
-    lead.add_custom_data do |lead|
+    lead.add_custom_data do |data|
       data.do_not_email_c = true
     end
 

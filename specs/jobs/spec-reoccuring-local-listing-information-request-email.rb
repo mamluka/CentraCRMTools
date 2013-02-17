@@ -9,7 +9,7 @@ class Tests < JobsTestBase
       lead.status = 'client'
     end
 
-    lead.add_custom_data do |lead|
+    lead.add_custom_data do |data|
       data.mobileweb_info_req_sent_c = 4.days.ago
     end
 
