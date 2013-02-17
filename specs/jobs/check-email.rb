@@ -8,6 +8,6 @@ Mail.defaults do
                    :enable_ssl => true
 end
 
-mail.all.each do |mail|
+Mail.all.each do |mail|
   puts mail.to
 end
