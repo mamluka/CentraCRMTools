@@ -17,6 +17,6 @@ class Tests < JobsTestBase
 
     result = lead.reload
 
-    assert_includes result.custom_data.googlelocal_info_req_sent_c, today_crm_time
+    assert result.custom_data.googlelocal_info_req_sent_c > 5.minutes.ago
   end
 end
