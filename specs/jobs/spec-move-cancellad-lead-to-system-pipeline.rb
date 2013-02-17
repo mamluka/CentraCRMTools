@@ -10,7 +10,7 @@ class Tests < JobsTestBase
       lead.status = 'cancelled'
     end
 
-    load_job 'move-assigned-leads-to-system-pipeline'
+    load_job 'move-cancellad-lead-to-system-pipeline'
 
     result = lead.reload
 
