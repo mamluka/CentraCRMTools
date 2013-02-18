@@ -36,7 +36,7 @@ class Tests < JobsTestBase
 
     load_job 'second-system-pipeline-system-email'
 
-    assert_email_contains 'Centra Small Business is built around the idea of absorbing the stresses of other businesses’ infrastructure needs.'
+    assert_email_contains 'Centra Small Business is built around the idea of absorbing the stresses'
     assert_email_contains 'http://prevurl'
   end
 end
