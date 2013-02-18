@@ -9,6 +9,6 @@ Mail.defaults do
 end
 
 Mail.all.each do |mail|
-  puts mail.parts[0].parse_message  #=> {'charset' => 'ISO-8859-1'}
-  puts mail.parts[1].parse_message  #=> {'name' => 'my.pdf'}
+  puts mail.parts[0].raw_source  #=> {'charset' => 'ISO-8859-1'}
+  puts mail.parts[1].raw_source  #=> {'name' => 'my.pdf'}
 end
