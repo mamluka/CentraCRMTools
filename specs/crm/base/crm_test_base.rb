@@ -1,7 +1,9 @@
 require 'json'
 require 'time'
 
-class CrmTestBase < MiniTest::Unit::TestCase
+require File.dirname(__FILE__) + "/../../core/tests-base.rb"
+
+class CrmTestBase < TestsBase
 
   def setup
     @driver = Watir::Browser.new :phantomjs
@@ -28,13 +30,5 @@ class CrmTestBase < MiniTest::Unit::TestCase
 
   def assert_api_not_called
     assert !File.exists?('api-call.json'), "Api call file exists"
-  end
-
-  def today_crm_time
-    Time.now.strftime('%Y-%m-%d %H:%M')
-  end
-
-  def today_crm_date
-    Date.today.strftime('%m/%d/%Y')
   end
 end

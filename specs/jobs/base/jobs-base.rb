@@ -8,24 +8,17 @@ current_dir = File.dirname(__FILE__)
 
 require current_dir + "/../../../jobs/lib/init.rb"
 require current_dir + "/../../../jobs/lib/active_records_models.rb"
-require current_dir + "/email-assertions.rb"
+require current_dir + "/../../core/tests-base.rb"
 
 $test_user_id = '8d71be80-cc24-cda3-e4d6-50d8a70d9d20'
 
-class JobsTestBase < MiniTest::Unit::TestCase
+class JobsTestBase < TestsBase
 
   @@current_dir = File.dirname(__FILE__)
 
   def setup
     reload_database
     clean_databases
-
-    @email_assertions = EmailAssertions.new
-    @email_assertions.clear_inbox
-  end
-
-  def teardown
-    @email_assertions.clear_inbox
   end
 
   def clean_databases
@@ -51,14 +44,6 @@ class JobsTestBase < MiniTest::Unit::TestCase
     load @@current_dir + '/../../../jobs/' + job_file +'.rb'
   end
 
-  def today_crm_time
-    Time.now.strftime('%Y-%m-%d %H:%M')
-  end
-
-  def today_crm_date
-    Date.today.strftime('%m/%d/%Y')
-  end
-
   def lead_with
     lead = Lead.new
     lead.assigned_user_id =$test_user_id
@@ -80,18 +65,5 @@ class JobsTestBase < MiniTest::Unit::TestCase
     @emails
   end
 
-  def assert_email_contains(text)
-    time_elapsed = 0
-    while Mail.all.length == 0 && time_elapsed < 30
-      sleep 5
-      time_elapsed +=5
-    end
-
-    if Mail.all.length == 0
-      flunk "No email found"
-    end
-
-    assert_includes Mail.first.parts.first.body, text
-  end
 
 end
