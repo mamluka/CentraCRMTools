@@ -17,8 +17,11 @@ class JobsTestBase < TestsBase
   @@current_dir = File.dirname(__FILE__)
 
   def setup
+    super.setup
+
     load_database
     clean_databases
+
   end
 
   def load_job(job_file)
