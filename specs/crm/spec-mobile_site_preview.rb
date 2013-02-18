@@ -8,7 +8,7 @@ require File.dirname(__FILE__) + '/base/crm_test_base.rb'
 
 class TestMini < CrmTestBase
 
-  def test_when_has_preview_url_should_send_preview_email
+  def test_when_has_preview_url_should_update_sending_date
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = Lead.new @driver,

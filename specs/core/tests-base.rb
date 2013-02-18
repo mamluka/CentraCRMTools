@@ -32,4 +32,23 @@ class TestsBase < MiniTest::Unit::TestCase
 
     assert_includes Mail.first.parts.first.body, text
   end
+
+  def clean_databases
+    ActiveRecord::Base.connection.execute("DELETE FROM leads;")
+    ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
+    ActiveRecord::Base.connection.execute("DELETE FROM email_addresses;")
+    ActiveRecord::Base.connection.execute("DELETE FROM email_addr_bean_rel;")
+  end
+
+  def load_database
+
+    config = JSON.parse(File.read("#{File.dirname(__FILE__)}/database.json"))
+
+    ActiveRecord::Base.establish_connection(
+        :adapter => 'mysql2',
+        :database => config['database'],
+        :username => config['username'],
+        :password => config['password'],
+        :host => config['host'])
+  end
 end
