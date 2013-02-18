@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + "/email-assertions.rb"
 class TestsBase < MiniTest::Unit::TestCase
 
   def setup
+    puts "yeah"
     @email_assertions = EmailAssertions.new
     @email_assertions.clear_inbox
   end
