@@ -71,7 +71,7 @@ class JobsTestBase < MiniTest::Unit::TestCase
     lead
   end
 
-  def email
+  def emails
     @emails
   end
 
