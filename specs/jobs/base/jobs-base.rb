@@ -24,6 +24,10 @@ class JobsTestBase < MiniTest::Unit::TestCase
     @email_assertions.clear_inbox
   end
 
+  def teardown
+    @email_assertions.clear_inbox
+  end
+
   def clean_databases
     ActiveRecord::Base.connection.execute("DELETE FROM leads;")
     ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
