@@ -35,7 +35,7 @@ class Tests < JobsTestBase
 
     load_job 'dead-lead-system-email'
 
-    emails.assert_email_contains 'wants to reach back out'
+    assert_email_contains 'wants to reach back out'
 
   end
 
