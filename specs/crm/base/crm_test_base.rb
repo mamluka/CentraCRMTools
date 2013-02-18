@@ -10,6 +10,9 @@ class CrmTestBase < TestsBase
     @auth = Auth.new @driver
     @auth.login
 
+    load_database
+    clean_databases
+
     `screen -L -dmS api ruby #{File.dirname(__FILE__)}/api-interceptor.rb`
   end
 

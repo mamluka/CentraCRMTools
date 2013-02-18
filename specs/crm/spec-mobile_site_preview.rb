@@ -21,6 +21,20 @@ class TestMini < CrmTestBase
     assert_equal lead.status, "Assigned"
   end
 
+  def test_when_has_preview_url_should_send_preview_email
+    email = "#{SecureRandom.uuid}@david.com"
+
+    lead = Lead.new @driver,
+                    {:prev_url_c => 'http://preview.flowmobileapps.com/compare/testing',
+                     :email => "email crmtesting@centracorporation.com"
+                    }
+
+    assert_email_contains 'At this stage we consider it 80% done.'
+    assert_email_contains 'http://preview.flowmobileapps.com/compare/testing'
+
+
+  end
+
   def test_when_has_no_preview_url_should_not_send_preview_email
     email = "#{SecureRandom.uuid}@david.com"
 
