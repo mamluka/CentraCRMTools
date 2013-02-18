@@ -19,6 +19,7 @@ class JobsTestBase < MiniTest::Unit::TestCase
     reload_database
     clean_databases
 
+    @emails = EmailAssertions.new
     @emails.clear_inbox
   end
 
@@ -71,7 +72,7 @@ class JobsTestBase < MiniTest::Unit::TestCase
   end
 
   def email
-    @emails ||= EmailAssertions.new
+    @emails
   end
 
 end
