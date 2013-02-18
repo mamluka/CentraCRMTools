@@ -7,6 +7,7 @@ current_dir = File.dirname(__FILE__)
 
 require current_dir + "/../../../jobs/lib/init.rb"
 require current_dir + "/../../../jobs/lib/active_records_models.rb"
+require current_dir + "/email-assertions.rb"
 
 $test_user_id = '8d71be80-cc24-cda3-e4d6-50d8a70d9d20'
 
@@ -14,8 +15,18 @@ class JobsTestBase < MiniTest::Unit::TestCase
 
   @@current_dir = File.dirname(__FILE__)
 
+  def initialize
+    @emails = EmailAssertions.new
+  end
+
   def setup
     reload_database
+    clean_databases
+
+    @emails.clear_inbox
+  end
+
+  def clean_databases
     ActiveRecord::Base.connection.execute("DELETE FROM leads;")
     ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
     ActiveRecord::Base.connection.execute("DELETE FROM email_addresses;")
@@ -61,6 +72,10 @@ class JobsTestBase < MiniTest::Unit::TestCase
 
     lead.save
     lead
+  end
+
+  def email
+    @emails
   end
 
 end
