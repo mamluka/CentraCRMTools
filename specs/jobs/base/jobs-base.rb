@@ -15,10 +15,6 @@ class JobsTestBase < MiniTest::Unit::TestCase
 
   @@current_dir = File.dirname(__FILE__)
 
-  def initialize
-    @emails = EmailAssertions.new
-  end
-
   def setup
     reload_database
     clean_databases
@@ -75,7 +71,7 @@ class JobsTestBase < MiniTest::Unit::TestCase
   end
 
   def email
-    @emails
+    @emails ||= EmailAssertions.new
   end
 
 end
