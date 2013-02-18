@@ -20,8 +20,8 @@ class JobsTestBase < MiniTest::Unit::TestCase
     reload_database
     clean_databases
 
-    @emails = EmailAssertions.new
-    @emails.clear_inbox
+    @email_assertions = EmailAssertions.new
+    @email_assertions.clear_inbox
   end
 
   def clean_databases
