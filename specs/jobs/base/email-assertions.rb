@@ -5,6 +5,7 @@ require 'minitest/autorun'
 class EmailAssertions
   def initialize
     config = JSON.parse(File.read(File.dirname(__FILE__) + "/email-config.json"))
+
     Mail.defaults do
       retriever_method :pop3, :address => config['host'],
                        :port => 995,
