@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + "/email-assertions.rb"
-require 'activerecord'
+require 'active_record'
 require 'mail'
 
 class TestsBase < MiniTest::Unit::TestCase
