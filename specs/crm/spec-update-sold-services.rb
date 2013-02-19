@@ -80,7 +80,7 @@ class TestMini < CrmTestBase
     lead = Lead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',
-        :email => "email #{email}"
+        :email => "email crmtesting@centracorporation.com",
     }
 
     first_name = lead.get 'first_name'

@@ -6,7 +6,7 @@ require File.dirname(__FILE__) + "/../../core/tests-base.rb"
 class CrmTestBase < TestsBase
 
   def setup
-    super.setup
+    super
 
     @driver = Watir::Browser.new :phantomjs
     @auth = Auth.new @driver
@@ -19,7 +19,7 @@ class CrmTestBase < TestsBase
   end
 
   def teardown
-    super.teardown
+    super
 
     @auth.logout
 
