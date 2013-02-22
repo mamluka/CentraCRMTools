@@ -32,7 +32,7 @@ class TestsBase < MiniTest::Unit::TestCase
       flunk "No email found"
     end
 
-    if mail.first.multipart?
+    if Mail.first.multipart?
       assert_includes Mail.first.parts.first.body, text
     else
       assert_includes Mail.first.body, text
