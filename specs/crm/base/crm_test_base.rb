@@ -9,22 +9,22 @@ class CrmTestBase < TestsBase
 
   def setup
     super
-
     @driver = Watir::Browser.new :phantomjs
     @auth = Auth.new @driver
     @auth.login
 
     load_database
     clean_databases
+    enable_email_sending
 
     `screen -L -dmS api ruby #{File.dirname(__FILE__)}/api-interceptor.rb`
-    ``
+
   end
 
   def teardown
     super
-
     @auth.logout
+    disable_email_sending
 
     `pkill -f api-interceptor.rb`
     `rm -rf /tmp/api-call.json`
@@ -44,5 +44,9 @@ class CrmTestBase < TestsBase
 
   def enable_email_sending
     `sed -i 's/http:\/\/localhost:4567\/api/http:\/\/apps.centracorporation.com\/api/g' #{@@crm_php_script}`
+  end
+
+  def disable_email_sending
+    `sed -i 's/http:\/\/apps.centracorporation.com\/api/http:\/\/localhost:4567\/api/g' #{@@crm_php_script}`
   end
 end
