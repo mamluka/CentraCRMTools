@@ -1,12 +1,12 @@
 require 'grape'
 
-class EchoSignApi < Grape::Api
+class EchoSignApi < Grape::API
   format :json
 
   resource :echosign do
     desc "Return a public timeline."
     get :send do
-      "OK"
+      {:msg => 'hello'}
     end
   end
 
