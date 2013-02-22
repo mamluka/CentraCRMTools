@@ -27,12 +27,13 @@ class TestMini < CrmTestBase
   end
 
   def test_when_mobile_web_is_sold_should_send_email
-    email = "#{SecureRandom.uuid}@david.com"
+
+    enable_email_sending
 
     lead = Lead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
-        :email => "email #{email}"
+        :email => "email crmtesting@centracorporation.com",
     }
 
     first_name = lead.get 'first_name'
