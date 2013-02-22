@@ -6,7 +6,7 @@ class EchoSignApi < Grape::API
   resource :echosign do
     desc "Return a public timeline."
     get :send do
-      {:msg => 'hello'}
+      "OK"
     end
   end
 
