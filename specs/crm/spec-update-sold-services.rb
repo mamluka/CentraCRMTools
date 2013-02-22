@@ -75,8 +75,6 @@ class TestMini < CrmTestBase
   end
 
   def test_when_google_local_listing_is_sold_should_send_email
-    email = "#{SecureRandom.uuid}@david.com"
-
     lead = Lead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',

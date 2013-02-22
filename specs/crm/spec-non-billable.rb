@@ -25,8 +25,6 @@ class TestMini < CrmTestBase
 
   def test_when_non_billable_and_reason_is_invalid_url_should_send_out_an_email
 
-    email = "#{SecureRandom.uuid}@david.com"
-
     lead = Lead.new @driver, {
         :email => "email crmtesting@centracorporation.com",
         :not_billable_c => 'check',
@@ -35,8 +33,6 @@ class TestMini < CrmTestBase
 
     assert_email_contains 'Thank you for your interest in the free mobile website conversion for your business.'
     assert_email_contains 'http://www.centracorporation.com/update-url#!' + lead.id
-
-
   end
 
   def test_when_non_billable_and_reason_not_business_owner_should_send_out_email
@@ -52,6 +48,8 @@ class TestMini < CrmTestBase
   end
 
   def test_when_non_billable_and_reason_not_business_owner_should_update_sending_date
+
+    email = "#{SecureRandom.uuid}@david.com"
 
     lead = Lead.new @driver, {
         :email => "email crmtesting@centracorporation.com",

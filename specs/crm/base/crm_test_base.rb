@@ -5,6 +5,8 @@ require File.dirname(__FILE__) + "/../../core/tests-base.rb"
 
 class CrmTestBase < TestsBase
 
+  @@crm_php_script = "/home/davidmz/sugarcrm/custom/modules/Leads/CentraLeads.php"
+
   def setup
     super
 
@@ -16,6 +18,7 @@ class CrmTestBase < TestsBase
     clean_databases
 
     `screen -L -dmS api ruby #{File.dirname(__FILE__)}/api-interceptor.rb`
+    ``
   end
 
   def teardown
@@ -37,5 +40,9 @@ class CrmTestBase < TestsBase
 
   def assert_api_not_called
     assert !File.exists?('api-call.json'), "Api call file exists"
+  end
+
+  def enable_email_sending
+    `sed -i 's/http:\/\/localhost:4567\/api/http:\/\/apps.centracorporation.com\/api/g' #{@@crm_php_script}`
   end
 end
