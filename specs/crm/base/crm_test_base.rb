@@ -43,10 +43,10 @@ class CrmTestBase < TestsBase
   end
 
   def enable_email_sending
-    `sed -i 's/http:\/\/localhost:4567\/api/http:\/\/apps.centracorporation.com\/api/g' #{@@crm_php_script}`
+    `sed -i 's/http:\\/\\/localhost:4567/api/http:\\/\\/apps.centracorporation.com\\/api/g' #{@@crm_php_script}`
   end
 
   def disable_email_sending
-    `sed -i 's/http:\/\/apps.centracorporation.com\/api/http:\/\/localhost:4567\/api/g' #{@@crm_php_script}`
+    `sed -i 's/http:\\/\\/apps.centracorporation.com\\/api/http:\\/\\/localhost:4567\\/api/g' #{@@crm_php_script}`
   end
 end
