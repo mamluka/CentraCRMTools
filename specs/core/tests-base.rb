@@ -32,7 +32,12 @@ class TestsBase < MiniTest::Unit::TestCase
       flunk "No email found"
     end
 
-    assert_includes Mail.first.parts.first.body, text
+    if mail.first.multipart?
+      assert_includes Mail.first.parts.first.body, text
+    else
+      assert_includes Mail.first.body, text
+    end
+
   end
 
   def clean_databases
