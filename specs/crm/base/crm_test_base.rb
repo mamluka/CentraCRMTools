@@ -15,7 +15,6 @@ class CrmTestBase < TestsBase
 
     load_database
     clean_databases
-    enable_email_sending
 
     `screen -L -dmS api ruby #{File.dirname(__FILE__)}/api-interceptor.rb`
 
