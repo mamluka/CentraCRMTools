@@ -15,17 +15,32 @@ class EchoSign
 
   def send(email)
     response = call :send_document, {
+        :apiKey => @api_key,
+        :senderInfo => nil,
         :documentCreationInfo => {
-            :recipients => {:RecipientInfo => {:email => email, :role => 'SIGNER'}},
+            :recipients => {:RecipientInfo => {:email => email, :role => 'SIGNER', :fax => nil}},
             :name => 'test agreement',
             :message => 'this is a test message',
             :fileInfos => {:fileInfo => {
                 :fileName => 'Centra Coproration Centra Local Listing Contract ver 2',
-                :libraryDocumentKey => 'RWKW8L232Y3Z7F'
+                :libraryDocumentKey => 'RWKW8L232Y3Z7F',
+                :mimeType => nil,
+                :file => nil,
+                :url => nil,
+                :formKey => nil,
+                :libraryDocumentName => nil
             }},
             :signatureType => 'ESIGN',
-            :signatureFlow => 'SENDER_SIGNATURE_NOT_REQUIRED'
-        }}
+            :signatureFlow => 'SENDER_SIGNATURE_NOT_REQUIRED',
+            :securityOptions => nil,
+            :externalId => nil,
+            :reminderFrequency => nil,
+            :callbackInfo => nil,
+            :daysUntilSigningDeadline => nil,
+            :locale => nil,
+            :mergeFieldInfo => nil
+        }
+    }
 
     puts response
 
@@ -34,7 +49,7 @@ class EchoSign
   private
 
   def call(resource, params)
-    params = params.merge :apiKey => @api_key
+    #params = params.merge :apiKey => @api_key
 
     @client.call resource, :message => params
   end
