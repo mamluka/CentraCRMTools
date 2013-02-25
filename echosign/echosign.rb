@@ -1,5 +1,6 @@
 require 'savon'
 require 'json'
+require 'csv'
 
 class RecipientInfo
   def initialize(email)
@@ -47,7 +48,7 @@ class EchoSign
     end
   end
 
-  def send(email)
+  def send(email, document_id)
     response = call :send_document, %{
             <tns:apiKey>#{@api_key}</tns:apiKey>
             <tns:senderInfo xsi:nil="true"/>
@@ -64,7 +65,7 @@ class EchoSign
               <ins0:fileInfos>
                 <ins0:fileInfo>
                   <ins0:fileName>Centra Coproration Centra Local Listing Contract ver 2</ins0:fileName>
-                  <ins0:libraryDocumentKey>RWKW8L232Y3Z7F</ins0:libraryDocumentKey>
+                  <ins0:libraryDocumentKey>#{document_id}</ins0:libraryDocumentKey>
                   <ins0:mimeType xsi:nil="true"/>
                   <ins0:file xsi:nil="true"/>
                   <ins0:url xsi:nil="true"/>
@@ -78,13 +79,35 @@ class EchoSign
               <ins0:externalId xsi:nil="true"/>
               <ins0:reminderFrequency xsi:nil="true"/>
               <ins0:callbackInfo>
-                <ins0:signedDocumentUrl></dto:signedDocumentUrl>
+                <ins0:signedDocumentUrl>http://63.141.234.34:9292/echosign/notify/testing-this-put-stuff</ins0:signedDocumentUrl>
               </ins0:callbackInfo>
               <ins0:daysUntilSigningDeadline xsi:nil="true"/>
               <ins0:locale xsi:nil="true"/>
               <ins0:mergeFieldInfo xsi:nil="true"/>
             </tns:documentCreationInfo>
     }
+
+    response.body[:send_document_response][:document_keys][:document_key][:document_key]
+  end
+
+  def get_form_data(document_key, csv_dto)
+    response = call :get_form_data, {
+        :apiKey => @api_key,
+        :documentKey => document_key
+    }
+
+    csv_dto.send("parse", response.body[:get_form_data_response][:get_form_data_result][:form_data_csv]).all.first
+  end
+
+  def get_documents
+    response = call :get_my_documents, {:apiKey => @api_key}
+
+    response.body[:get_my_documents_response][:get_my_documents_result][:document_list_for_user][:document_list_item]
+  end
+
+  def get_library_documents
+    response = call :get_my_library_documents, {:apiKey => @api_key}
+    puts response.body
   end
 
   private
