@@ -90,13 +90,17 @@ class EchoSign
     response.body[:send_document_response][:document_keys][:document_key][:document_key]
   end
 
-  def get_form_data(document_key, csv_dto)
+  def get_form_data(document_key)
     response = call :get_form_data, {
         :apiKey => @api_key,
         :documentKey => document_key
     }
 
-    csv_dto.send("parse", response.body[:get_form_data_response][:get_form_data_result][:form_data_csv]).all.first
+    csv_data = CSV.parse response.body[:get_form_data_response][:get_form_data_result][:form_data_csv]
+
+    headers = csv_data.shift.map { |i| i.to_s }
+    string_data = csv_data.map { |row| row.map { |cell| cell.to_s } }
+    string_data.map { |row| Hash[*headers.zip(row).flatten] }
   end
 
   def get_documents
