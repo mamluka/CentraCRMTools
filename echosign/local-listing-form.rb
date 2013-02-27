@@ -11,9 +11,7 @@ class LocalListing
     db = CrmDatabase.new
     db.connect
 
-    lead_id = CustomData.where(:echosign_doc_id => document_id).id
-
-    lead = Lead.find(lead_id)
+    lead = CustomData.where(:echosign_doc_id => document_id).lead
 
     puts lead.first_name
 
