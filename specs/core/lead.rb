@@ -62,16 +62,34 @@ class Lead
   end
 
   def get(name)
-    @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+
+    unless @driver.url.include?(@id)
+      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    end
+
     show_all_panels
 
     @driver.span(:id => name).text
   end
 
   def status
-    @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    unless @driver.url.include?(@id)
+      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    end
     show_all_panels
 
     @driver.execute_script("return $('#status').parent().text().trim()")
   end
+
+  def get_by_label(label)
+    unless @driver.url.include?(@id)
+      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    end
+
+    show_all_panels
+
+    @driver.execute_script("return $($.grep($('#LBL_CONTACT_INFORMATION td'),function(n,i) { return $(n).text().match(/#{label}:/) })[0]).next().text()")
+  end
+
+
 end

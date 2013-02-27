@@ -1,11 +1,11 @@
-require File.dirname(__FILE__) + "/email-assertions.rb"
+require_relative "email-client.rb"
 require 'active_record'
 require 'mail'
 
 class TestsBase < MiniTest::Unit::TestCase
 
   def setup
-    @email_assertions = EmailAssertions.new
+    @email_assertions = EmailClient.new
     @email_assertions.clear_inbox
   end
 

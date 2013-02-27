@@ -2,7 +2,7 @@ require 'json'
 require 'mail'
 require 'minitest/autorun'
 
-class EmailAssertions
+class EmailClient
   def initialize
     config = JSON.parse(File.read(File.dirname(__FILE__) + "/email-config.json"))
 
@@ -17,5 +17,15 @@ class EmailAssertions
 
   def clear_inbox
     Mail.delete_all
+  end
+
+  def get_first_email_body
+    mail = Mail.all.first
+
+    if mail.multipart?
+      mail.part[0].body
+    else
+      mail.body
+    end
   end
 end

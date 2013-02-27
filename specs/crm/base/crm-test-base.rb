@@ -1,7 +1,9 @@
 require 'json'
 require 'time'
 
-require File.dirname(__FILE__) + "/../../core/tests-base.rb"
+require_relative "/../../core/tests-base.rb"
+require_relative "/../../core/auth.rb"
+require_relative "/../../core/lead.rb"
 
 class CrmTestBase < TestsBase
 
@@ -17,7 +19,6 @@ class CrmTestBase < TestsBase
     clean_databases
 
     `screen -L -dmS api ruby #{File.dirname(__FILE__)}/api-interceptor.rb`
-
   end
 
   def teardown

@@ -13,7 +13,6 @@ class LocalListing
 
     lead = CustomData.where(:echosign_doc_id_c => document_id).first.lead
 
-    puts lead.first_name
 
   end
 end
