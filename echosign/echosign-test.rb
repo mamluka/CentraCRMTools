@@ -1,6 +1,5 @@
 require 'savon'
 require 'json'
-require 'virgola'
 
 require_relative "echosign"
 require_relative "local-listing-form"
