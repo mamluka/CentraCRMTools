@@ -4,7 +4,7 @@ require_relative 'models'
 class CrmDatabase
 
   def connect
-    config = JSON.parse(File.read("#{current_path}/database.json"))
+    config = JSON.parse(File.read(File.dirname(__FILE__) + "/database.json"))
 
     ActiveRecord::Base.establish_connection(
         :adapter => 'mysql2',
