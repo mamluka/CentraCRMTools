@@ -48,7 +48,7 @@ class EchoSign
     end
   end
 
-  def send(email, document_id)
+  def send(email, document_id, callback_url)
     response = call :send_document, %{
             <tns:apiKey>#{@api_key}</tns:apiKey>
             <tns:senderInfo xsi:nil="true"/>
@@ -79,7 +79,7 @@ class EchoSign
               <ins0:externalId xsi:nil="true"/>
               <ins0:reminderFrequency xsi:nil="true"/>
               <ins0:callbackInfo>
-                <ins0:signedDocumentUrl>http://63.141.234.34:9292/echosign/notify/testing-this-put-stuff</ins0:signedDocumentUrl>
+                <ins0:signedDocumentUrl>#{callback_url}</ins0:signedDocumentUrl>
               </ins0:callbackInfo>
               <ins0:daysUntilSigningDeadline xsi:nil="true"/>
               <ins0:locale xsi:nil="true"/>

@@ -14,5 +14,4 @@ class CrmDatabase
         :host => config['host'])
 
   end
-
 end

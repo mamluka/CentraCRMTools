@@ -72,10 +72,10 @@ class LocalListingFormTests < EchoSignTestsBase
 
     @driver.div(:css => 'div[fieldname=echosign_signature]').click
 
-    @driver.text_field(:id=>'signature-name').when_present.set 'david mz'
-    @driver.div(:id=> 'adopt').click
+    @driver.text_field(:id => 'signature-name').when_present.set 'david mz'
+    @driver.div(:id => 'adopt').click
 
-    @driver.div(:id=>'submit').when_present.click
+    @driver.div(:id => 'submit').when_present.click
 
     assert_equal lead.get('billing_payment_method_c'), 'Visa'
 
@@ -87,16 +87,40 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_equal lead.get('billing_address_state_c'), 'New York'
     assert_equal lead.get('billing_address_zip_c'), '12345'
 
-    assert_includes lead.get_by_label('Business Address') 'address'
-    assert_includes lead.get_by_label('Business Address') 'city'
-    assert_includes lead.get_by_label('Business Address') 'Alabama'
-    assert_includes lead.get_by_label('Business Address') 'Alabama'
-    assert_includes lead.get_by_label('Business Address') '54321'
+    assert_includes lead.get_by_label('Business Address'), 'address'
+    assert_includes lead.get_by_label('Business Address'), 'city'
+    assert_includes lead.get_by_label('Business Address'), 'Alabama'
+    assert_includes lead.get_by_label('Business Address'), 'Alabama'
+    assert_includes lead.get_by_label('Business Address'), '54321'
 
+    assert_includes lead.get('business_category_c'), 'cat1'
+    assert_includes lead.get('business_category_c'), 'cat2'
+    assert_includes lead.get('business_category_c'), 'cat3'
+    assert_includes lead.get('business_category_c'), 'cat4'
+    assert_includes lead.get('business_category_c'), 'cat5'
 
+    assert_includes lead.get('business_hours_mf_c'), '1-2'
+    assert_includes lead.get('business_hours_mf_c'), '2-3'
+    assert_includes lead.get('business_hours_mf_c'), '3-4'
+    assert_includes lead.get('business_hours_mf_c'), '4-5'
+    assert_includes lead.get('business_hours_mf_c'), '5-6'
 
+    assert_includes lead.get('business_hours_ss_c'), '6-7'
+    assert_includes lead.get('business_hours_ss_c'), '7-8'
 
+    assert_includes lead.get('business_payment_types_c'), 'check'
+    assert_includes lead.get('business_payment_types_c'), 'cash'
+    assert_includes lead.get('business_payment_types_c'), 'visa'
+    assert_includes lead.get('business_payment_types_c'), 'mastercard'
+    assert_includes lead.get('business_payment_types_c'), 'discover'
+    assert_includes lead.get('business_payment_types_c'), 'amex'
+    assert_includes lead.get('business_payment_types_c'), 'paypal'
+    assert_includes lead.get('business_payment_types_c'), 'google'
+    assert_includes lead.get('business_payment_types_c'), 'financing'
+    assert_includes lead.get('business_payment_types_c'), 'invoice'
+    assert_includes lead.get('business_payment_types_c'), 'diners'
 
+    assert_equal lead.get('billing_address_zip_c'), today_crm_time
 
   end
 end
