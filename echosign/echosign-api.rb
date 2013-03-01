@@ -7,6 +7,12 @@ require_relative 'local-listing-form'
 class EchoSignApi < Grape::API
   format :json
 
+  helpers do
+    def get_config
+      JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
+    end
+  end
+
   resource :echosign do
     get :send do
       begin
@@ -29,9 +35,4 @@ class EchoSignApi < Grape::API
 
     end
   end
-
-  def get_config
-    JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
-  end
-
 end
