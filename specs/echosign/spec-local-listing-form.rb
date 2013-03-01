@@ -20,6 +20,12 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'contact_phone').set '1234567890'
 
     @driver.radio(:value => 'visa').set
+
+    @driver.text_field(:name => 'billing_cc_number').set '1234567890'
+    @driver.text_field(:name => 'billing_cc_exp').set '03/16'
+    @driver.text_field(:name => 'billing_cc_ccv').set '123'
+    @driver.text_field(:name => 'billing_cc_name').set 'David mz card'
+
     @driver.radio(:value => 'not_same_address').set
 
     @driver.text_field(:name => 'billing_address').set 'billing address'
