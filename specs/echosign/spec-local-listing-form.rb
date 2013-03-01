@@ -70,11 +70,11 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'title').set 'CTO'
     @driver.text_field(:name => 'date').set '1/1/2014'
 
-    browser.screenshot.save 'before.png'
+    @driver.screenshot.save 'before.png'
 
     @driver.element(:css => 'div[fieldname=echosign_signature]').click
 
-    browser.screenshot.save 'after.png'
+    @driver.screenshot.save 'after.png'
 
     @driver.text_field(:id => 'signature-name').when_present.set 'david mz'
     @driver.div(:id => 'adopt').click
