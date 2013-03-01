@@ -7,7 +7,7 @@ class EchoSignTestsBase < TestsBase
     @driver = Watir::Browser.new :phantomjs
     @email_client = EmailClient.new
 
-    `screen -L -dmS echosign  rakeup -p 9393 #{File.dirname(__FILE__)}/../../../echosign/config.ru`
+    `screen -L -dmS echosign  rackup -p 9393 #{File.dirname(__FILE__)}/../../../echosign/config.ru`
 
     load_database
     clean_databases
