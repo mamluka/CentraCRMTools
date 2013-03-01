@@ -42,7 +42,7 @@ class LocalListing
     custom_data.service_area_c = @csv_hash['service_area']
     custom_data.business_category_c = @csv_hash.select { |k| k.start_with?('category') }.values.join(', ')
 
-    opening_hours = @csv_hash.select { |k| k.include?('opening_hours') }.map { |k, v| k.split('_').last.upcase! + ' - ' + v }
+    opening_hours = @csv_hash.select { |k| k.include?('opening_hours') }.map { |k, v| k.split('_').last.capitalize + ': ' + v }
     regular_opening_hours = opening_hours.select { |s| !s.include?('Sat') && !s.include?('Sun') }
 
     custom_data.business_hours_mf_c = regular_opening_hours.join(', ')
