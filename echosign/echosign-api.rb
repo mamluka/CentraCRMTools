@@ -7,16 +7,11 @@ require_relative 'local-listing-form'
 class EchoSignApi < Grape::API
   format :json
 
-  def initialize
-    @config = JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
-
-    @echosign = EchoSign.new
-  end
-
   resource :echosign do
     get :send do
       begin
-        @echosign.send params[:email], "RWKW8L232Y3Z7F", @config['callback_url']
+        echosign = EchoSign.new
+        echosign.send params[:email], "RWKW8L232Y3Z7F", @@config['callback_url']
       rescue
         "ERROR"
       end
@@ -31,6 +26,10 @@ class EchoSignApi < Grape::API
       local_listing.update_crm document_key
 
     end
+  end
+
+  def get_config
+    JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
   end
 
 end
