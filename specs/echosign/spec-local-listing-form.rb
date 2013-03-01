@@ -135,6 +135,6 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_payment_types_c'), 'Invoice'
     assert_includes lead.get('business_payment_types_c'), 'Diners'
 
-    assert_equal lead.get('googlelisting_sign_date_c'), today_crm_time
+    assert_equal lead.get('googlelisting_sign_date_c'), today_mysql_time
   end
 end
