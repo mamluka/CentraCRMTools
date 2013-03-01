@@ -4,6 +4,7 @@ require 'watir-webdriver'
 
 class EchoSignTestsBase < TestsBase
   def setup
+    super
     @driver = Watir::Browser.new :phantomjs
     @email_client = EmailClient.new
 
@@ -17,6 +18,7 @@ class EchoSignTestsBase < TestsBase
   end
 
   def teardown
+    super
     `pkill -f 9393`
   end
 

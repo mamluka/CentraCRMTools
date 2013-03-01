@@ -20,8 +20,8 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'contact_phone').set '1234567890'
 
     @driver.radio(:value => 'visa').set
+    @driver.radio(:value => 'not_same_address').set
 
-    @driver.radio(:value=> 'not_same_address').set
     @driver.text_field(:name => 'billing_address').set 'billing address'
     @driver.text_field(:name => 'billing_city').set 'billing city'
     @driver.select_list(:name => 'billing_state').select 'New York'

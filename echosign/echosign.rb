@@ -111,7 +111,6 @@ class EchoSign
 
   def get_library_documents
     response = call :get_my_library_documents, {:apiKey => @api_key}
-    puts response.body
   end
 
   private
