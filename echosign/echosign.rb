@@ -99,9 +99,9 @@ class EchoSign
     csv_data = CSV.parse response.body[:get_form_data_response][:get_form_data_result][:form_data_csv]
 
     csv_hash = Hash.new
-    field_count = csv_data[0].length
+    field_count = csv_data[0].length-1
 
-    (1..field_count).each_index do |i|
+    (0..field_count).each do |i|
       csv_hash[headers[i]] = csv_data[1][i]
     end
 
