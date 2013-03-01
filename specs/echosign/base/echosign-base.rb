@@ -30,7 +30,7 @@ class EchoSignTestsBase < TestsBase
 
     puts documents
 
-    keys = documents.select { |doc| doc[:name] == "test agreement" }.map { |doc| doc[:documentKey] }
+    keys = documents.select { |doc| doc[:name] == "test agreement" }.map { |doc| doc[:document_key] }
 
     puts keys
   end
