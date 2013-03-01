@@ -18,7 +18,7 @@ class EchoSignTestsBase < TestsBase
   end
 
   def teardown
-    super
+    #super
     `pkill -f 9393`
   end
 

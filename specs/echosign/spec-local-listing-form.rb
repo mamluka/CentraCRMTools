@@ -91,6 +91,8 @@ class LocalListingFormTests < EchoSignTestsBase
 
     @driver.screenshot.save 'after-signed.png'
 
+    sleep 10
+
     assert_equal lead.get('billing_payment_method_c'), 'Visa'
 
     #TODO checking the same billing checkbox is missing
@@ -137,6 +139,5 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_payment_types_c'), 'Diners'
 
     assert_equal lead.get('googlelocal_sign_date_c'), today_crm_time
-
   end
 end
