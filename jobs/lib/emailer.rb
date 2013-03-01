@@ -31,6 +31,6 @@ class ApiEmailer
       apiCallParams = apiCallParams.merge(more)
     end
 
-    RestClient.get_text "http://apps.centracorporation.com/api/email/#{api}", {:params => apiCallParams}
+    RestClient.get "http://apps.centracorporation.com/api/email/#{api}", {:params => apiCallParams}
   end
 end
