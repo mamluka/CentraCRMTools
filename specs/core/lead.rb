@@ -83,6 +83,16 @@ class Lead
     @driver.hidden(:id => id).value
   end
 
+  def is_checked(id)
+    unless @driver.url.include?(@id)
+      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    end
+
+    show_all_panels
+
+    @driver.checkbox(:id => id).isset?
+  end
+
   def status
     unless @driver.url.include?(@id)
       @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
