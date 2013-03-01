@@ -28,11 +28,12 @@ class EchoSignTestsBase < TestsBase
     echosign = EchoSign.new
     documents = echosign.get_documents
 
-    puts documents
-
     keys = documents.select { |doc| doc[:name] == "test agreement" }.map { |doc| doc[:document_key] }
 
-    puts keys
+    keys.each do |key|
+      echosign.cancel_document key
+    end
+
   end
 
 

@@ -117,6 +117,10 @@ class EchoSign
     response = call :get_my_library_documents, {:apiKey => @api_key}
   end
 
+  def cancel_document(document_key)
+    call :get_my_documents, {:apiKey => @api_key, :documentKey => document_key}
+  end
+
   private
 
   def call(resource, params)
