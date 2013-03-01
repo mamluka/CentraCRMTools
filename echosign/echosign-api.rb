@@ -18,7 +18,6 @@ class EchoSignApi < Grape::API
     get :send do
       begin
         @echosign.send params[:email], "RWKW8L232Y3Z7F", @config['callback_url']
-        "OK"
       rescue
         "ERROR"
       end
