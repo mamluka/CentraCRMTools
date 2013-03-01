@@ -8,6 +8,6 @@ class TestMini < CrmTestBase
     lead = Lead.new @driver, {:status => 'select Dead'}
 
     assert_equal lead.get('dead_status_assigner_c'), "David MZ"
-    assert_includes lead.get('dead_status_assigned_date_c'), today_crm_time
+    assert_includes lead.get('dead_status_assigned_date_c'), today_mysql_time
   end
 end

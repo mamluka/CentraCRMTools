@@ -17,12 +17,16 @@ class TestsBase < MiniTest::Unit::TestCase
     @email_client.clear_inbox
   end
 
-  def today_crm_time
+  def today_mysql_time
     Time.now.strftime('%Y-%m-%d %H:%M')
   end
 
   def today_crm_date
     Date.today.strftime('%m/%d/%Y')
+  end
+
+  def today_crm_time
+    Date.today.strftime('%m/%d/%Y %H:%M')
   end
 
   def assert_email_contains(text)
