@@ -121,8 +121,8 @@ class EchoSign
     call :cancel_document, {
         :apiKey => @api_key,
         :documentKey => document_key,
-        :comment => nil,
-        :notifySigner => nil
+        :comment => "Testing document",
+        :notifySigner => false
     }
   end
 
