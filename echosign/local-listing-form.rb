@@ -49,7 +49,7 @@ class LocalListing
     custom_data.business_hours_ss_c = (opening_hours - regular_opening_hours).join(', ')
 
     custom_data.business_payment_types_c = @csv_hash.select { |k, v| k.include?('payment_type') && v == "Yes" }.keys.map { |s| s.split('_').last.capitalize }.join(', ')
-    s
+
     custom_data.save
 
   end
