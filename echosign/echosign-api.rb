@@ -14,7 +14,6 @@ class EchoSignApi < Grape::API
   end
 
   resource :echosign do
-    desc "Return a public timeline."
     get :send do
       begin
         @echosign.send params[:email], "RWKW8L232Y3Z7F", @config['callback_url']
