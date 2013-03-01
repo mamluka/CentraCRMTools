@@ -34,6 +34,10 @@ class EchoSignTestsBase < TestsBase
       echosign.cancel_document key
     end
 
+    keys.each do |key|
+      echosign.remove_document key
+    end
+
   end
 
 
