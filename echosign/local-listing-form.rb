@@ -14,11 +14,6 @@ class LocalListing
     custom_data = CustomData.where(:echosign_doc_id_c => document_id).first
     lead = custom_data.lead
 
-    puts @csv_hash
-    puts @csv_hash.class
-
-    puts @csv_hash["billing_payment_options"]
-
     custom_data.billing_payment_method_c = @csv_hash['billing_payment_options']
 
     if @csv_hash['billing_payment_options'] == "not_same_address"
@@ -53,7 +48,7 @@ class LocalListing
     custom_data.business_hours_mf_c = (opening_hours - regular_opening_hours).join(', ')
     custom_data.business_hours_ss_c = regular_opening_hours.join(', ')
 
-    custom_data.business_payment_types_c = @csv_hash.select { |k, v| k.include?('payment_type') && v == "Yes" }.map { |s| s.plit('_').last.upper! }.join(', ')
+    custom_data.business_payment_types_c = @csv_hash.select { |k, v| k.include?('payment_type') && v == "Yes" }.map { |s| s.split('_').last.upper! }.join(', ')
 
     custom_data.save
 
