@@ -97,7 +97,6 @@ class LocalListingFormTests < EchoSignTestsBase
 
     #TODO checking the same billing checkbox is missing
 
-    assert_equal lead.get('billing_payment_method_c'), 'Visa'
     assert_equal lead.get('billing_address_street_c'), 'billing address'
     assert_equal lead.get('billing_address_city_c'), 'billing city'
     assert_equal lead.get('billing_address_state_c'), 'New York'

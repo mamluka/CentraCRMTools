@@ -14,7 +14,7 @@ class LocalListing
     custom_data = CustomData.where(:echosign_doc_id_c => document_id).first
     lead = custom_data.lead
 
-    custom_data.billing_payment_method_c = @csv_hash['billing_payment_options']
+    custom_data.billing_payment_method_c = @csv_hash['billing_payment_options'].upcase!
 
     if @csv_hash['billing_payment_options'] == "not_same_address"
       custom_data.billing_address_street_c = @csv_hash['billing_address']
