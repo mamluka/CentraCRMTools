@@ -9,7 +9,7 @@ class LocalListingFormTests < EchoSignTestsBase
         :googlelocal_check_c => 'check'
     }
 
-    contract_url = @email_client.get_first_email_body.match('"(https://centra.echosign.com/public/esign.+?)"')[0][0].to_s
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
 
     puts contract_url
 
