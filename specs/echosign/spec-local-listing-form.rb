@@ -70,7 +70,11 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'title').set 'CTO'
     @driver.text_field(:name => 'date').set '1/1/2014'
 
+    @driver.execute_script("document.getElementById('document-frame').style.height='10000px'; document.getElementById('scrollable-wrapper').style.height='10000px'")
+
     @driver.screenshot.save 'before.png'
+
+
 
     @driver.element(:css => 'div[fieldname=echosign_signature]').click
 
