@@ -30,7 +30,7 @@ class EchoSignApi < Grape::API
         document_key = params[:documentKey]
 
         echosign = EchoSign.new
-        csv_hash = echosign.get_form_data :document_key
+        csv_hash = echosign.get_form_data document_key
 
         puts csv_hash
 
