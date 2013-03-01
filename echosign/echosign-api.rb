@@ -14,7 +14,7 @@ class EchoSignApi < Grape::API
   end
 
   resource :echosign do
-    get 'send' do
+    get :send do
       begin
         @echosign.send params[:email], "RWKW8L232Y3Z7F", @config['callback_url']
       rescue
@@ -22,7 +22,7 @@ class EchoSignApi < Grape::API
       end
     end
 
-    get 'notify' do
+    get :notify do
       document_key = params[:documentKey]
 
       csv_hash = @echosign.get_form_data :document_key
