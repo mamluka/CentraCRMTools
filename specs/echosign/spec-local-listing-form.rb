@@ -68,7 +68,7 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'print_name').set 'centra ltd'
     @driver.text_field(:name => 'signature').set 'centra signature'
     @driver.text_field(:name => 'title').set 'CTO'
-    @driver.text_field(:name => 'date').set '1/1/2014'
+    @driver.text_field(:name => 'date').set '1/1/14'
 
     @driver.execute_script("document.getElementById('document-frame').style.height='10000px'; document.getElementById('scrollable-wrapper').style.height='10000px'")
 
