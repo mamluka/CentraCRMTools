@@ -105,6 +105,7 @@ class EchoSign
       csv_hash[csv_data[0][i]] = csv_data[1][i]
     end
 
+    csv_hash
   end
 
   def get_documents
