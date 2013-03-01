@@ -26,7 +26,7 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def today_crm_time
-    Date.today.strftime('%m/%d/%Y %H:%M')
+    Time.now.strftime('%m/%d/%Y %H:%M')
   end
 
   def assert_email_contains(text)
