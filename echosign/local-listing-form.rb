@@ -28,6 +28,11 @@ class LocalListing
       custom_data.billing_address_zip_c = @csv_hash['zip']
     end
 
+    custom_data.billing_cc_number_c = @csv_hash['billing_cc_number']
+    custom_data.billing_cc_exp_date_c = @csv_hash['billing_cc_exp']
+    custom_data.billing_cc_cvv_c = @csv_hash['billing_cc_ccv']
+    custom_data.billing_cc_name_c = @csv_hash['billing_cc_name']
+
     lead.phone_other = @csv_hash['alt_phone']
     lead.primary_address_street = @csv_hash['address']
     lead.primary_address_city= @csv_hash['city']
