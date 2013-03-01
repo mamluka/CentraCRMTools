@@ -93,6 +93,8 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get_by_label('Business Address'), 'Alabama'
     assert_includes lead.get_by_label('Business Address'), '54321'
 
+    assert_includes lead.get('service_area_c'), 'LA'
+
     assert_includes lead.get('business_category_c'), 'cat1'
     assert_includes lead.get('business_category_c'), 'cat2'
     assert_includes lead.get('business_category_c'), 'cat3'
@@ -108,19 +110,19 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_hours_ss_c'), '6-7'
     assert_includes lead.get('business_hours_ss_c'), '7-8'
 
-    assert_includes lead.get('business_payment_types_c'), 'check'
-    assert_includes lead.get('business_payment_types_c'), 'cash'
-    assert_includes lead.get('business_payment_types_c'), 'visa'
-    assert_includes lead.get('business_payment_types_c'), 'mastercard'
-    assert_includes lead.get('business_payment_types_c'), 'discover'
-    assert_includes lead.get('business_payment_types_c'), 'amex'
-    assert_includes lead.get('business_payment_types_c'), 'paypal'
-    assert_includes lead.get('business_payment_types_c'), 'google'
-    assert_includes lead.get('business_payment_types_c'), 'financing'
-    assert_includes lead.get('business_payment_types_c'), 'invoice'
-    assert_includes lead.get('business_payment_types_c'), 'diners'
+    assert_includes lead.get('business_payment_types_c'), 'Check'
+    assert_includes lead.get('business_payment_types_c'), 'Cash'
+    assert_includes lead.get('business_payment_types_c'), 'Visa'
+    assert_includes lead.get('business_payment_types_c'), 'Mastercard'
+    assert_includes lead.get('business_payment_types_c'), 'Discover'
+    assert_includes lead.get('business_payment_types_c'), 'Amex'
+    assert_includes lead.get('business_payment_types_c'), 'Paypal'
+    assert_includes lead.get('business_payment_types_c'), 'Google'
+    assert_includes lead.get('business_payment_types_c'), 'Financing'
+    assert_includes lead.get('business_payment_types_c'), 'Invoice'
+    assert_includes lead.get('business_payment_types_c'), 'Diners'
 
-    assert_equal lead.get('billing_address_zip_c'), today_crm_time
+    assert_equal lead.get('googlelocal_sign_date_c'), today_crm_time
 
   end
 end

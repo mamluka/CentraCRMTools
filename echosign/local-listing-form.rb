@@ -15,11 +15,18 @@ class LocalListing
     lead = custom_data.lead
 
     custom_data.billing_payment_method_c = @csv_hash['billing_payment_options']
-    custom_data.billing_same_address_c = @csv_hash['billing_same_address']
-    custom_data.billing_address_street_c = @csv_hash['billing_address']
-    custom_data.billing_address_city_c = @csv_hash['billing_city']
-    custom_data.billing_address_state_c = @csv_hash['billing_state']
-    custom_data.billing_address_zip_c = @csv_hash['billing_zip']
+
+    if @csv_hash['billing_payment_options'] == "0"
+      custom_data.billing_address_street_c = @csv_hash['billing_address']
+      custom_data.billing_address_city_c = @csv_hash['billing_city']
+      custom_data.billing_address_state_c = @csv_hash['billing_state']
+      custom_data.billing_address_zip_c = @csv_hash['billing_zip']
+    else
+      custom_data.billing_address_street_c = @csv_hash['address']
+      custom_data.billing_address_city_c = @csv_hash['city']
+      custom_data.billing_address_state_c = @csv_hash['state']
+      custom_data.billing_address_zip_c = @csv_hash['zip']
+    end
 
     lead.phone_other = @csv_hash['alt_phone']
     lead.primary_address_street = @csv_hash['address']
@@ -27,7 +34,16 @@ class LocalListing
     lead.primary_address_state= @csv_hash['state']
     lead.primary_address_postalcode = @csv_hash['zip']
 
-    custom_data.billing_address_zip_c = @csv_hash['billing_zip']
+    custom_data.service_area_c = @csv_hash['service_area']
+    custom_data.business_category_c = @csv_hash.select { |k| k.start_with?('category') }.values.join(', ')
+
+    opening_hours = @csv_hash.map { |k, v| k.split('_').last.upcase! + ' - ' + v }
+    regular_opening_hours = opening_hours.select { |s| s.include?('Sat') || s.include?('Sun') }
+
+    custom_data.business_hours_mf_c = (opening_hours - regular_opening_hours).join(', ')
+    custom_data.business_hours_ss_c = regular_opening_hours.join(', ')
+
+    custom_data.business_payment_types_c = @csv_hash.select { |k, v| k.includes?('payment_type') && v == "Yes" }.map { |s| s.plit('_').last.upper! }.join(', ')
 
 
   end
