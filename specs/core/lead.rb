@@ -1,6 +1,6 @@
 require 'securerandom'
 
-require File.dirname(__FILE__) + '/driver-extentions.rb'
+require_relative 'driver-extentions.rb'
 
 class Lead
   def initialize(driver, values = nil)
