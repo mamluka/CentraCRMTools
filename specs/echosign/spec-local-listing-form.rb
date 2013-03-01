@@ -80,9 +80,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
     @driver.screenshot.save 'before.png'
 
-
-
-    @driver.element(:css => 'div[fieldname=echosign_signature]').click
+    @driver.element(:css => 'div[fieldname=echosign_signature] img').click
 
     @driver.screenshot.save 'after.png'
 
@@ -90,6 +88,8 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.div(:id => 'adopt').click
 
     @driver.div(:id => 'submit').when_present.click
+
+    @driver.screenshot.save 'after-signed.png'
 
     assert_equal lead.get('billing_payment_method_c'), 'Visa'
 
