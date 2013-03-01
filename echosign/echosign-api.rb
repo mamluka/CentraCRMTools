@@ -23,7 +23,7 @@ class EchoSignApi < Grape::API
       end
     end
 
-    get 'notify' do
+    get :notify do
       document_key = params[:documentKey]
 
       csv_hash = @echosign.get_form_data :document_key
