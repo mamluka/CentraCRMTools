@@ -118,7 +118,12 @@ class EchoSign
   end
 
   def cancel_document(document_key)
-    call :cancel_document, {:apiKey => @api_key, :documentKey => document_key}
+    call :cancel_document, {
+        :apiKey => @api_key,
+        :documentKey => document_key,
+        :comment => nil,
+        :notifySigner => nil
+    }
   end
 
   private
