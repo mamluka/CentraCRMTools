@@ -125,7 +125,7 @@ class EchoSign
         :apiKey => @api_key,
         :documentKey => document_key,
         :comment => "Testing document",
-        :notifySigner => false}
+        :notifySigner => "false"}
   end
 
   private
