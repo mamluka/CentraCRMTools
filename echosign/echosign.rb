@@ -102,7 +102,7 @@ class EchoSign
     field_count = csv_data[0].length-1
 
     (0..field_count).each do |i|
-      csv_hash[headers[i]] = csv_data[1][i]
+      csv_hash[csv_data[0][i]] = csv_data[1][i]
     end
 
   end
