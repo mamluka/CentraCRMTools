@@ -15,7 +15,6 @@ class LocalListing
     lead = custom_data.lead
 
     puts @csv_hash
-
     puts @csv_hash.class
 
     puts @csv_hash["billing_payment_options"]

@@ -98,9 +98,13 @@ class EchoSign
 
     csv_data = CSV.parse response.body[:get_form_data_response][:get_form_data_result][:form_data_csv]
 
-    headers = csv_data.shift.map { |i| i.to_s }
-    string_data = csv_data.map { |row| row.map { |cell| cell.to_s } }
-    string_data.map { |row| Hash[*headers.zip(row).flatten] }
+    csv_hash = Hash.new
+    field_count = csv_data[0].length
+
+    (1..field_count).each_index do |i|
+      csv_hash[headers[i]] = csv_data[1][i]
+    end
+
   end
 
   def get_documents
