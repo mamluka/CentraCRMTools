@@ -90,7 +90,7 @@ class Lead
 
     show_all_panels
 
-    @driver.checkbox(:id => id).isset?
+    @driver.checkbox(:id => id).set?
   end
 
   def status
