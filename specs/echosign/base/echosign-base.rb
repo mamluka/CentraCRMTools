@@ -28,7 +28,9 @@ class EchoSignTestsBase < TestsBase
     echosign = EchoSign.new
     documents = echosign.get_documents
 
-    put documents
+    keys = documents.select { |doc| doc[:name] == "test agreement" }.map { |doc| doc[:documentKey] }
+
+    puts keys
   end
 
 
