@@ -13,7 +13,7 @@ class EchoSignTestsBase < TestsBase
     load_database
     clean_databases
 
-    @auth = Auth.new
+    @auth = Auth.new @driver
     @auth.login
   end
 
