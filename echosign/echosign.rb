@@ -114,11 +114,11 @@ class EchoSign
   end
 
   def get_library_documents
-    response = call :get_my_library_documents, {:apiKey => @api_key}
+    call :get_my_library_documents, {:apiKey => @api_key}
   end
 
   def cancel_document(document_key)
-    call :get_my_documents, {:apiKey => @api_key, :documentKey => document_key}
+    call :cancel_document, {:apiKey => @api_key, :documentKey => document_key}
   end
 
   private
