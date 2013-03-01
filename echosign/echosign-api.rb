@@ -8,7 +8,7 @@ class EchoSignApi < Grape::API
   format :json
 
   def initialize
-    @config = JSON.parse(File.dirname(__FILE__) + "/config.json")
+    @config = JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
 
     @echosign = EchoSign.new
   end
