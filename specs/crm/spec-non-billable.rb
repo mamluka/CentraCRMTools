@@ -16,8 +16,8 @@ class TestMini < CrmTestBase
 
     assert_api_called({:email => email, :customerId => lead.id})
 
-    assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
-    assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
+    assert_includes lead.get_text('not_billable_assign_date_c'), today_crm_date
+    assert_includes lead.get_text('not_billable_assigner_c'), 'David MZ'
     assert_includes lead.status, 'Pit stop'
   end
 
@@ -61,8 +61,8 @@ class TestMini < CrmTestBase
 
     assert_api_called({:email => email})
 
-    assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
-    assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
+    assert_includes lead.get_text('not_billable_assign_date_c'), today_crm_date
+    assert_includes lead.get_text('not_billable_assigner_c'), 'David MZ'
     assert_includes lead.status, 'Dead'
   end
 
@@ -76,8 +76,8 @@ class TestMini < CrmTestBase
         :non_billable_reason_c => 'select Not interested'
     }
 
-    assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
-    assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
+    assert_includes lead.get_text('not_billable_assign_date_c'), today_crm_date
+    assert_includes lead.get_text('not_billable_assigner_c'), 'David MZ'
     assert_includes lead.status, 'Dead'
   end
 
@@ -91,8 +91,8 @@ class TestMini < CrmTestBase
         :non_billable_reason_c => 'select Invalid email'
     }
 
-    assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
-    assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
+    assert_includes lead.get_text('not_billable_assign_date_c'), today_crm_date
+    assert_includes lead.get_text('not_billable_assigner_c'), 'David MZ'
     assert_includes lead.status, 'Pit stop'
   end
 

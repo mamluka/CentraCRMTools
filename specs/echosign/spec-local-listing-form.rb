@@ -93,15 +93,15 @@ class LocalListingFormTests < EchoSignTestsBase
 
     sleep 10
 
-    assert_equal lead.get('billing_payment_method_c'), 'Visa'
+    assert_equal lead.get_text('billing_payment_method_c'), 'Visa'
 
     #TODO checking the same billing checkbox is missing
 
-    assert_equal lead.get('billing_payment_method_c'), 'Visa'
-    assert_equal lead.get('billing_address_street_c'), 'billing address'
-    assert_equal lead.get('billing_address_city_c'), 'billing city'
-    assert_equal lead.get('billing_address_state_c'), 'New York'
-    assert_equal lead.get('billing_address_zip_c'), '12345'
+    assert_equal lead.get_text('billing_payment_method_c'), 'Visa'
+    assert_equal lead.get_text('billing_address_street_c'), 'billing address'
+    assert_equal lead.get_text('billing_address_city_c'), 'billing city'
+    assert_equal lead.get_text('billing_address_state_c'), 'New York'
+    assert_equal lead.get_text('billing_address_zip_c'), '12345'
 
     assert_includes lead.get_by_label('Business Address'), 'address'
     assert_includes lead.get_by_label('Business Address'), 'city'
@@ -109,35 +109,35 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get_by_label('Business Address'), 'Alabama'
     assert_includes lead.get_by_label('Business Address'), '54321'
 
-    assert_includes lead.get('service_area_c'), 'LA'
+    assert_includes lead.get_text('service_area_c'), 'LA'
 
-    assert_includes lead.get('business_category_c'), 'cat1'
-    assert_includes lead.get('business_category_c'), 'cat2'
-    assert_includes lead.get('business_category_c'), 'cat3'
-    assert_includes lead.get('business_category_c'), 'cat4'
-    assert_includes lead.get('business_category_c'), 'cat5'
+    assert_includes lead.get_text('business_category_c'), 'cat1'
+    assert_includes lead.get_text('business_category_c'), 'cat2'
+    assert_includes lead.get_text('business_category_c'), 'cat3'
+    assert_includes lead.get_text('business_category_c'), 'cat4'
+    assert_includes lead.get_text('business_category_c'), 'cat5'
 
-    assert_includes lead.get('business_hours_mf_c'), '1-2'
-    assert_includes lead.get('business_hours_mf_c'), '2-3'
-    assert_includes lead.get('business_hours_mf_c'), '3-4'
-    assert_includes lead.get('business_hours_mf_c'), '4-5'
-    assert_includes lead.get('business_hours_mf_c'), '5-6'
+    assert_includes lead.get_text('business_hours_mf_c'), '1-2'
+    assert_includes lead.get_text('business_hours_mf_c'), '2-3'
+    assert_includes lead.get_text('business_hours_mf_c'), '3-4'
+    assert_includes lead.get_text('business_hours_mf_c'), '4-5'
+    assert_includes lead.get_text('business_hours_mf_c'), '5-6'
 
-    assert_includes lead.get('business_hours_ss_c'), '6-7'
-    assert_includes lead.get('business_hours_ss_c'), '7-8'
+    assert_includes lead.get_text('business_hours_ss_c'), '6-7'
+    assert_includes lead.get_text('business_hours_ss_c'), '7-8'
 
-    assert_includes lead.get('business_payment_types_c'), 'Check'
-    assert_includes lead.get('business_payment_types_c'), 'Cash'
-    assert_includes lead.get('business_payment_types_c'), 'Visa'
-    assert_includes lead.get('business_payment_types_c'), 'Mastercard'
-    assert_includes lead.get('business_payment_types_c'), 'Discover'
-    assert_includes lead.get('business_payment_types_c'), 'Amex'
-    assert_includes lead.get('business_payment_types_c'), 'Paypal'
-    assert_includes lead.get('business_payment_types_c'), 'Google'
-    assert_includes lead.get('business_payment_types_c'), 'Financing'
-    assert_includes lead.get('business_payment_types_c'), 'Invoice'
-    assert_includes lead.get('business_payment_types_c'), 'Diners'
+    assert_includes lead.get_text('business_payment_types_c'), 'Check'
+    assert_includes lead.get_text('business_payment_types_c'), 'Cash'
+    assert_includes lead.get_text('business_payment_types_c'), 'Visa'
+    assert_includes lead.get_text('business_payment_types_c'), 'Mastercard'
+    assert_includes lead.get_text('business_payment_types_c'), 'Discover'
+    assert_includes lead.get_text('business_payment_types_c'), 'Amex'
+    assert_includes lead.get_text('business_payment_types_c'), 'Paypal'
+    assert_includes lead.get_text('business_payment_types_c'), 'Google'
+    assert_includes lead.get_text('business_payment_types_c'), 'Financing'
+    assert_includes lead.get_text('business_payment_types_c'), 'Invoice'
+    assert_includes lead.get_text('business_payment_types_c'), 'Diners'
 
-    assert_equal lead.get('googlelocal_sign_date_c'), today_crm_time
+    assert_equal lead.get_text('googlelocal_sign_date_c'), today_crm_time
   end
 end

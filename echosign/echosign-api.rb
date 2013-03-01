@@ -14,7 +14,7 @@ class EchoSignApi < Grape::API
   end
 
   resource :echosign do
-    get :send do
+    get_text :send do
       begin
         config = get_config
         echosign = EchoSign.new
@@ -25,7 +25,7 @@ class EchoSignApi < Grape::API
       end
     end
 
-    get :notify do
+    get_text :notify do
       if params[:eventType] == "ESIGNED"
         document_key = params[:documentKey]
 
