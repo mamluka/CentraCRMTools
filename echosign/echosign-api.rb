@@ -26,13 +26,14 @@ class EchoSignApi < Grape::API
     end
 
     get :notify do
-      document_key = params[:documentKey]
+      if params[:eventType] == "SIGNED0"
+        document_key = params[:documentKey]
 
-      csv_hash = @echosign.get_form_data :document_key
+        csv_hash = @echosign.get_form_data :document_key
 
-      local_listing = LocalListing.new csv_hash
-      local_listing.update_crm document_key
-
+        local_listing = LocalListing.new csv_hash
+        local_listing.update_crm document_key
+      end
     end
   end
 end
