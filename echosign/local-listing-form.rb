@@ -14,7 +14,9 @@ class LocalListing
     custom_data = CustomData.where(:echosign_doc_id_c => document_id).first
     lead = custom_data.lead
 
-    puts @csv_hash[0]
+    puts @csv_hash
+
+    puts @csv_hash.class
 
     puts @csv_hash["billing_payment_options"]
 

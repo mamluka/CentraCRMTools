@@ -32,8 +32,6 @@ class EchoSignApi < Grape::API
         echosign = EchoSign.new
         csv_hash = echosign.get_form_data document_key
 
-        puts csv_hash
-
         local_listing = LocalListing.new csv_hash
         local_listing.update_crm document_key
       end
