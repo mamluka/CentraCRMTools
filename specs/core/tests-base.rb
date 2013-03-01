@@ -8,12 +8,12 @@ require 'mail'
 class TestsBase < MiniTest::Unit::TestCase
 
   def setup
-    @email_assertions = EmailClient.new
-    @email_assertions.clear_inbox
+    @email_client = EmailClient.new
+    @email_client.clear_inbox
   end
 
   def teardown
-    @email_assertions.clear_inbox
+    @email_client.clear_inbox
   end
 
   def today_crm_time
@@ -25,15 +25,8 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def assert_email_contains(text)
-    time_elapsed = 0
-    while Mail.all.length == 0 && time_elapsed < 30
-      sleep 5
-      time_elapsed +=5
-    end
 
-    if Mail.all.length == 0
-      flunk "No email found"
-    end
+    @email_client.wait_for_emails
 
     if Mail.first.multipart?
       assert_includes Mail.first.parts.first.body, text

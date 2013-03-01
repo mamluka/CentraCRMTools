@@ -20,12 +20,27 @@ class EmailClient
   end
 
   def get_first_email_body
+
+    wait_for_emails
+
     mail = Mail.all.first
 
     if mail.multipart?
       mail.part[0].body
     else
       mail.body
+    end
+  end
+
+  def wait_for_emails
+    time_elapsed = 0
+    while Mail.all.length == 0 && time_elapsed < 30
+      sleep 5
+      time_elapsed +=5
+    end
+
+    if Mail.all.length == 0
+      flunk "No email found"
     end
   end
 end
