@@ -16,7 +16,7 @@ class LocalListing
 
     custom_data.billing_payment_method_c = @csv_hash['billing_payment_options']
 
-    if @csv_hash['billing_payment_options'] == "0"
+    if @csv_hash['billing_payment_options'] == "not_same_address"
       custom_data.billing_address_street_c = @csv_hash['billing_address']
       custom_data.billing_address_city_c = @csv_hash['billing_city']
       custom_data.billing_address_state_c = @csv_hash['billing_state']

@@ -21,7 +21,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
     @driver.radio(:value => 'visa').set
 
-    @driver.radio(:name, 'billing_same_address', "0").set
+    @driver.radio(:value=> 'not_same_address').set
     @driver.text_field(:name => 'billing_address').set 'billing address'
     @driver.text_field(:name => 'billing_city').set 'billing city'
     @driver.select_list(:name => 'billing_state').select 'New York'
