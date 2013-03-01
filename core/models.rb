@@ -42,7 +42,7 @@ class CustomData < ActiveRecord::Base
   self.table_name = 'leads_cstm'
   self.primary_key = 'id_c'
 
-  has_one :lead, :primary_key => 'id_c', :foreign_key => 'id'
+  has_one :lead, :primary_key => 'id_c', :foreign_key => 'id', :autosave => true
 end
 
 
