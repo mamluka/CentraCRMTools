@@ -70,7 +70,7 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'title').set 'CTO'
     @driver.text_field(:name => 'date').set '1/1/2014'
 
-    @driver.div(:css => 'div[fieldname=echosign_signature]').click
+    @driver.element(:css => 'div[fieldname=echosign_signature]').click
 
     @driver.text_field(:id => 'signature-name').when_present.set 'david mz'
     @driver.div(:id => 'adopt').click
