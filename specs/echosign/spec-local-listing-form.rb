@@ -11,8 +11,6 @@ class LocalListingFormTests < EchoSignTestsBase
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
 
-    puts contract_url
-
     @driver.goto contract_url
 
     @driver.text_field(:name => 'contact_name').set 'David mz'
