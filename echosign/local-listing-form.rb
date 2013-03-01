@@ -18,11 +18,16 @@ class LocalListing
     custom_data.billing_payment_method_c = @csv_hash['billing_payment_options'].capitalize
 
     if @csv_hash['billing_same_address'] == "not_same_address"
+      custom_data.billing_same_address_c = false
+
       custom_data.billing_address_street_c = @csv_hash['billing_address']
       custom_data.billing_address_city_c = @csv_hash['billing_city']
       custom_data.billing_address_state_c = @csv_hash['billing_state']
       custom_data.billing_address_zip_c = @csv_hash['billing_zip']
+
     else
+      custom_data.billing_same_address_c = true
+
       custom_data.billing_address_street_c = @csv_hash['address']
       custom_data.billing_address_city_c = @csv_hash['city']
       custom_data.billing_address_state_c = @csv_hash['state']

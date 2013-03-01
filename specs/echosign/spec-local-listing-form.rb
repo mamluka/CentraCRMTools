@@ -215,7 +215,7 @@ class LocalListingFormTests < EchoSignTestsBase
   end
 
   def not_same_billing_address
-    @driver.radio(:value => 'same_address').set
+    @driver.radio(:value => 'not_same_address').set
   end
 
   def fill_billing_address
