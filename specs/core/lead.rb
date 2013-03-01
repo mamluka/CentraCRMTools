@@ -72,6 +72,17 @@ class Lead
     @driver.span(:id => name).text
   end
 
+  def get_list(id)
+
+    unless @driver.url.include?(@id)
+      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    end
+
+    show_all_panels
+
+    @driver.hidden(:id => id).value
+  end
+
   def status
     unless @driver.url.include?(@id)
       @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"

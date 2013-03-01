@@ -93,7 +93,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
     sleep 10
 
-    assert_equal lead.get('billing_payment_method_c'), 'Visa'
+    assert_equal lead.get_list('billing_payment_method_c'), 'Visa'
 
     #TODO checking the same billing checkbox is missing
 
