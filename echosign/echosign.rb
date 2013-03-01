@@ -110,7 +110,6 @@ class EchoSign
 
   def get_documents
     response = call :get_my_documents, {:apiKey => @api_key}
-
     response.body[:get_my_documents_response][:get_my_documents_result][:document_list_for_user][:document_list_item]
   end
 

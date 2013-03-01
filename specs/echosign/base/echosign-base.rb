@@ -1,4 +1,5 @@
 require_relative "../../core/tests-base.rb"
+require_relative "../../../echosign/echosign"
 
 require 'watir-webdriver'
 
@@ -20,6 +21,14 @@ class EchoSignTestsBase < TestsBase
   def teardown
     #super
     `pkill -f 9393`
+    clean_echosign_documents
+  end
+
+  def clean_echosign_documents
+    echosign = EchoSign.new
+    documents = echosign.get_documents
+
+    put documents
   end
 
 
