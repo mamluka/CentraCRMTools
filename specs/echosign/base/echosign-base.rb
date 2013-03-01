@@ -1,5 +1,4 @@
 require_relative "../../core/tests-base.rb"
-require_relative "../../core/auth.rb"
 
 require 'watir-webdriver'
 
