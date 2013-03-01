@@ -12,8 +12,8 @@ class EchoSignApi < Grape::API
       begin
         echosign = EchoSign.new
         echosign.send params[:email], "RWKW8L232Y3Z7F", @@config['callback_url']
-      rescue
-        "ERROR"
+      rescue => ex
+        "ERROR: " + ex.message + " " + ex.backtrace
       end
     end
 
