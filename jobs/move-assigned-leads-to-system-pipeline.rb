@@ -1,42 +1,31 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class JobAssignLeadsToSystemPipeline < JobsBase
 
-week_old_leads = Lead.where('date_entered < ? and status= ?', 7.day.ago, 'FU')
+  def execute
+    leads = CustomData.where('prev_url_c != ?', 'http://').select { |x| !x.do_not_email && x.system_pipeline_email_1_c.nil? }.map { |x| x.lead }.select { |x| x.emails.any? }.select { |x| x.status =="FU" && x.date_entered < 7.days.ago }
 
-logger.info "We have found #{week_old_leads.length.to_s} leads"
+    logger.info "Found #{leads.length.to_s} that are 7 days old and still in follow up status"
 
-week_old_leads.each do |lead|
-  lead.status = 'SP'
-  lead.assigned_user_id = $system_pipeline_user_id
+    leads.each do |lead|
+      email = lead.email
+      logger.info "#{lead.name} will get an email to #{email}"
 
-  if !lead.custom_data.nil? && lead.custom_data.prev_url_c != "http://" && lead.emails.any? && lead.custom_data.system_pipeline_email_1_c.nil? && !lead.do_not_email
-    logger.info "loaded custom data for #{lead.first_name} the data has in it #{lead.custom_data.prev_url_c}"
+      res = mailer.first_system_pipeline email, lead.custom_data.prev_url_c
 
-    email = lead.emails.first.email_address
+      if res == "OK"
+        lead.custom_data.system_pipeline_email_1_c = Time.now
+      else
+        logger.info "Api response was: " + res
+      end
 
-    logger.info "it has the email: #{email}"
-
-    mailer = ApiEmailer.new
-
-    res = mailer.first_system_pipeline email, lead.custom_data.prev_url_c
-
-    logger.info "The api call response: #{res}"
-
-    if res == "OK"
-      lead.custom_data.system_pipeline_email_1_c = Time.now
-    else
-      logger.info "Api response was: " + res
+      sleep 20
     end
 
+    logger.info "#{leads.length.to_s} send system pipeline email #1"
   end
-
-  lead.save
-
-  logger.info "--Done--"
-  sleep 10
 end
 
-logger.info "we have modified and sent to:  #{week_old_leads.length.to_s} leads"
+job = JobAssignLeadsToSystemPipeline.new
+job.execute
 
