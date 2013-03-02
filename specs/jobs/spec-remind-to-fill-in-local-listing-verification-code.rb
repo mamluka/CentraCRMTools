@@ -10,13 +10,14 @@ class Tests < JobsTestBase
     end
 
     lead.add_custom_data do |data|
+      data.googlelocal_verified_date_c = 8.days.ago
       data.googlelocal_check_c = true
       data.googlelocal_verified_c = true
     end
 
     load_job 'remind-to-fill-in-local-listing-verification-code'
 
-    assert_email_contains 'By now you should have received the correspondence from Google.'
+    assert_email_contains 'By now you should have received the correspondence from Google'
     assert_email_contains 'http://centracorporation.com/google-local-listing-code#!' + lead.id
   end
 end

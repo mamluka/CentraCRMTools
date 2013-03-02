@@ -25,6 +25,10 @@ class ApiEmailer
     email 'google-local-listing-client-information-request', email, {:name => name, :customerId => customerId}
   end
 
+  def google_local_listing_verification_reminder(email, customerId)
+    email 'google-local-listing-verification-reminder', email, {:name => name, :customerId => customerId}
+  end
+
   def email(api, email, more = nil)
     apiCallParams = {:email => email}
     if not more.nil?

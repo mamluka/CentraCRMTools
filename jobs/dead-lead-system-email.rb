@@ -1,6 +1,6 @@
 require_relative "lib/jobs-base"
 
-class JobDeadEmail < JobsBase
+class DeadEmailJob < JobsBase
 
   def execute
     leads = CustomData.where('dead_status_assigned_date_c < ?', 7.days.ago).select { |x| !x.do_not_email && x.dead_client_email_sent_c.nil? && !x.not_billable_c }.map { |x| x.lead }.select { |x| x.status =="Dead" && x.emails.any? && x.assigned_user_id == system_pipeline_user_id }
@@ -26,5 +26,5 @@ class JobDeadEmail < JobsBase
   end
 end
 
-job = JobDeadEmail.new
+job = DeadEmailJob.new
 job.execute

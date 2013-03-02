@@ -39,6 +39,8 @@ class TestsBase < MiniTest::Unit::TestCase
       assert_includes Mail.first.body, text
     end
 
+    end
+
   end
 
   def clean_databases

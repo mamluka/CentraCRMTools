@@ -1,6 +1,6 @@
 require_relative "lib/jobs-base"
 
-class JobCancellationEmail < JobsBase
+class CancellationEmailJob < JobsBase
 
   def execute
     leads = CustomData.where('cancellation_change_date_c < ?', 3.days.ago).select { |x| !x.do_not_email && x.cancellation_email_sent_c.nil? }.map { |x| x.lead }.select { |x| x.status =="cancelled" && x.emails.any? }
@@ -26,6 +26,6 @@ class JobCancellationEmail < JobsBase
   end
 end
 
-job = JobCancellationEmail.new
+job = CancellationEmailJob.new
 job.execute
 
