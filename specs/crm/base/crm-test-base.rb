@@ -1,9 +1,9 @@
 require 'json'
 require 'time'
 
-require_relative "/../../core/tests-base.rb"
-require_relative "/../../core/auth.rb"
-require_relative "/../../core/crm-lead.rb"
+require_relative "../../core/tests-base.rb"
+require_relative "../../core/auth.rb"
+require_relative "../../core/crm-lead.rb"
 
 class CrmTestBase < TestsBase
 
