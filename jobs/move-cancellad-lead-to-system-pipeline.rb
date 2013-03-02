@@ -8,6 +8,8 @@ class MoveCancelledLeadsToSystemPipelineJob < JobsBase
 
     leads.each do |lead|
       lead.assigned_user_id = system_pipeline_user_id
+
+      lead.save
     end
 
     logger.info "#{leads.length.to_s} cancelled leads moved to system  pipeline"

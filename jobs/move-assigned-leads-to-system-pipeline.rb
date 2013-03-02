@@ -15,6 +15,7 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
 
       if res == "OK"
         lead.custom_data.system_pipeline_email_1_c = Time.now
+        lead.save
       else
         logger.info "Api response was: " + res
       end

@@ -6,7 +6,7 @@ class Tests < JobsTestBase
   def test_when_lead_is_do_not_email_should_move_to_dead_status
 
     lead = lead_with do |lead|
-      lead.status = 'SP'
+      lead.status = 'FU'
     end
 
     lead.add_custom_data do |data|
@@ -17,6 +17,7 @@ class Tests < JobsTestBase
 
     result = lead.reload
 
+    assert_equal result.status, 'Dead'
     assert_equal result.assigned_user_id, $system_pipeline_user_id
     assert_equal result.custom_data.dead_status_assigner_c, 'System Pipeline'
   end

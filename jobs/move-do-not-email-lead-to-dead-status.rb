@@ -1,25 +1,24 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class MoveDoNotEmailToDeadStatusJob < JobsBase
 
-leads = Lead.where('status = ?', 'SP').select { |lead| lead.assigned_user_id != $system_pipeline_user_id }
-non_mailable_leads = leads.select { |lead| lead.custom_data.do_not_email_c = 1 }
+  def execute
+    leads = CustomData.where(:do_not_email_c => 1).map { |x| x.lead }.select { |x| x.status != "SP" }
+    logger.info "Found #{leads.length.to_s} leads that are have do not email checked and belong to system pipeline"
 
-logger.info "Found #{non_mailable_leads.length.to_s} leads that are system pipeline and have do not email checked"
+    leads.each do |lead|
+      lead.assigned_user_id = system_pipeline_user_id
+      lead.status = "Dead"
+      lead.custom_data.dead_status_assigner_c = 'System Pipeline'
 
-non_mailable_leads.each do |lead|
-  lead.assigned_user_id = $system_pipeline_user_id
+      logger.info "Moved #{lead.name} to dead status"
 
-  if not lead.custom_data.nil?
-    lead.custom_data.dead_status_assigner_c = 'System Pipeline'
-  else
-    logger.info "This user has no extra data strange?"
+      lead.save
+    end
+
+    logger.info "#{leads.length.to_s} moved to dead status"
   end
-
-  logger.info "Moved #{lead.first_name} #{lead.last_name} to dead status"
-  lead.save
 end
 
-logger.info "#{non_mailable_leads.length.to_s} dead leads moved to system pipeline user"
-
+job = MoveDoNotEmailToDeadStatusJob.new
+job.execute

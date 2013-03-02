@@ -10,6 +10,7 @@ class MoveCancelledLeadsToSystemPipelineJob < JobsBase
       lead.assigned_user_id = centra_small_business_user_id
       logger.info "Moved #{lead.name } to centra small business user"
 
+      lead.save
     end
 
     logger.info "#{leads.length.to_s} clients moved to centra small business"

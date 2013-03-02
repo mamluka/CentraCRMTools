@@ -1,23 +1,21 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class MoveDeadLeadsToSystemPipelineJob < JobsBase
 
-dead_leads = Lead.where('status = ? and assigned_user_id != ?','Dead',$system_pipeline_user_id)
+  def execute
+    leads = Lead.where('status = ? and assigned_user_id != ?', 'Dead', system_pipeline_user_id).select { |x| !x.custom_data.nil? }
+    logger.info "Found #{leads.length.to_s} dead leads to move to system pipeline"
 
-logger.info "Found #{dead_leads.length.to_s} dead leads"
+    leads.each do |lead|
+      lead.assigned_user_id = system_pipeline_user_id
 
-dead_leads.each do |lead|
-  lead.assigned_user_id = $system_pipeline_user_id
-  if not lead.custom_data.nil?
-    lead.custom_data.dead_status_assigned_date_c = Time.now
-  else
-    logger.info "This user has no extra data strange?"
+      logger.info "Moved #{lead.name} to system pipeline"
+      lead.save
+    end
+
+    logger.info "#{leads.length.to_s} dead leads moved to system  pipeline"
   end
-
-  logger.info "Moved #{lead.first_name} #{lead.last_name} to system pipline user"
-  lead.save
 end
 
-logger.info "#{dead_leads.length.to_s} dead leads moved to system pipeline user"
-
+job = MoveDeadLeadsToSystemPipelineJob.new
+job.execute
