@@ -2,7 +2,7 @@ require 'json'
 require 'mail'
 require 'minitest/autorun'
 
-class EmailClient < MiniTest
+class EmailClient
   def initialize
     config = JSON.parse(File.read(File.dirname(__FILE__) + "/email-config.json"))
 
