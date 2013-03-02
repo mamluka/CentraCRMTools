@@ -18,7 +18,7 @@ class Tests < JobsTestBase
     result = lead.reload
 
     assert_equal result.status, 'Dead'
-    assert_equal result.assigned_user_id, $system_pipeline_user_id
+    assert_equal result.assigned_user_id, system_pipeline_user_id
     assert_equal result.custom_data.dead_status_assigner_c, 'System Pipeline'
   end
 end

@@ -7,7 +7,7 @@ class Tests < JobsTestBase
 
     lead = lead_with do |lead|
       lead.status = 'SP'
-      lead.assigned_user_id = $system_pipeline_user_id
+      lead.assigned_user_id = system_pipeline_user_id
     end
 
     lead.add_custom_data do |data|
@@ -26,7 +26,7 @@ class Tests < JobsTestBase
 
     lead = lead_with do |lead|
       lead.status = 'SP'
-      lead.assigned_user_id = $system_pipeline_user_id
+      lead.assigned_user_id = system_pipeline_user_id
     end
 
     lead.add_custom_data do |data|

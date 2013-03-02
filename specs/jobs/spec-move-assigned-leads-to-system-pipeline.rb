@@ -16,7 +16,7 @@ class Tests < JobsTestBase
     result = lead.reload
 
     assert_equal result.status, "SP"
-    assert_equal result.assigned_user_id, $system_pipeline_user_id
+    assert_equal result.assigned_user_id, system_pipeline_user_id
   end
 
   def test_when_user_has_mobile_preview_url_and_7_days_passed_should_update_email_sending_date

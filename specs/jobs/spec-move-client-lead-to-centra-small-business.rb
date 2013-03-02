@@ -14,6 +14,6 @@ class Tests < JobsTestBase
 
     result = lead.reload
 
-    assert_equal result.assigned_user_id, $centra_small_business_user_id
+    assert_equal result.assigned_user_id, centra_small_business_user_id
   end
 end
