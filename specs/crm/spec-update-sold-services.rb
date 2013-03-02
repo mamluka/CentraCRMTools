@@ -9,7 +9,7 @@ class TestMini < CrmTestBase
   def test_when_mobile_web_is_sold_should_update_dates
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
         :email => "email #{email}"
@@ -28,7 +28,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
         :email => "email crmtesting@centracorporation.com",
@@ -45,7 +45,7 @@ class TestMini < CrmTestBase
   def test_when_mobile_web_is_sold_and_sales_date_already_exists_should_not_send_email
     email = "#{SecureRandom.uuid}@david.com"
 
-    Lead.new @driver, {
+    CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_sale_date_c => today_crm_date,
         :mobileweb_check_c => 'check',
@@ -58,7 +58,7 @@ class TestMini < CrmTestBase
   def test_when_google_local_listing_is_sold_should_update_dates
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',
         :email => "email #{email}"
@@ -77,7 +77,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',
         :email => "email crmtesting@centracorporation.com",
@@ -94,7 +94,7 @@ class TestMini < CrmTestBase
   def test_when_google_local_listing_is_sold_and_sales_date_already_exists_should_not_send_email
     email = "#{SecureRandom.uuid}@david.com"
 
-    Lead.new @driver, {
+    CrmLead.new @driver, {
         :status => 'select Client',
         :googlelocal_sale_date_c => today_crm_date,
         :googlelocal_check_c => 'check',
@@ -107,7 +107,7 @@ class TestMini < CrmTestBase
   def test_when_marchent_is_sold_should_update_dates
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :merch_check_c => 'check',
         :email => "email #{email}"

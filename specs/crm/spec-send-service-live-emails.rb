@@ -10,7 +10,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    Lead.new @driver, {
+    CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
         :mobileweb_live_c => 'check',
@@ -24,7 +24,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    Lead.new @driver, {
+    CrmLead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',
         :googlelocal_live_c => 'check',

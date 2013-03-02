@@ -2,7 +2,7 @@ require 'securerandom'
 
 require_relative 'driver-extentions.rb'
 
-class Lead
+class CrmLead
   def initialize(driver, values = nil)
     @driver = driver
     create_new_lead(values)

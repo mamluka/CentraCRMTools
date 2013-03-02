@@ -8,7 +8,7 @@ class TestMini < CrmTestBase
 
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :email => "email #{email}",
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Invalid url'
@@ -25,7 +25,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :email => "email crmtesting@centracorporation.com",
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Invalid url'
@@ -39,7 +39,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    Lead.new @driver, {
+    CrmLead.new @driver, {
         :email => "email crmtesting@centracorporation.com",
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Not business owner or decision maker'
@@ -53,7 +53,7 @@ class TestMini < CrmTestBase
 
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :email => "email #{email}",
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Not business owner or decision maker'
@@ -70,7 +70,7 @@ class TestMini < CrmTestBase
 
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :email => "email #{email}",
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Not interested'
@@ -85,7 +85,7 @@ class TestMini < CrmTestBase
 
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :email => "email #{email}",
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Invalid email'

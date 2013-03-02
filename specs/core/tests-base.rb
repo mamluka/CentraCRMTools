@@ -1,5 +1,5 @@
 require_relative "email-client"
-require_relative "lead"
+require_relative "crm-lead"
 require_relative "auth"
 require_relative "../../core/crm-database"
 

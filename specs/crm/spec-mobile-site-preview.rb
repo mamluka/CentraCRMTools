@@ -9,7 +9,7 @@ class TestMini < CrmTestBase
   def test_when_has_preview_url_should_update_sending_date
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver,
+    lead = CrmLead.new @driver,
                     {:prev_url_c => 'http://preview.flowmobileapps.com/compare/testing',
                      :email => "email #{email}"
                     }
@@ -23,7 +23,7 @@ class TestMini < CrmTestBase
 
     enable_email_sending
 
-    Lead.new @driver,
+    CrmLead.new @driver,
                     {:prev_url_c => 'http://preview.flowmobileapps.com/compare/testing',
                      :email => "email crmtesting@centracorporation.com"
                     }
@@ -37,14 +37,14 @@ class TestMini < CrmTestBase
   def test_when_has_no_preview_url_should_not_send_preview_email
     email = "#{SecureRandom.uuid}@david.com"
 
-    lead = Lead.new @driver, {:email => "email #{email}"}
+    lead = CrmLead.new @driver, {:email => "email #{email}"}
 
     assert_api_not_called
     assert_equal lead.status, ""
   end
 
   def test_when_has_no_email_should_not_send_preview_email
-    lead = Lead.new @driver
+    lead = CrmLead.new @driver
 
     assert_api_not_called
     assert_equal lead.status, ""

@@ -3,7 +3,7 @@ require_relative "base/echosign-base"
 class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_should_send_out_agreement_and_update_the_fields
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check'
@@ -78,7 +78,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
   def test_when_selling_local_listing_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check'

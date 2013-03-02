@@ -6,7 +6,7 @@ require_relative '/base/crm-test-base.rb'
 class TestMini < CrmTestBase
   def test_when_change_status_to_cancelled_should_update_assigner_user
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Cancelled',
         :assigned_user_id => 'hidden 54c61b2e-43ab-6c5e-8e5b-50c60d1a5960'
     }

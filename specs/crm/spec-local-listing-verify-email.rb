@@ -9,7 +9,7 @@ class TestMini < CrmTestBase
   def test_when_verify_is_checked_sendout_the_google_info_head_up_email
     enable_email_sending
 
-    lead = Lead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',
         :googlelocal_verified_c => 'check',
