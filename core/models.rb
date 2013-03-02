@@ -36,6 +36,10 @@ class Lead < ActiveRecord::Base
   def name
     self.first_name
   end
+
+  def email
+    emails.first.email_address
+  end
 end
 
 class CustomData < ActiveRecord::Base
