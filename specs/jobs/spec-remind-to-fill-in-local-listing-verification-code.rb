@@ -1,6 +1,6 @@
 current_dir = File.dirname(__FILE__)
 
-require current_dir + "/base/jobs-base.rb"
+require current_dir + "base/jobs-base.rb"
 
 class Tests < JobsTestBase
   def test_7_days_pass_after_local_listing_data_varified_send_out_reminder_to_fill_in_google_verification_code
