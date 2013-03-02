@@ -31,7 +31,11 @@ class TestsBase < MiniTest::Unit::TestCase
 
   def assert_email_contains(text)
 
-    @email_client.wait_for_emails
+    email_count = @email_client.wait_for_emails
+
+    if email_count == 0
+      flunk "No emails found"
+    end
 
     if Mail.first.multipart?
       assert_includes Mail.first.parts.first.body, text

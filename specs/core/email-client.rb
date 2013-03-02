@@ -2,7 +2,7 @@ require 'json'
 require 'mail'
 require 'minitest/autorun'
 
-class EmailClient
+class EmailClient < MiniTest
   def initialize
     config = JSON.parse(File.read(File.dirname(__FILE__) + "/email-config.json"))
 
@@ -39,8 +39,6 @@ class EmailClient
       time_elapsed +=5
     end
 
-    if Mail.all.length == 0
-      Test::Unit::Assertions.flunk "No email found"
-    end
+    Mail.all.length
   end
 end
