@@ -8,8 +8,10 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
     logger.info "Found #{leads.length.to_s} that are 7 days old and still in follow up status"
 
     leads.each do |lead|
+      lead.status = 'SP'
       email = lead.email
       logger.info "#{lead.name} will get an email to #{email}"
+
 
       res = mailer.first_system_pipeline email, lead.custom_data.prev_url_c
 
