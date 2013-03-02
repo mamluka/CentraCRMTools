@@ -1,6 +1,6 @@
 require_relative "lib/jobs-base"
 
-class JobAssignLeadsToSystemPipeline < JobsBase
+class JobAssignLeadsToSystemPipelineJob < JobsBase
 
   def execute
     leads = CustomData.where('prev_url_c != ?', 'http://').select { |x| !x.do_not_email && x.system_pipeline_email_1_c.nil? }.map { |x| x.lead }.select { |x| x.emails.any? }.select { |x| x.status =="FU" && x.date_entered < 7.days.ago }
@@ -26,6 +26,6 @@ class JobAssignLeadsToSystemPipeline < JobsBase
   end
 end
 
-job = JobAssignLeadsToSystemPipeline.new
+job = JobAssignLeadsToSystemPipelineJob.new
 job.execute
 

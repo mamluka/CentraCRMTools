@@ -1,17 +1,20 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class MoveCancelledLeadsToSystemPipelineJob < JobsBase
 
-dead_leads = Lead.where('status = ? and assigned_user_id != ?', 'client', $centra_small_business_user_id)
+  def execute
+    leads = Lead.where('status = ? and assigned_user_id != ?', 'client', centra_small_business_user_id).select { |x| !x.custom_data.nil? }
+    logger.info "Found #{leads.length.to_s} clients to move to centra small business"
 
-logger.info "Found #{dead_leads.length.to_s} clients"
+    leads.each do |lead|
+      lead.assigned_user_id = centra_small_business_user_id
+      logger.info "Moved #{lead.name } to centra small business user"
 
-dead_leads.each do |lead|
-  lead.assigned_user_id = $centra_small_business_user_id
-  logger.info "Moved #{lead.first_name} #{lead.last_name} to centra small business user"
+    end
 
-  lead.save
+    logger.info "#{leads.length.to_s} clients moved to centra small business"
+  end
 end
 
-logger.info "#{dead_leads.length.to_s} clients were moved to centra small business"
+job = MoveCancelledLeadsToSystemPipelineJob.new
+job.execute

@@ -1,19 +1,18 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class MoveCancelledLeadsToSystemPipelineJob < JobsBase
 
-cancelled_leads = Lead.where('status = ?','cancelled').select do  |x|
-  !x.custom_data.nil?
+  def execute
+    leads = Lead.where('status = ? and assigned_user_id != ?', 'cancelled', system_pipeline_user_id).select { |x| !x.custom_data.nil? }
+    logger.info "Found #{leads.length.to_s} cancelled leads to move to system pipeline"
+
+    leads.each do |lead|
+      lead.assigned_user_id = system_pipeline_user_id
+    end
+
+    logger.info "#{leads.length.to_s} cancelled leads moved to system  pipeline"
+  end
 end
 
-
-logger.info "Found #{cancelled_leads.length.to_s} cancelled leads to move"
-
-cancelled_leads.each do |lead|
-  lead.assigned_user_id = $system_pipeline_user_id
-  lead.custom_data.cancellation_change_date_c = Time.now
-  lead.save
-end
-
-logger.info "Moved #{cancelled_leads.length.to_s} leads to system pipeline"
+job = MoveCancelledLeadsToSystemPipelineJob.new
+job.execute
