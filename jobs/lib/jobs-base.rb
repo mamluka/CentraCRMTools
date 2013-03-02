@@ -1,4 +1,4 @@
-require "logger"
+require "logging"
 require "securerandom"
 
 require_relative "../../core/emailer"
