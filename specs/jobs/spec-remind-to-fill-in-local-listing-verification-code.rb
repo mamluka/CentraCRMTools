@@ -4,7 +4,7 @@ class Tests < JobsTestBase
   def test_7_days_pass_after_local_listing_data_varified_send_out_reminder_to_fill_in_google_verification_code
 
     lead = lead_with do |lead|
-      lead.status = 'Client'
+      lead.status = 'client'
     end
 
     lead.add_custom_data do |data|

@@ -40,7 +40,7 @@ class EmailClient
     end
 
     if Mail.all.length == 0
-      flunk "No email found"
+      Test::Unit::Assertions.flunk "No email found"
     end
   end
 end
