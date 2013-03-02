@@ -2,7 +2,7 @@ require_relative "lib/jobs-base"
 
 class JobCancellationEmail < JobsBase
   def execute
-    leads = CustomData.where('cancellation_change_date_c < ?', 3.days.ago).select { |x| !x.do_not email && x.cancellation_email_sent_c.nil? }.map { |x| x.lead }.select { |x| x.status =="cancelled" && x.emails.any? }
+    leads = CustomData.where('cancellation_change_date_c < ?', 3.days.ago).select { |x| !x.do_not_email && x.cancellation_email_sent_c.nil? }.map { |x| x.lead }.select { |x| x.status =="cancelled" && x.emails.any? }
     @logger.info "Found #{leads.length.to_s} cancelled leads that are 3 days old and have email"
 
     leads.each do |lead|
