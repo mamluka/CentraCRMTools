@@ -31,6 +31,14 @@ class JobsBase
     logger
   end
 
+  def logger
+    @logger
+  end
+
+  def mailer
+    @mailer
+  end
+
   def system_pipeline_user_id
     '92b0bdb7-bb6c-449f-fa73-510054673707'
   end
