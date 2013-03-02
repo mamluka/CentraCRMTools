@@ -4,13 +4,7 @@ require 'active_support/all'
 require 'securerandom'
 require 'mail'
 
-current_dir = File.dirname(__FILE__)
-
-require current_dir + "/../../../jobs/lib/init.rb"
-require current_dir + "/../../../jobs/lib/active_records_models.rb"
-require current_dir + "/../../core/tests-base.rb"
-
-$test_user_id = '8d71be80-cc24-cda3-e4d6-50d8a70d9d20'
+require_relative "../../core/tests-base"
 
 class JobsTestBase < TestsBase
 
@@ -28,7 +22,7 @@ class JobsTestBase < TestsBase
 
   def lead_with
     lead = Lead.new
-    lead.assigned_user_id =$test_user_id
+    lead.assigned_user_id ='8d71be80-cc24-cda3-e4d6-50d8a70d9d20'
     lead.first_name = SecureRandom.uuid
     lead.last_name = SecureRandom.uuid
 
