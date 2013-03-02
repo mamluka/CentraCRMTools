@@ -18,7 +18,6 @@ class JobsTestBase < TestsBase
 
   def setup
     super
-    load_database
     clean_databases
 
   end

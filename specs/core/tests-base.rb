@@ -1,7 +1,6 @@
 require_relative "email-client"
 require_relative "lead"
 require_relative "auth"
-require_relative "email-client"
 
 require 'active_record'
 require 'mail'

@@ -1,33 +1,30 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class JobDeadEmail < JobsBase
 
-dead_leads = Lead.where('status = ? and assigned_user_id = ?', 'Dead', $system_pipeline_user_id)
+  def execute
+    leads = CustomData.where('dead_status_assigned_date_c < ?', 7.days.ago).select { |x| !x.do_not_email && x.dead_client_email_sent_c.nil? && !x.custom_data.not_billable_c }.map { |x| x.lead }.select { |x| x.status =="Dead" && x.emails.any? && x.assigned_user_id == system_pipeline_user_id }
+    logger.info "Found #{leads.length.to_s} dead leads that are 7 days old and did not got a dead client email"
 
-old_dead_leads = dead_leads.select do |lead|
-  !lead.custom_data.nil? && !lead.custom_data.dead_status_assigned_date_c.nil? && lead.custom_data.dead_status_assigned_date_c < 7.days.ago && lead.emails.any? && !lead.do_not_email && lead.custom_data.dead_client_email_sent_c.nil? && lead.custom_data.not_billable_c == false
-end
+    leads.each do |lead|
+      email = lead.email
+      logger.info "#{lead.name} will get an email to #{email}"
 
-logger.info "Found #{old_dead_leads.length.to_s} dead leads that are 7 days old and did not got a dead client email"
+      res = mailer.dead_client email
 
-old_dead_leads.each do |lead|
+      if res=="OK"
+        lead.custom_data.dead_client_email_sent_c = Time.now
+        lead.save
+      else
+        logger.info "Api returned error response: " + res
+      end
 
-  email = lead.emails.first.email_address
+      sleep 20
+    end
 
-  logger.info "#{lead.first_name} #{lead.last_name} will get an email to #{email}"
-
-  mailer = ApiEmailer.new
-  res = mailer.dead_client email
-
-  if res=="OK"
-    lead.custom_data.dead_client_email_sent_c = Time.now
-    lead.save
-  else
-    logger.info "Api returned error response: " + res
+    logger.info "#{leads.length.to_s} cancelled leads got an email"
   end
-
-  sleep 20
 end
 
-logger.info "#{old_dead_leads.length.to_s} dead leads got an dead user email"
+job = JobDeadEmail.new
+job.execute

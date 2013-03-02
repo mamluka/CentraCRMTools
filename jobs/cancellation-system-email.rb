@@ -20,10 +20,9 @@ class JobCancellationEmail < JobsBase
       else
         logger.info "Api returned error response: " + res
       end
-
     end
 
-    logger.info "#{old_cancelled_leads.length.to_s} cancelled leads got an email"
+    logger.info "#{leads.length.to_s} cancelled leads got an email"
   end
 end
 
