@@ -1,5 +1,6 @@
 require "logging"
 require "securerandom"
+require 'time'
 
 require_relative "../../core/emailer"
 require_relative "../../core/crm-database"

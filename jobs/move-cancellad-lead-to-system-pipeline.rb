@@ -8,6 +8,7 @@ class MoveCancelledLeadsToSystemPipelineJob < JobsBase
 
     leads.each do |lead|
       lead.assigned_user_id = system_pipeline_user_id
+      lead.custom_data.cancellation_change_date_c = Time.now
 
       lead.save
     end

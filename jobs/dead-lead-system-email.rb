@@ -3,7 +3,7 @@ require_relative "lib/jobs-base"
 class JobDeadEmail < JobsBase
 
   def execute
-    leads = CustomData.where('dead_status_assigned_date_c < ?', 7.days.ago).select { |x| !x.do_not_email && x.dead_client_email_sent_c.nil? && !x.custom_data.not_billable_c }.map { |x| x.lead }.select { |x| x.status =="Dead" && x.emails.any? && x.assigned_user_id == system_pipeline_user_id }
+    leads = CustomData.where('dead_status_assigned_date_c < ?', 7.days.ago).select { |x| !x.do_not_email && x.dead_client_email_sent_c.nil? && !x.not_billable_c }.map { |x| x.lead }.select { |x| x.status =="Dead" && x.emails.any? && x.assigned_user_id == system_pipeline_user_id }
     logger.info "Found #{leads.length.to_s} dead leads that are 7 days old and did not got a dead client email"
 
     leads.each do |lead|

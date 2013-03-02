@@ -11,6 +11,7 @@ class Tests < JobsTestBase
 
     lead.add_custom_data do |data|
       data.mobileweb_info_req_sent_c = 4.days.ago
+      data.mobileweb_check_c = true
     end
 
     load_job 'reoccuring-mobile-web-information-request-email'
@@ -28,6 +29,7 @@ class Tests < JobsTestBase
 
     lead.add_custom_data do |data|
       data.mobileweb_info_req_sent_c = 4.days.ago
+      data.mobileweb_check_c = true
     end
 
     load_job 'reoccuring-mobile-web-information-request-email'
@@ -44,7 +46,7 @@ class Tests < JobsTestBase
     end
 
     lead.add_custom_data do |data|
-      lead.mobileweb_check_c = false
+      data.mobileweb_check_c = false
     end
 
     load_job 'reoccuring-mobile-web-information-request-email'

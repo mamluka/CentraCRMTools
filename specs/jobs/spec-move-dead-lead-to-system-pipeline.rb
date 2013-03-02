@@ -15,6 +15,5 @@ class Tests < JobsTestBase
     result = lead.reload
 
     assert_equal result.assigned_user_id, system_pipeline_user_id
-    assert result.custom_data.dead_status_assigned_date_c > 5.minutes.ago
   end
 end

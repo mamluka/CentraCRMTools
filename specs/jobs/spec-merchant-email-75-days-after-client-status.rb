@@ -13,8 +13,6 @@ class Tests < JobsTestBase
 
     load_job 'merchant-email-75-days-after-client-status'
 
-    result = lead.reload
-
     assert_email_contains 'We wanted to drop by and thank you again for the opportunity to doing business'
   end
 end

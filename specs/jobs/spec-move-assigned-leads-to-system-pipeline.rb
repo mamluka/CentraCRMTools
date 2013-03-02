@@ -11,6 +11,10 @@ class Tests < JobsTestBase
       lead.status = 'FU'
     end
 
+    lead.add_custom_data do |data|
+      data.prev_url_c = 'http://david.com'
+    end
+
     load_job 'move-assigned-leads-to-system-pipeline'
 
     result = lead.reload
