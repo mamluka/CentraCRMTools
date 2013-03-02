@@ -19,7 +19,7 @@ class SecondSystemPipelineEmailJob < JobsBase
         logger.info "Api returned an error " + res
       end
 
-      sleep 20
+      sleep 5
 
     end
 

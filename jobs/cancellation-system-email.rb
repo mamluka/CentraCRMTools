@@ -16,7 +16,7 @@ class JobCancellationEmail < JobsBase
         lead.custom_data.cancellation_email_sent_c = Time.now
         lead.save
 
-        sleep 20
+        sleep 5
       else
         logger.info "Api returned error response: " + res
       end

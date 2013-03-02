@@ -9,9 +9,10 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
 
     leads.each do |lead|
       lead.status = 'SP'
+      lead.assigned_user_id = system_pipeline_user_id
+
       email = lead.email
       logger.info "#{lead.name} will get an email to #{email}"
-
 
       res = mailer.first_system_pipeline email, lead.custom_data.prev_url_c
 
@@ -22,7 +23,7 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
         logger.info "Api response was: " + res
       end
 
-      sleep 20
+      sleep 5
     end
 
     logger.info "#{leads.length.to_s} send system pipeline email #1"

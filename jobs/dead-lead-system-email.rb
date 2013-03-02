@@ -19,7 +19,7 @@ class JobDeadEmail < JobsBase
         logger.info "Api returned error response: " + res
       end
 
-      sleep 20
+      sleep 5
     end
 
     logger.info "#{leads.length.to_s} cancelled leads got an email"
