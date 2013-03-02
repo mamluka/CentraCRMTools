@@ -20,19 +20,7 @@ ActiveRecord::Base.establish_connection(
     :host => config['host'])
 
 class StandardLogger
-  def self.get
-    logger = Logging.logger['logger']
-    logger.add_appenders(
-        Logging.appenders.stdout,
-        Logging.appenders.file(
-            'centra.log',
-            :layout => Logging.layouts.pattern(:pattern => '[%d]: %m\n')
-        )
-    )
 
-    logger.level = :info
-    logger
-  end
 end
 
 $system_pipeline_user_id = '92b0bdb7-bb6c-449f-fa73-510054673707'
