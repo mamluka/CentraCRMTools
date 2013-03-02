@@ -26,7 +26,7 @@ class ApiEmailer
   end
 
   def google_local_listing_verification_reminder(email, customerId)
-    email 'google-local-listing-verification-reminder', email, {:name => name, :customerId => customerId}
+    email 'google-local-listing-verification-reminder', email, {:customerId => customerId}
   end
 
   def email(api, email, more = nil)
