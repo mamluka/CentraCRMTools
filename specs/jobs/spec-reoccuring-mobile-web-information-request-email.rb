@@ -36,4 +36,22 @@ class Tests < JobsTestBase
     assert_email_contains 'http://centracorporation.com/mobile-site-customer-information#!' + lead.id
 
   end
+
+  def test_when_mobile_web_is_not_sold_should_do_nothing
+
+    lead = lead_with do |lead|
+      lead.status = 'client'
+    end
+
+    lead.add_custom_data do |data|
+      lead.mobileweb_check_c = false
+    end
+
+    load_job 'reoccuring-mobile-web-information-request-email'
+
+    result = lead.reload
+
+    assert_nil result.custom_data.mobileweb_info_req_sent_c
+
+  end
 end
