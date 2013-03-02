@@ -1,37 +1,31 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class SecondSystemPipelineEmailJob < JobsBase
 
-system_leads = Lead.where('status = ? and assigned_user_id = ?', 'SP', $system_pipeline_user_id)
+  def execute
+    leads = CustomData.where('system_pipeline_email_1_c < ? and system_pipeline_email_2_c is null', 7.days.ago).select { |x| !x.do_not_email }.map { |x| x.lead }.select { |x| x.status =="SP" && x.emails.any? && x.assigned_user_id == system_pipeline_user_id }
+    logger.info "Found #{leads.length.to_s} system pipeline leads that got email #1 a week ago"
 
-two_weeks_old_system_leads = system_leads.select do |lead|
-  !lead.custom_data.nil? && !lead.custom_data.system_pipeline_email_1_c.nil? && lead.custom_data.system_pipeline_email_1_c < 7.days.ago && lead.emails.any? && !lead.do_not_email && lead.custom_data.system_pipeline_email_2_c.nil?
+    leads.each do |lead|
+      email = lead.email
+      logger.info "#{lead.name} will get an cancellation email to #{email}"
+
+      res = mailer.second_system_pipeline email, lead.custom_data.prev_url_c
+
+      if res=="OK"
+        lead.custom_data.system_pipeline_email_2_c = Time.now
+        lead.save
+      else
+        logger.info "Api returned an error " + res
+      end
+
+      sleep 20
+
+    end
+
+    logger.info "#{leads.length.to_s} leads got system pipeline email #2"
+  end
 end
 
-logger.info "Found #{two_weeks_old_system_leads.length.to_s} system leads that have received the first system pipline email 7 days ago"
-
-two_weeks_old_system_leads.each do |lead|
-
-  if lead.custom_data.prev_url_c.nil?
-    next
-  end
-
-  email = lead.emails.first.email_address
-
-  logger.info "#{lead.name} will get an system pipeline email #2 to #{email}"
-
-  mailer = ApiEmailer.new
-  res = mailer.second_system_pipeline email, lead.custom_data.prev_url_c
-
-  if res=="OK"
-    lead.custom_data.system_pipeline_email_2_c = Time.now
-    lead.save
-  else
-    logger.info "Api returned an error " + res
-  end
-
-  sleep 20
-end
-
-logger.info "#{two_weeks_old_system_leads.length.to_s} system leads got the second email"
+job = SecondSystemPipelineEmailJob.new
+job.execute

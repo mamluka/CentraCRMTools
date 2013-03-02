@@ -1,33 +1,30 @@
-require File.dirname(__FILE__) + '/lib/init.rb'
-require File.dirname(__FILE__) + '/lib/active_records_models.rb'
+require_relative "lib/jobs-base"
 
-logger = StandardLogger.get
+class ResendMobileWebCustomerDataRequestJpb < JobsBase
 
-clients = Lead.where('status = ?', 'client')
+  def execute
+    leads = CustomData.where('mobileweb_info_req_sent_c < ? and host_login_c is null and mobileweb_check_c = 1', 3.days.ago).select { |x| !x.do_not_email }.map { |x| x.lead }.select { |x| x.status =="client" && x.emails.any? }
+    logger.info "Found #{leads.length.to_s} mobile web clients that did not enter their data"
 
-clients_without_hosting_provider_data = clients.select do |lead|
-  !lead.custom_data.nil? && !lead.custom_data.mobileweb_info_req_sent_c.nil? && lead.custom_data.mobileweb_info_req_sent_c < 3.days.ago && lead.emails.any? && lead.custom_data.host_login_c.nil?
-end
+    leads.each do |lead|
+      email = lead.email
+      logger.info "#{lead.name} will get an email to #{email}"
 
-logger.info "Found #{clients_without_hosting_provider_data.length.to_s} mobile web clients tha did not filled the details form and 3 days had passed"
+      res = mailer.mobileweb_info_request email, lead.first_name, lead.id
 
-clients_without_hosting_provider_data.each do |lead|
+      if res=="OK"
+        lead.custom_data.mobileweb_info_req_sent_c = Time.now
+        lead.save
+      else
+        logger.info "Api returned error response: " + res
+      end
 
-  email = lead.emails.first.email_address
+      sleep 20
+    end
 
-  logger.info "#{lead.first_name} #{lead.last_name} will get mobile web details request an email to #{email}"
-
-  mailer = ApiEmailer.new
-  res = mailer.mobileweb_info_request email, lead.first_name, lead.id
-
-  if res=="OK"
-    lead.custom_data.mobileweb_info_req_sent_c = Time.now
-    lead.save
-  else
-    logger.info "Api returned error response: " + res
+    logger.info "#{leads.length.to_s} mobile web clients got a request data reminder"
   end
-
-  sleep 20
 end
 
-logger.info "#{clients_without_hosting_provider_data.length.to_s} leads got a reoccurring mobile details request"
+job = ResendMobileWebCustomerDataRequestJpb.new
+job.execute
