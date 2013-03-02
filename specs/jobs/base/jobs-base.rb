@@ -49,6 +49,4 @@ class JobsTestBase < TestsBase
   def centra_small_business_user_id
     'b2f5c6ac-4dcf-8c27-e381-51083846f181'
   end
-
-
 end

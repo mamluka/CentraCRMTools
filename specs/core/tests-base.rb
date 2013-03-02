@@ -39,8 +39,6 @@ class TestsBase < MiniTest::Unit::TestCase
       assert_includes Mail.first.body, text
     end
 
-    end
-
   end
 
   def clean_databases
@@ -54,4 +52,5 @@ class TestsBase < MiniTest::Unit::TestCase
     crm_database = CrmDatabase.new
     crm_database.connect
   end
+
 end
