@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'watir-webdriver'
 
-require_relative '/base/crm-test-base.rb'
+require_relative 'base/crm-test-base.rb'
 
 class TestMini < CrmTestBase
   def test_when_non_billable_and_reason_is_invalid_url_should_update_status_and_dates

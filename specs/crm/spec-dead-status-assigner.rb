@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'watir-webdriver'
 
-require_relative '/base/crm-test-base.rb'
+require_relative 'base/crm-test-base.rb'
 
 class TestMini < CrmTestBase
   def test_when_change_status_to_dead_should_update_assigner_user

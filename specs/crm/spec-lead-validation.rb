@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'watir-webdriver'
 
-require_relative '/base/crm-test-base.rb'
+require_relative 'base/crm-test-base.rb'
 
 class TestMini < CrmTestBase
 
