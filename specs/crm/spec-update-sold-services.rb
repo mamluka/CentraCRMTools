@@ -64,10 +64,6 @@ class TestMini < CrmTestBase
         :email => "email #{email}"
     }
 
-    first_name = lead.get 'first_name'
-
-    assert_api_called({'email' => email, 'name' => first_name, 'customerId' => lead.id})
-
     assert_equal lead.get('googlelocal_sale_date_c'), today_crm_date
     assert_equal lead.get('googlelocal_sale_rep_c'), 'David MZ'
   end
