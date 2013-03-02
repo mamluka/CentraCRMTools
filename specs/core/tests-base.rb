@@ -1,6 +1,7 @@
 require_relative "email-client"
 require_relative "lead"
 require_relative "auth"
+require_relative "../../core/crm-database"
 
 require 'active_record'
 require 'mail'
@@ -48,14 +49,7 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def load_database
-
-    config = JSON.parse(File.read("#{File.dirname(__FILE__)}/database.json"))
-
-    ActiveRecord::Base.establish_connection(
-        :adapter => 'mysql2',
-        :database => config['database'],
-        :username => config['username'],
-        :password => config['password'],
-        :host => config['host'])
+    crm_database = CrmDatabase.new
+    crm_database.connect
   end
 end
