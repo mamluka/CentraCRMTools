@@ -73,6 +73,8 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_payment_types_c'), 'Invoice'
     assert_includes lead.get('business_payment_types_c'), 'Diners'
 
+    assert lead.is_checked('googlelocal_echosign_signed_c')
+
     assert_includes lead.get('googlelocal_sign_date_c'), today_mysql_time
   end
 
@@ -145,6 +147,8 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_payment_types_c'), 'Financing'
     assert_includes lead.get('business_payment_types_c'), 'Invoice'
     assert_includes lead.get('business_payment_types_c'), 'Diners'
+
+    assert lead.is_checked('googlelocal_echosign_signed_c')
 
     assert_includes lead.get('googlelisting_sign_date_c'), today_mysql_time
   end
