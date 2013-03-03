@@ -56,7 +56,7 @@ class LocalListing
 
     custom_data.business_payment_types_c = @csv_hash.select { |k, v| k.include?('payment_type') && v == "Yes" }.keys.map { |s| s.split('_').last.capitalize }.join(', ')
 
-    custom_data.googlelisting_sign_date_c = Time.now
+    custom_data.googlelocal_sign_date_c = Time.now
 
     custom_data.save
 
