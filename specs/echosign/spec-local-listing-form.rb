@@ -73,7 +73,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_payment_types_c'), 'Invoice'
     assert_includes lead.get('business_payment_types_c'), 'Diners'
 
-    assert_includes lead.get('googlelisting_sign_date_c'), today_mysql_time
+    assert_includes lead.get('googlelocal_sign_date_c'), today_mysql_time
   end
 
   def test_when_selling_local_listing_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
