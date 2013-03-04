@@ -4,7 +4,7 @@ require_relative "../core/crm-database"
 crm = CrmDatabase.new
 crm.connect
 
-var rows = ActiveRecord::Base.connection.select_all('SELECT * FROM leads left join leads_cstm on leads.id = leads_cstm.id_c')
+rows = ActiveRecord::Base.connection.select_all('SELECT * FROM leads left join leads_cstm on leads.id = leads_cstm.id_c')
 
 
 Axlsx::Package.new do |p|
@@ -13,7 +13,7 @@ Axlsx::Package.new do |p|
     rows.shift
 
     rows.each do |row|
-      sheet.add row.values
+      sheet.add_row row.values
     end
   end
   p.serialize('simple.xlsx')
