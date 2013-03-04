@@ -29,9 +29,9 @@ class Crm2ExcelApi < Grape::API
 
         filename = 'crm-report-' + Date.today.to_s + ".xlsx"
         p.serialize(filename)
-
-        IO.read(filename)
       end
+
+      IO.read(filename)
     end
   end
 end
