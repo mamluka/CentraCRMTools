@@ -1,4 +1,4 @@
 require 'rack'
-require_relative "crm2csv-api"
+require File.dirname(__FILE__) + "/crm2csv-api"
 
 run Crm2ExcelApi
