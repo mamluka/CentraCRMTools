@@ -17,6 +17,8 @@ class Crm2ExcelApi < Grape::API
 
       rows = ActiveRecord::Base.connection.select_all('SELECT * FROM leads left join leads_cstm on leads.id = leads_cstm.id_c')
 
+      filename = 'crm-report-' + Date.today.to_s + ".xlsx"
+
       Axlsx::Package.new do |p|
         p.workbook.add_worksheet(:name => "CRM clients") do |sheet|
           sheet.add_row rows.first.keys
@@ -27,7 +29,7 @@ class Crm2ExcelApi < Grape::API
           end
         end
 
-        filename = 'crm-report-' + Date.today.to_s + ".xlsx"
+
         p.serialize(filename)
       end
 
