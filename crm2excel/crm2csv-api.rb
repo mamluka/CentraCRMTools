@@ -29,7 +29,6 @@ class Crm2ExcelApi < Grape::API
           end
         end
 
-
         p.serialize(filename)
       end
 

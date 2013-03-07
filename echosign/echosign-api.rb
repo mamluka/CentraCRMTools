@@ -36,5 +36,11 @@ class EchoSignApi < Grape::API
         local_listing.update_crm document_key
       end
     end
+
+    get 'document-list' do
+      echosign = EchoSign.new
+      echosign.get_documents
+    end
   end
+
 end
