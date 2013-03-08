@@ -1,7 +1,7 @@
 require 'json'
 
 class Auth
-  @@config = File.dirname(__FILE__) + '/config_crm.json'
+  @@config = File.dirname(__FILE__) + '/config-crm.json'
 
   def initialize(driver)
     @driver = driver

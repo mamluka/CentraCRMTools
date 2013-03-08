@@ -7,3 +7,7 @@ end
 Rake::TestTask.new("test:jobs") do |t|
   t.pattern = "specs/jobs/spec-*.rb"
 end
+
+Rake::TestTask.new("test:echosign") do |t|
+  t.pattern = "specs/echosign/spec-*.rb"
+end
