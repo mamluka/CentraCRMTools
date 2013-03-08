@@ -40,5 +40,9 @@ class EchoSignTestsBase < TestsBase
 
   end
 
+  def assert_price_point(price)
+    assert_includes @driver.text, price
+  end
+
 
 end

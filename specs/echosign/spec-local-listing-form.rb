@@ -23,59 +23,23 @@ class LocalListingFormTests < EchoSignTestsBase
     fill_categories
     fill_working_hours
     fill_payment_types
+    full_mobile_web_information
 
     fill_sign_details
     sign_form
 
-    sleep 3
+    assert_price_point ''
 
-    assert_equal lead.get_list('billing_payment_method_c'), 'Visa'
+    sleep 3
 
     assert !lead.is_checked('billing_same_address_c')
 
-    assert_equal lead.get('billing_address_street_c'), 'billing address'
-    assert_equal lead.get('billing_address_city_c'), 'billing city'
-    assert_equal lead.get('billing_address_state_c'), 'New York'
-    assert_equal lead.get('billing_address_zip_c'), '12345'
+    assert_billing_address_when_not_the_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
 
-    assert_includes lead.get_by_label('Business Address'), 'address'
-    assert_includes lead.get_by_label('Business Address'), 'city'
-    assert_includes lead.get_by_label('Business Address'), 'Alabama'
-    assert_includes lead.get_by_label('Business Address'), 'Alabama'
-    assert_includes lead.get_by_label('Business Address'), '54321'
-
-    assert_includes lead.get('service_area_c'), 'LA'
-
-    assert_includes lead.get('business_category_c'), 'cat1'
-    assert_includes lead.get('business_category_c'), 'cat2'
-    assert_includes lead.get('business_category_c'), 'cat3'
-    assert_includes lead.get('business_category_c'), 'cat4'
-    assert_includes lead.get('business_category_c'), 'cat5'
-
-    assert_includes lead.get('business_hours_mf_c'), '1-2'
-    assert_includes lead.get('business_hours_mf_c'), '2-3'
-    assert_includes lead.get('business_hours_mf_c'), '3-4'
-    assert_includes lead.get('business_hours_mf_c'), '4-5'
-    assert_includes lead.get('business_hours_mf_c'), '5-6'
-
-    assert_includes lead.get('business_hours_ss_c'), '6-7'
-    assert_includes lead.get('business_hours_ss_c'), '7-8'
-
-    assert_includes lead.get('business_payment_types_c'), 'Check'
-    assert_includes lead.get('business_payment_types_c'), 'Cash'
-    assert_includes lead.get('business_payment_types_c'), 'Visa'
-    assert_includes lead.get('business_payment_types_c'), 'Mastercard'
-    assert_includes lead.get('business_payment_types_c'), 'Discover'
-    assert_includes lead.get('business_payment_types_c'), 'Amex'
-    assert_includes lead.get('business_payment_types_c'), 'Paypal'
-    assert_includes lead.get('business_payment_types_c'), 'Google'
-    assert_includes lead.get('business_payment_types_c'), 'Financing'
-    assert_includes lead.get('business_payment_types_c'), 'Invoice'
-    assert_includes lead.get('business_payment_types_c'), 'Diners'
-
-    assert lead.is_checked('googlelocal_echosign_signed_c')
-
-    assert_includes lead.get('googlelocal_sign_date_c'), today_mysql_time
   end
 
   def test_when_selling_local_listing_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
@@ -99,28 +63,38 @@ class LocalListingFormTests < EchoSignTestsBase
     fill_categories
     fill_working_hours
     fill_payment_types
+    full_mobile_web_information
 
     fill_sign_details
     sign_form
 
     sleep 3
 
-    assert_equal lead.get_list('billing_payment_method_c'), 'Visa'
-
     assert lead.is_checked('billing_same_address_c')
 
-    assert_equal lead.get('billing_address_street_c'), 'address'
-    assert_equal lead.get('billing_address_city_c'), 'city'
-    assert_equal lead.get('billing_address_state_c'), 'Alabama'
-    assert_equal lead.get('billing_address_zip_c'), '54321'
+    assert_billing_address_when_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
+  end
 
-    assert_includes lead.get_by_label('Business Address'), 'address'
-    assert_includes lead.get_by_label('Business Address'), 'city'
-    assert_includes lead.get_by_label('Business Address'), 'Alabama'
-    assert_includes lead.get_by_label('Business Address'), '54321'
+  def assert_signing(lead)
+    assert lead.is_checked('googlelocal_echosign_signed_c')
+    assert_includes lead.get('googlelocal_sign_date_c'), today_mysql_time
+  end
 
-    assert_includes lead.get('service_area_c'), 'LA'
+  def assert_mobile_web_details(lead)
+    assert_includes lead.get('host_dash_url_c'), 'http://hosting.com'
+    assert_includes lead.get('host_login_c'), 'hosting_user'
+    assert_includes lead.get('host_password_c'), 'hosting_password'
 
+    assert_includes lead.get('domain_host_dash_url_c'), 'http://domain.com'
+    assert_includes lead.get('domain_host_username_c'), 'provider_user'
+    assert_includes lead.get('domain_host_password_c'), 'provider_password'
+  end
+
+  def assert_google_local_details(lead)
     assert_includes lead.get('business_category_c'), 'cat1'
     assert_includes lead.get('business_category_c'), 'cat2'
     assert_includes lead.get('business_category_c'), 'cat3'
@@ -147,10 +121,41 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get('business_payment_types_c'), 'Financing'
     assert_includes lead.get('business_payment_types_c'), 'Invoice'
     assert_includes lead.get('business_payment_types_c'), 'Diners'
+  end
 
-    assert lead.is_checked('googlelocal_echosign_signed_c')
+  def assert_client_details(lead)
+    assert_includes lead.get_by_label('Business Address'), 'address'
+    assert_includes lead.get_by_label('Business Address'), 'city'
+    assert_includes lead.get_by_label('Business Address'), 'Alabama'
+    assert_includes lead.get_by_label('Business Address'), '54321'
 
-    assert_includes lead.get('googlelisting_sign_date_c'), today_mysql_time
+    assert_includes lead.get('service_area_c'), 'LA'
+  end
+
+  def assert_billing_address_when_not_the_same(lead)
+    assert_equal lead.get_list('billing_payment_method_c'), 'Visa'
+    assert_equal lead.get('billing_address_street_c'), 'billing address'
+    assert_equal lead.get('billing_address_city_c'), 'billing city'
+    assert_equal lead.get('billing_address_state_c'), 'New York'
+    assert_equal lead.get('billing_address_zip_c'), '12345'
+  end
+
+  def assert_billing_address_when_same(lead)
+    assert_equal lead.get_list('billing_payment_method_c'), 'Visa'
+    assert_equal lead.get('billing_address_street_c'), 'address'
+    assert_equal lead.get('billing_address_city_c'), 'city'
+    assert_equal lead.get('billing_address_state_c'), 'Alabama'
+    assert_equal lead.get('billing_address_zip_c'), '54321'
+  end
+
+  def full_mobile_web_information
+    @driver.text_field(:name => 'hosting_url').set 'http://hosting.com'
+    @driver.text_field(:name => 'hosting_username').set 'hosting_user'
+    @driver.text_field(:name => 'hosting_passwrod').set 'hosting_password'
+
+    @driver.text_field(:name => 'domain_provider_url').set 'http://domain.com'
+    @driver.text_field(:name => 'domain_provider_username').set 'provider_user'
+    @driver.text_field(:name => 'domain_provider_passwrod').set 'provider_password'
   end
 
   def sign_form
