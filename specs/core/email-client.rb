@@ -21,7 +21,10 @@ class EmailClient
 
   def get_first_email_body
 
-    wait_for_emails
+    number_of_emails = wait_for_emails
+    if number_of_emails == 0
+      return ""
+    end
 
     mail = Mail.all.first
 
