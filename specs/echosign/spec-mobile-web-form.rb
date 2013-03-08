@@ -16,15 +16,15 @@ class LocalListingFormTests < EchoSignTestsBase
 
     fill_basic_info
     fill_billing_info
-
     not_same_billing_address
     fill_billing_address
-
     fill_client_details
     full_mobile_web_information
-
     fill_sign_details
+
     sign_form
+
+    assert_price_point '24.99'
 
     sleep 3
 

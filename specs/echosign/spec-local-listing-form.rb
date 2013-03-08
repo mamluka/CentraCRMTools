@@ -1,12 +1,13 @@
 require_relative "base/echosign-base"
 
 class LocalListingFormTests < EchoSignTestsBase
-  def test_when_selling_local_listing_should_send_out_agreement_and_update_the_fields
+  def test_when_selling_local_listing_99_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
-        :googlelocal_check_c => 'check'
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
@@ -28,7 +29,49 @@ class LocalListingFormTests < EchoSignTestsBase
     fill_sign_details
     sign_form
 
-    assert_price_point ''
+    assert_price_point '99'
+
+    sleep 3
+
+    assert !lead.is_checked('billing_same_address_c')
+
+    assert_billing_address_when_not_the_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
+
+    end
+
+  def test_when_selling_local_listing_79_price_point_should_send_out_agreement_and_update_the_fields
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
+
+    assert_price_point '79.99'
 
     sleep 3
 
@@ -47,7 +90,8 @@ class LocalListingFormTests < EchoSignTestsBase
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
-        :googlelocal_check_c => 'check'
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
