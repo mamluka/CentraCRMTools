@@ -9,7 +9,7 @@ class EchoSignTestsBase < TestsBase
     @driver = Watir::Browser.new :phantomjs
     @email_client = EmailClient.new
 
-    `screen -L -dmS echosign  rackup -p 9393 #{File.dirname(__FILE__)}/../../../echosign/config.ru`
+    `screen -L -dmS echosign  rackup -p 9050 #{File.dirname(__FILE__)}/../../../echosign/config.ru`
 
     load_database
     clean_databases
@@ -19,8 +19,8 @@ class EchoSignTestsBase < TestsBase
   end
 
   def teardown
-    #super
-    `pkill -f 9393`
+    super
+    `pkill -f 9050`
     clean_echosign_documents
   end
 
