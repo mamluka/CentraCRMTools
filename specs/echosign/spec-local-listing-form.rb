@@ -14,6 +14,8 @@ class LocalListingFormTests < EchoSignTestsBase
 
     @driver.goto contract_url
 
+    assert_price_point '99'
+
     fill_basic_info
     fill_billing_info
 
@@ -29,7 +31,6 @@ class LocalListingFormTests < EchoSignTestsBase
     fill_sign_details
     sign_form
 
-    assert_price_point '99'
 
     sleep 3
 
