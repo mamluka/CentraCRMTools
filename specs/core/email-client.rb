@@ -16,7 +16,9 @@ class EmailClient
   end
 
   def clear_inbox
+    puts "Clearing inbox"
     Mail.delete_all
+
   end
 
   def get_first_email_body
