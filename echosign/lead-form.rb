@@ -1,7 +1,7 @@
 require 'date'
 require_relative "../core/crm-database"
 
-class LocalListing
+class LeadForm
 
   def initialize(csv_hash)
     @csv_hash = csv_hash

@@ -213,7 +213,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def fill_sign_details
     @driver.text_field(:name => 'company').set 'centra'
     @driver.text_field(:name => 'print_name').set 'centra ltd'
-    @driver.text_field(:name => 'signature').set 'centra signature'
     @driver.text_field(:name => 'title').set 'CTO'
     @driver.text_field(:name => 'date').set '1/1/14'
   end
