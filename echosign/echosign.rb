@@ -42,13 +42,11 @@ class EchoSign
     config = JSON.parse File.read(File.dirname(__FILE__) + "/echosign.json")
     @api_key = config['apikey']
 
-    Savon.configure do |config|
-      config.log = false
-    end
 
     @client = Savon.client do
       wsdl "https://centra.echosign.com/services/EchoSignDocumentService15?wsdl"
       ssl_verify_mode :none
+      log false
     end
   end
 
