@@ -13,6 +13,8 @@ Rake::TestTask.new("test:echosign") do |t|
 end
 
 namespace :crm do
+
+  desc "Start services that support crm testing"
   task :testing do
     puts "Stating echosign..."
     `thin -d -p 9050 -R echosign/config,ru`
