@@ -143,14 +143,12 @@ class LocalListingFormTests < EchoSignTestsBase
   end
 
   def fill_client_details
-    @driver.text_field(:name => 'alt_phone').set '0987654321'
     @driver.text_field(:name => 'name').set 'David the name'
     @driver.text_field(:name => 'website').set 'http://www.centracorporation.com'
     @driver.text_field(:name => 'address').set 'address'
     @driver.text_field(:name => 'city').set 'city'
     @driver.select_list(:name => 'state').select 'Alabama'
     @driver.text_field(:name => 'zip').set '54321'
-    @driver.text_field(:name => 'service_area').set 'LA'
   end
 
   def same_billing_address
