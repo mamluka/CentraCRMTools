@@ -56,6 +56,15 @@ class LocalListing
 
     custom_data.business_payment_types_c = @csv_hash.select { |k, v| k.include?('payment_type') && v == "Yes" }.keys.map { |s| s.split('_').last.capitalize }.join(', ')
 
+    custom_data.host_dash_url_c=@csv_hash['hosting_url']
+    custom_data.host_login_c=@csv_hash['hosting_username']
+    custom_data.host_password_c=@csv_hash['hosting_password']
+
+    custom_data.domain_host_dash_url_c=@csv_hash['domain_provider_url']
+    custom_data.domain_host_username_c=@csv_hash['domain_provider_username']
+    custom_data.domain_host_password_c=@csv_hash['domain_provider_password']
+
+
     custom_data.googlelocal_sign_date_c = Time.now
     custom_data.googlelocal_echosign_signed_c = true
 
