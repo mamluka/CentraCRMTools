@@ -1,4 +1,4 @@
 require 'rack'
-require "./echosign-api"
+require require File.expand_path("echosign-api", __FILE__)
 
 run EchoSignApi
