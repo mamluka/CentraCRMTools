@@ -40,10 +40,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get_by_label('Business Address'), 'address'
     assert_includes lead.get_by_label('Business Address'), 'city'
     assert_includes lead.get_by_label('Business Address'), 'Alabama'
-    assert_includes lead.get_by_label('Business Address'), 'Alabama'
     assert_includes lead.get_by_label('Business Address'), '54321'
-
-    assert_includes lead.get('service_area_c'), 'LA'
 
     assert_includes lead.get('host_dash_url_c'), 'http://hosting.com'
     assert_includes lead.get('host_login_c'), 'hosting_user'
@@ -98,10 +95,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_includes lead.get_by_label('Business Address'), 'address'
     assert_includes lead.get_by_label('Business Address'), 'city'
     assert_includes lead.get_by_label('Business Address'), 'Alabama'
-    assert_includes lead.get_by_label('Business Address'), 'Alabama'
     assert_includes lead.get_by_label('Business Address'), '54321'
-
-    assert_includes lead.get('service_area_c'), 'LA'
 
     assert_includes lead.get('host_dash_url_c'), 'http://hosting.com'
     assert_includes lead.get('host_login_c'), 'hosting_user'
