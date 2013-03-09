@@ -1,4 +1,4 @@
 require 'rack'
-require File.dirname(__FILE__) + '/echosign-api.rb'
+require_relative "echosign-api"
 
 run EchoSignApi
