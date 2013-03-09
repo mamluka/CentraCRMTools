@@ -195,11 +195,11 @@ class LocalListingFormTests < EchoSignTestsBase
   def full_mobile_web_information
     @driver.text_field(:name => 'hosting_url').set 'http://hosting.com'
     @driver.text_field(:name => 'hosting_username').set 'hosting_user'
-    @driver.text_field(:name => 'hosting_passwrod').set 'hosting_password'
+    @driver.text_field(:name => 'hosting_password').set 'hosting_password'
 
     @driver.text_field(:name => 'domain_provider_url').set 'http://domain.com'
     @driver.text_field(:name => 'domain_provider_username').set 'provider_user'
-    @driver.text_field(:name => 'domain_provider_passwrod').set 'provider_password'
+    @driver.text_field(:name => 'domain_provider_password').set 'provider_password'
   end
 
   def sign_form
