@@ -143,7 +143,6 @@ class LocalListingFormTests < EchoSignTestsBase
   end
 
   def fill_client_details
-    @driver.text_field(:name => 'phone').set '1234567890'
     @driver.text_field(:name => 'alt_phone').set '0987654321'
     @driver.text_field(:name => 'name').set 'David the name'
     @driver.text_field(:name => 'website').set 'http://www.centracorporation.com'

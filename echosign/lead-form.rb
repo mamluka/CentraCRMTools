@@ -1,10 +1,27 @@
 require 'date'
 require_relative "../core/crm-database"
 
-class LeadForm
+class SafeCsvHash
 
   def initialize(csv_hash)
     @csv_hash = csv_hash
+  end
+
+  def [](key)
+
+    unless @csv_hash.has_key?(key)
+      return ""
+    end
+
+    @csv_hash[key]
+  end
+
+end
+
+class LeadForm
+
+  def initialize(csv_hash)
+    @csv_hash = SafeCsvHash.new csv_hash
   end
 
   def update_crm(document_id)
