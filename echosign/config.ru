@@ -1,4 +1,4 @@
 require 'rack'
-require_relative "echosign-api"
+require "./echosign-api"
 
 run EchoSignApi
