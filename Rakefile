@@ -11,3 +11,10 @@ end
 Rake::TestTask.new("test:echosign") do |t|
   t.pattern = "specs/echosign/spec-*.rb"
 end
+
+namespace :crm do
+  task :testing do
+    puts "Stating echosign..."
+    `thin -d -p 9050 -R echosign/config,ru`
+  end
+end
