@@ -16,6 +16,11 @@ class SafeCsvHash
     @csv_hash[key]
   end
 
+  private
+  def method_missing(method, *args, &block)
+    @csv_hash.send(method, *args, &block)
+  end
+
 end
 
 class LeadForm
