@@ -17,6 +17,6 @@ namespace :crm do
   desc "Start services that support crm testing"
   task :testing do
     puts "Stating echosign..."
-    `thin -d -p 9050 -R echosign/config.ru start`
+    `thin -d -a soa.centracorporation.com -p 9050 -R echosign/config.ru start`
   end
 end
