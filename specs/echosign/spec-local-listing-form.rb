@@ -126,7 +126,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
   def assert_signing(lead)
     assert lead.is_checked('googlelocal_echosign_signed_c')
-    assert_includes lead.get('googlelocal_sign_date_c'), today_mysql_time
+    assert_includes lead.get('googlelocal_sign_date_c'), today_crm_date
   end
 
   def assert_mobile_web_details(lead)
