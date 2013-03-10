@@ -103,6 +103,6 @@ class LeadForm
   end
 
   def contract_for_product?(document_title, product)
-    @document_metadata.find { |x| x['title'] == document_title }.include?(product)
+    @document_metadata.find { |x| x['title'] == document_title }['products'].include?(product)
   end
 end
