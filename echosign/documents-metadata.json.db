@@ -1,0 +1,22 @@
+{
+    "documents":[
+        {
+            "id":"SAWI2F65BB524L",
+            "crmId":"centra99",
+            "title":"Mobile Web Presence Discount",
+            "products":["local-listing", "mobileweb"]
+        },
+        {
+            "id":"SAWI2L6TXSXN3X",
+            "crmId":"centra80",
+            "title":"Centra Gift",
+            "products":["local-listing", "mobileweb"]
+        },
+        {
+            "id":"SAWI3G32565J5E",
+            "crmId":"centra24",
+            "title":"Mobile Web",
+            "products":["mobileweb"]
+        }
+    ]
+}

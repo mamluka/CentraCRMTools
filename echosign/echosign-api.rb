@@ -23,7 +23,7 @@ class EchoSignApi < Grape::API
 
         document_title = config['documents'].select { |doc| doc['id'] == contract_id }.first['title']
 
-        echosign.send params[:email], contract_id, config['callback_url'],document_title
+        echosign.send params[:email], contract_id, config['callback_url'], document_title
       rescue => exception
         exception.message
       end
@@ -40,7 +40,7 @@ class EchoSignApi < Grape::API
         csv_hash = echosign.get_form_data document_key
 
         lead_form = LeadForm.new csv_hash
-        lead_form.update_crm document_key
+        lead_form.update_crm document_key, document_title
       end
     end
 

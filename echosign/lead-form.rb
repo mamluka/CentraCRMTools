@@ -27,9 +27,10 @@ class LeadForm
 
   def initialize(csv_hash)
     @csv_hash = SafeCsvHash.new csv_hash
+    @document_metadata = JSON.parse(file.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
   end
 
-  def update_crm(document_id)
+  def update_crm(document_id, document_title)
 
     db = CrmDatabase.new
     db.connect
@@ -86,11 +87,22 @@ class LeadForm
     custom_data.domain_host_username_c=@csv_hash['domain_provider_username']
     custom_data.domain_host_password_c=@csv_hash['domain_provider_password']
 
+    if get_products_from_document(document_title) == "local-listing"
+      custom_data.googlelocal_sign_date_c = Time.now
+      custom_data.googlelocal_echosign_signed_c = true
+    end
 
-    custom_data.googlelocal_sign_date_c = Time.now
-    custom_data.googlelocal_echosign_signed_c = true
+    if get_products_from_document(document_title) == "mobileweb"
+      custom_data.mobileweb_sign_date_c = Time.now
+      custom_data.mobileweb_echosign_signed_c = true
+    end
+
 
     custom_data.save
 
+  end
+
+  def get_products_from_document(document_title)
+    @document_metadata.find { |x| x['title'] == document_title }
   end
 end
