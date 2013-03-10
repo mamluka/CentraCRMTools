@@ -19,7 +19,11 @@ class EchoSignApi < Grape::API
         config = get_config
         echosign = EchoSign.new
 
-        echosign.send params[:email], params[:contractId], config['callback_url']
+        contract_id = params[:contractId]
+
+        document_title = config['documents'].select { |doc| doc['id'] == contract_id }.first['title']
+
+        echosign.send params[:email], contract_id, config['callback_url'],document_title
       rescue => exception
         exception.message
       end
@@ -30,6 +34,9 @@ class EchoSignApi < Grape::API
         document_key = params[:documentKey]
 
         echosign = EchoSign.new
+
+        echosign.get_document_info document_key
+
         csv_hash = echosign.get_form_data document_key
 
         lead_form = LeadForm.new csv_hash

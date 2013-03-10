@@ -1,6 +1,6 @@
 require_relative "base/echosign-base"
 
-class LocalListingFormTests < EchoSignTestsBase
+class MobileWebFormTests < EchoSignTestsBase
   def test_when_selling_mobile_web_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
@@ -11,6 +11,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Mobile Web"
 
     @driver.goto contract_url
 
@@ -108,6 +109,18 @@ class LocalListingFormTests < EchoSignTestsBase
     assert lead.is_checked('mobileweb_echosign_signed_c')
 
     assert_includes lead.get('mobileweb_sign_date_c'), today_mysql_time
+  end
+
+  def test_when_selling_only_mobile_web_must_select_a_contract
+
+    CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :mobileweb_check_c => 'check',
+        :mobileweb_contract_type_c => 'select Centra 24'
+    }
+
+
   end
 
 

@@ -2,40 +2,6 @@ require 'savon'
 require 'json'
 require 'csv'
 
-class RecipientInfo
-  def initialize(email)
-    @email = email
-  end
-
-  def to_s
-    %q{<ins8:recipientInfo>
-      <ins8:email>#{@email}</ins8:email>
-      <ins8:role>SIGNER</ins8:role>
-      <ins8:fax xsi:nil="true"/>
-    </ins8:recipientInfo>}
-  end
-end
-
-class FileInfo
-  def initialize(filename, document_id)
-
-    @filename = filename
-    @document_id = document_id
-  end
-
-  def to_s
-    %q{<ins0:fileInfo>
-        <ins0:fileName>#{@filename}</ins0:fileName>
-        <ins0:libraryDocumentKey>#{@document_id}</ins0:libraryDocumentKey>
-        <ins0:mimeType xsi:nil="true"/>
-        <ins0:file xsi:nil="true"/>
-        <ins0:url xsi:nil="true"/>
-        <ins0:formKey xsi:nil="true"/>
-        <ins0:libraryDocumentName xsi:nil="true"/>
-    </ins0:fileInfo>}
-  end
-end
-
 class EchoSign
 
   def initialize
@@ -50,7 +16,7 @@ class EchoSign
     end
   end
 
-  def send(email, document_id, callback_url)
+  def send(email, document_id, callback_url, document_title)
     response = call :send_document, %{
             <tns:apiKey>#{@api_key}</tns:apiKey>
             <tns:senderInfo xsi:nil="true"/>
@@ -62,11 +28,11 @@ class EchoSign
                   <ins8:fax xsi:nil="true"/>
                 </ins8:recipientInfo>
               </ins0:recipients>
-              <ins0:name>test agreement</ins0:name>
+              <ins0:name>#{document_title}</ins0:name>
               <ins0:message>this is a test message</ins0:message>
               <ins0:fileInfos>
                 <ins0:fileInfo>
-                  <ins0:fileName>Centra Coproration Centra Local Listing Contract ver 2</ins0:fileName>
+                  <ins0:fileName>#{document_title}</ins0:fileName>
                   <ins0:libraryDocumentKey>#{document_id}</ins0:libraryDocumentKey>
                   <ins0:mimeType xsi:nil="true"/>
                   <ins0:file xsi:nil="true"/>
@@ -133,6 +99,15 @@ class EchoSign
     call :remove_document, {
         :apiKey => @api_key,
         :documentKey => document_key}
+  end
+
+  def get_document_info(document_key)
+    response = call :get_document_info, {
+        :apiKey => @api_key,
+        :documentKey => document_key,
+    }
+
+    puts response.body
   end
 
   private
