@@ -35,12 +35,12 @@ class EchoSignApi < Grape::API
 
         echosign = EchoSign.new
 
-        echosign.get_document_info document_key
+        info = echosign.get_document_info document_key
 
         csv_hash = echosign.get_form_data document_key
 
         lead_form = LeadForm.new csv_hash
-        lead_form.update_crm document_key, document_title
+        lead_form.update_crm document_key, info[:name]
       end
     end
 

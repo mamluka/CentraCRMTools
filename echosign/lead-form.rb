@@ -27,7 +27,7 @@ class LeadForm
 
   def initialize(csv_hash)
     @csv_hash = SafeCsvHash.new csv_hash
-    @document_metadata = JSON.parse(file.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
+    @document_metadata = JSON.parse(File.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
   end
 
   def update_crm(document_id, document_title)

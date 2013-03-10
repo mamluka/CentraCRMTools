@@ -107,7 +107,7 @@ class EchoSign
         :documentKey => document_key,
     }
 
-    puts response.body
+    response.body[:get_document_info_response][:document_info]
   end
 
   private
