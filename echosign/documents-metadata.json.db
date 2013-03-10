@@ -1,5 +1,4 @@
-{
-    "documents":[
+[
         {
             "id":"SAWI2F65BB524L",
             "crmId":"centra99",
@@ -18,5 +17,4 @@
             "title":"Mobile Web",
             "products":["mobileweb"]
         }
-    ]
-}
+]
