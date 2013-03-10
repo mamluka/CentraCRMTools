@@ -87,12 +87,12 @@ class LeadForm
     custom_data.domain_host_username_c=@csv_hash['domain_provider_username']
     custom_data.domain_host_password_c=@csv_hash['domain_provider_password']
 
-    if get_products_from_document(document_title) == "local-listing"
+    if contract_for_product?(document_title, "local-listing")
       custom_data.googlelocal_sign_date_c = Time.now
       custom_data.googlelocal_echosign_signed_c = true
     end
 
-    if get_products_from_document(document_title) == "mobileweb"
+    if contract_for_product?(document_title, "mobileweb")
       custom_data.mobileweb_sign_date_c = Time.now
       custom_data.mobileweb_echosign_signed_c = true
     end
@@ -102,7 +102,7 @@ class LeadForm
 
   end
 
-  def get_products_from_document(document_title)
-    @document_metadata.find { |x| x['title'] == document_title }
+  def contract_for_product?(document_title, product)
+    @document_metadata.find { |x| x['title'] == document_title }.include?(product)
   end
 end
