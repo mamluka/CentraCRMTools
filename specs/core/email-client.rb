@@ -21,18 +21,28 @@ class EmailClient
 
   def get_first_email_body
 
-    number_of_emails = wait_for_emails
-    if number_of_emails == 0
-      return ""
-    end
-
-    mail = Mail.all.first
+    mail = get_first_mail
 
     if mail.multipart?
       mail.part[0].body
     else
       mail.body
     end
+  end
+
+  def get_first_email_subject
+    mail = get_first_mail
+    mail.subject
+  end
+
+  def get_first_mail
+    number_of_emails = wait_for_emails
+
+    if number_of_emails == 0
+      return ""
+    end
+
+    Mail.all.first
   end
 
   def wait_for_emails
@@ -44,4 +54,5 @@ class EmailClient
 
     Mail.all.length
   end
+
 end

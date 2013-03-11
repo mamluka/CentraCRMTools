@@ -40,6 +40,8 @@ class EchoSignTestsBase < TestsBase
 
   end
 
+
+
   def assert_price_point(price)
     # needs to be worked out
   end
