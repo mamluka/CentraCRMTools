@@ -126,6 +126,21 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_signing(lead)
   end
 
+  def test_when_echosign_contract_sent_mark_document_in
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
+
+    assert lead.is_checked('googlelisting_echosign_in')
+
+  end
+
   def assert_signing(lead)
     assert lead.is_checked('googlelocal_echosign_signed_c')
     assert_includes lead.get('googlelocal_sign_date_c'), today_crm_date

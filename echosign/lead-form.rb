@@ -30,12 +30,30 @@ class LeadForm
     @document_metadata = JSON.parse(File.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
   end
 
+  def mark_as_requested(document_id, document_title)
+
+    connect_to_db
+    custom_data = get_custom_data_by_doc_id(document_id)
+
+    if contract_for_product?(document_title, "local-listing")
+      custom_data.googlelocal_echosign_in = true
+    end
+
+    if contract_for_product?(document_title, "mobileweb")
+      custom_data.mobileweb_echosign_in = true
+    end
+
+  end
+
+  def get_custom_data_by_doc_id(document_id)
+    CustomData.where(:echosign_doc_id_c => document_id).first
+  end
+
   def update_crm(document_id, document_title)
 
-    db = CrmDatabase.new
-    db.connect
+    connect_to_db
 
-    custom_data = CustomData.where(:echosign_doc_id_c => document_id).first
+    custom_data = get_custom_data_by_doc_id(document_id)
     lead = custom_data.lead
 
     custom_data.billing_payment_method_c = @csv_hash['cc_type'].capitalize
@@ -100,6 +118,11 @@ class LeadForm
 
     custom_data.save
 
+  end
+
+  def connect_to_db
+    db = CrmDatabase.new
+    db.connect
   end
 
   def contract_for_product?(document_title, product)
