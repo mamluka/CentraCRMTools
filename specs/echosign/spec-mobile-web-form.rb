@@ -132,12 +132,11 @@ class MobileWebFormTests < EchoSignTestsBase
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
-        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web"
 
-    asset lead.is_checked('mobileweb_echosign_in')
+    assert_includes @driver.text, "You must select a contract"
 
   end
 
