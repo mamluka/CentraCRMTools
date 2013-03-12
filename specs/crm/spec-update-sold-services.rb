@@ -15,10 +15,6 @@ class TestMini < CrmTestBase
         :email => "email #{email}"
     }
 
-    first_name = lead.get 'first_name'
-
-    assert_api_called({'email' => email, 'name' => first_name, 'customerId' => lead.id})
-
     assert_equal lead.get('mobileweb_info_req_sent_c'), today_crm_date
     assert_equal lead.get('mobileweb_sale_date_c'), today_crm_date
     assert_equal lead.get('mobileweb_sale_rep_c'), 'David MZ'
@@ -52,7 +48,7 @@ class TestMini < CrmTestBase
         :email => "email #{email}"
     }
 
-    assert_api_not_called
+    assert_email_not_sent
   end
 
   def test_when_google_local_listing_is_sold_should_update_dates

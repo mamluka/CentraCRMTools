@@ -45,6 +45,15 @@ class TestsBase < MiniTest::Unit::TestCase
 
   end
 
+  def assert_email_not_sent
+    email_count = @email_client.wait_for_emails
+
+    if email_count > 0
+      flunk "Email was found"
+    end
+
+  end
+
   def clean_databases
     ActiveRecord::Base.connection.execute("DELETE FROM leads;")
     ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")

@@ -14,8 +14,6 @@ class TestMini < CrmTestBase
         :non_billable_reason_c => 'select Invalid url'
     }
 
-    assert_api_called({:email => email, :customerId => lead.id})
-
     assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
     assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
     assert_includes lead.status, 'Pit stop'
@@ -58,8 +56,6 @@ class TestMini < CrmTestBase
         :not_billable_c => 'check',
         :non_billable_reason_c => 'select Not business owner or decision maker'
     }
-
-    assert_api_called({:email => email})
 
     assert_includes lead.get('not_billable_assign_date_c'), today_crm_date
     assert_includes lead.get('not_billable_assigner_c'), 'David MZ'
