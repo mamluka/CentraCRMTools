@@ -22,8 +22,6 @@ class TestMini < CrmTestBase
 
   def test_when_mobile_web_is_sold_should_send_email
 
-    enable_email_sending
-
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',

@@ -7,7 +7,6 @@ require_relative 'base/crm-test-base.rb'
 class TestMini < CrmTestBase
 
   def test_when_verify_is_checked_shoould_sendout_the_google_info_head_up_email
-    enable_email_sending
 
     lead = CrmLead.new @driver, {
         :status => 'select Client',
@@ -21,7 +20,6 @@ class TestMini < CrmTestBase
   end
 
   def test_when_verify_is_checked_shoould_update_verified_date
-    enable_email_sending
 
     lead = CrmLead.new @driver, {
         :status => 'select Client',

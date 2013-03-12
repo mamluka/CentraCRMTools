@@ -20,8 +20,6 @@ class TestMini < CrmTestBase
 
   def test_when_has_preview_url_should_send_preview_email
 
-    enable_email_sending
-
     CrmLead.new @driver,
                 {:prev_url_c => 'http://preview.flowmobileapps.com/compare/testing',
                  :email => "email crmtesting@centracorporation.com"

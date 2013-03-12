@@ -8,8 +8,6 @@ class TestMini < CrmTestBase
 
   def test_when_mobile_web_is_live_should_email_the_client_that_its_live
 
-    enable_email_sending
-
     CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
@@ -21,8 +19,6 @@ class TestMini < CrmTestBase
   end
 
   def test_when_local_listing_is_live_should_email_the_client
-
-    enable_email_sending
 
     CrmLead.new @driver, {
         :status => 'select Client',

@@ -21,8 +21,6 @@ class TestMini < CrmTestBase
 
   def test_when_non_billable_and_reason_is_invalid_url_should_send_out_an_email
 
-    enable_email_sending
-
     lead = CrmLead.new @driver, {
         :email => "email crmtesting@centracorporation.com",
         :not_billable_c => 'check',
@@ -34,8 +32,6 @@ class TestMini < CrmTestBase
   end
 
   def test_when_non_billable_and_reason_not_business_owner_should_send_out_email
-
-    enable_email_sending
 
     CrmLead.new @driver, {
         :email => "email crmtesting@centracorporation.com",
