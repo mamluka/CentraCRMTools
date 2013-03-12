@@ -111,15 +111,33 @@ class MobileWebFormTests < EchoSignTestsBase
     assert_includes lead.get('mobileweb_sign_date_c'), today_mysql_time
   end
 
-  def test_when_selling_only_mobile_web_must_select_a_contract
+  def test_when_echosign_is_sent_should_mark_as_docs_in
 
-    CrmLead.new @driver, {
+    lead = CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
         :mobileweb_contract_type_c => 'select Centra 24'
     }
 
+    assert_includes @email_client.get_first_email_subject, "Mobile Web"
+
+    asset lead.is_checked('mobileweb_echosign_in')
+
+  end
+
+  def test_when_no_contact_is_selected_notify_user
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :mobileweb_check_c => 'check',
+        :mobileweb_contract_type_c => 'select Centra 24'
+    }
+
+    assert_includes @email_client.get_first_email_subject, "Mobile Web"
+
+    asset lead.is_checked('mobileweb_echosign_in')
 
   end
 
