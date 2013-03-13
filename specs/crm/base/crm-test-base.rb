@@ -21,6 +21,6 @@ class CrmTestBase < TestsBase
     super
     @auth.logout
 
-    @driver.screenshot.save "#{@@current_spec}.png"
+    #@driver.screenshot.save "#{}.png"
   end
 end
