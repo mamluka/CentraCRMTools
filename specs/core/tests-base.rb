@@ -43,12 +43,7 @@ class TestsBase < MiniTest::Unit::TestCase
       flunk "No emails found"
     end
 
-    if Mail.first.multipart?
-      assert_includes Mail.first.parts.first.body, text
-    else
-      assert_includes Mail.first.body, text
-    end
-
+    assert Mail.all.each { |x| x.multipart? ? x.parts.first.body : x.body }.any? { |x| x.include?(text) }
   end
 
   def assert_email_not_sent

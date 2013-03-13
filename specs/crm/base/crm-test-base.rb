@@ -20,7 +20,5 @@ class CrmTestBase < TestsBase
   def teardown
     super
     @auth.logout
-
-    #@driver.screenshot.save "#{}.png"
   end
 end
