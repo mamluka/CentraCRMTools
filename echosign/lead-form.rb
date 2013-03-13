@@ -36,11 +36,11 @@ class LeadForm
     custom_data = get_custom_data_by_doc_id(document_id)
 
     if contract_for_product?(document_title, "local-listing")
-      custom_data.googlelocal_echosign_in = true
+      custom_data.googlelocal_echosign_in_c = true
     end
 
     if contract_for_product?(document_title, "mobileweb")
-      custom_data.mobileweb_echosign_in = true
+      custom_data.mobileweb_echosign_in_c = true
     end
 
   end
