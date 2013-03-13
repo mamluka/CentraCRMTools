@@ -21,7 +21,8 @@ class TestMini < CrmTestBase
   end
 
   def test_when_mobile_web_is_sold_should_send_email
-    omit()
+
+    skip("not sure if this is still needed")
 
     lead = CrmLead.new @driver, {
         :status => 'select Client',
