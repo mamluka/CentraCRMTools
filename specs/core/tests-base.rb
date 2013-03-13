@@ -19,6 +19,8 @@ class TestsBase < MiniTest::Unit::TestCase
     @email_client.clear_inbox
 
     stop_echosign
+
+
   end
 
   def today_mysql_time

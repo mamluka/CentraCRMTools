@@ -20,5 +20,11 @@ class CrmTestBase < TestsBase
   def teardown
     super
     @auth.logout
+
+    test_name = Kernel.caller.flatten.select { |x| x.include?('test_') }.first
+
+    puts test_name, Kernel.caller
+
+    @driver.screenshot.save "#{test_name}.png
   end
 end
