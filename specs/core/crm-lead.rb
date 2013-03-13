@@ -63,6 +63,8 @@ class CrmLead
 
   def get(name)
 
+    puts @driver.url
+
     unless @driver.url.include?(@id)
       @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
