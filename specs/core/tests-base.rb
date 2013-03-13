@@ -11,10 +11,14 @@ class TestsBase < MiniTest::Unit::TestCase
   def setup
     @email_client = EmailClient.new
     @email_client.clear_inbox
+
+    start_echosign
   end
 
   def teardown
     @email_client.clear_inbox
+
+    stop_echosign
   end
 
   def today_mysql_time
@@ -64,6 +68,14 @@ class TestsBase < MiniTest::Unit::TestCase
   def load_database
     crm_database = CrmDatabase.new
     crm_database.connect
+  end
+
+  def start_echosign
+    `screen -L -dmS echosign  rackup -p 9050 #{File.dirname(__FILE__)}/../../../echosign/config.ru`
+  end
+
+  def stop_echosign
+    `pkill -f 9050`
   end
 
 end
