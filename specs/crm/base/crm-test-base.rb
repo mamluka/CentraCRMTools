@@ -25,6 +25,6 @@ class CrmTestBase < TestsBase
 
     puts test_name, Kernel.caller
 
-    @driver.screenshot.save "#{test_name}.png
+    @driver.screenshot.save "#{test_name}.png"
   end
 end
