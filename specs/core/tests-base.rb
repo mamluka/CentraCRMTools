@@ -71,7 +71,7 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def start_echosign
-    `screen -L -dmS echosign  rackup -p 9050 #{File.dirname(__FILE__)}/../../../echosign/config.ru`
+    `screen -L -dmS echosign  rackup -p 9050 #{File.dirname(__FILE__)}/../../echosign/config.ru`
   end
 
   def stop_echosign
