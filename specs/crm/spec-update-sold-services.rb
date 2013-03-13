@@ -12,7 +12,8 @@ class TestMini < CrmTestBase
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
-        :email => "email #{email}"
+        :email => "email #{email}",
+        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_equal lead.get('mobileweb_info_req_sent_c'), today_crm_date
@@ -26,6 +27,7 @@ class TestMini < CrmTestBase
         :status => 'select Client',
         :mobileweb_check_c => 'check',
         :email => "email crmtesting@centracorporation.com",
+        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     first_name = lead.get 'first_name'
@@ -43,10 +45,12 @@ class TestMini < CrmTestBase
         :status => 'select Client',
         :mobileweb_sale_date_c => today_crm_date,
         :mobileweb_check_c => 'check',
-        :email => "email #{email}"
+        :email => "email #{email}",
+        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_email_not_sent
+
   end
 
   def test_when_google_local_listing_is_sold_should_update_dates
@@ -55,7 +59,8 @@ class TestMini < CrmTestBase
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :googlelocal_check_c => 'check',
-        :email => "email #{email}"
+        :email => "email #{email}",
+        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_equal lead.get('googlelocal_sale_date_c'), today_crm_date
@@ -68,7 +73,8 @@ class TestMini < CrmTestBase
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :merch_check_c => 'check',
-        :email => "email #{email}"
+        :email => "email #{email}",
+        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_equal lead.get('marchent_sale_date_c'), today_crm_date
