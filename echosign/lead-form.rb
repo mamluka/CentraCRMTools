@@ -35,6 +35,8 @@ class LeadForm
     connect_to_db
     custom_data = get_custom_data_by_doc_id(document_id)
 
+    puts document_title
+
     if contract_for_product?(document_title, "local-listing")
       puts "local liusting marked"
       custom_data.googlelocal_echosign_in_c = true
