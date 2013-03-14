@@ -21,8 +21,5 @@ class CrmTestBase < TestsBase
     super
     @auth.logout
 
-    puts @driver.text
-
-    @driver.screenshot.save 'test.png'
   end
 end

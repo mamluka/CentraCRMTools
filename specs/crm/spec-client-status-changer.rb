@@ -8,7 +8,8 @@ class TestMini < CrmTestBase
     lead = CrmLead.new @driver, {
         :status => 'select Client',
         :mobileweb_check_c => 'check',
-        :mobileweb_contract_type_c => 'select Centra 24'
+        :mobileweb_contract_type_c => 'select Centra 24',
+        :email => "email crmtesting@centracorporation.com"
     }
 
     assert_equal lead.get('rep_client_status_changed_c'), "David MZ"
