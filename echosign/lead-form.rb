@@ -43,6 +43,8 @@ class LeadForm
       custom_data.mobileweb_echosign_in_c = true
     end
 
+    custom_data.save
+
   end
 
   def get_custom_data_by_doc_id(document_id)
@@ -114,7 +116,6 @@ class LeadForm
       custom_data.mobileweb_sign_date_c = Time.now
       custom_data.mobileweb_echosign_signed_c = true
     end
-
 
     custom_data.save
 
