@@ -20,5 +20,7 @@ class CrmTestBase < TestsBase
   def teardown
     super
     @auth.logout
+
+    puts @driver.text
   end
 end
