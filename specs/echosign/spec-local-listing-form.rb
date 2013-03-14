@@ -143,13 +143,11 @@ class LocalListingFormTests < EchoSignTestsBase
 
   def test_when_no_contract_is_selected_notice_user
 
-    lead = CrmLead.new @driver, {
+    CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
     }
-
-    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
     assert_includes @driver.text, "You must select a contract"
   end
