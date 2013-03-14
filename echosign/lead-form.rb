@@ -25,16 +25,14 @@ end
 
 class LeadForm
 
-  def initialize(csv_hash)
-    @csv_hash = SafeCsvHash.new csv_hash
+  def initialize()
+
     @document_metadata = JSON.parse(File.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
   end
 
-  def self.mark_as_requested(document_id, document_title)
+  def mark_as_requested(document_id, document_title)
 
-    db = CrmDatabase.new
-    db.connect
-
+    connect_to_db
     custom_data = get_custom_data_by_doc_id(document_id)
 
     if contract_for_product?(document_title, "local-listing")
@@ -55,7 +53,9 @@ class LeadForm
     CustomData.where(:echosign_doc_id_c => document_id).first
   end
 
-  def update_crm(document_id, document_title)
+  def update_crm(csv_hash, document_id, document_title)
+
+    @csv_hash = SafeCsvHash.new csv_hash
 
     connect_to_db
 

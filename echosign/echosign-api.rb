@@ -37,8 +37,8 @@ class EchoSignApi < Grape::API
 
         csv_hash = echosign.get_form_data document_key
 
-        lead_form = LeadForm.new csv_hash
-        lead_form.update_crm document_key, info[:name]
+        lead_form = LeadForm.new
+        lead_form.update_crm csv_hash, document_key, info[:name]
       end
 
       if params[:eventType] == "SIGNATURE_REQUESTED"
@@ -47,8 +47,8 @@ class EchoSignApi < Grape::API
         echosign = EchoSign.new
         info = echosign.get_document_info document_key
 
-
-        LeadForm.mark_as_requested document_key, info[:name]
+        lead_form = LeadForm.new
+        lead_form.mark_as_requested document_key, info[:name]
 
       end
     end
