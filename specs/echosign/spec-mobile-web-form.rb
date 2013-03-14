@@ -53,7 +53,7 @@ class MobileWebFormTests < EchoSignTestsBase
 
     assert lead.is_checked('mobileweb_echosign_signed_c')
 
-    assert_includes lead.get('mobileweb_sign_date_c'), today_mysql_time
+    assert_includes lead.get('mobileweb_sign_date_c'), today_crm_date
   end
 
 
@@ -108,7 +108,7 @@ class MobileWebFormTests < EchoSignTestsBase
 
     assert lead.is_checked('mobileweb_echosign_signed_c')
 
-    assert_includes lead.get('mobileweb_sign_date_c'), today_mysql_time
+    assert_includes lead.get('mobileweb_sign_date_c'), today_crm_date
   end
 
   def test_when_echosign_is_sent_should_mark_as_docs_in
@@ -122,7 +122,7 @@ class MobileWebFormTests < EchoSignTestsBase
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web"
 
-    asset lead.is_checked('mobileweb_echosign_in')
+    asset lead.is_checked('mobileweb_echosign_in_c')
 
   end
 
