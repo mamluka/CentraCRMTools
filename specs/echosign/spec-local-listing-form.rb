@@ -136,10 +136,10 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
-
+    @driver.screenshot.save '1.png'
     assert lead.is_checked('googlelocal_echosign_in_c')
 
-    @driver.screenshot.save '1.png'
+
 
   end
 
