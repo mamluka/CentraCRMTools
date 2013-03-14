@@ -12,7 +12,7 @@ class TestMini < CrmTestBase
   end
 
   def test_when_change_to_cancelled_status_and_mobileweb_is_checked_should_not_allow_to_save
-    CrmLead.new @driver, {:mobileweb_check_c => 'check', :status => 'select Cancelled'}
+    CrmLead.new @driver, { :mobileweb_check_c => 'check', :status => 'select Cancelled'}
 
     assert_equal @driver.text, "You can't change a lead to cancelled status when you have service checked, the services are located in the Sold Services tab"
 
