@@ -137,7 +137,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
-    assert lead.is_checked('googlelisting_echosign_in_c')
+    assert lead.is_checked('googlelocal_echosign_in_c')
 
   end
 
