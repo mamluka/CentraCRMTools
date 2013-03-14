@@ -47,8 +47,8 @@ class EchoSignApi < Grape::API
         echosign = EchoSign.new
         info = echosign.get_document_info document_key
 
-        lead_form = LeadForm.new csv_hash
-        lead_form.mark_as_requested document_key, info[:name]
+
+        LeadForm.mark_as_requested document_key, info[:name]
 
       end
     end

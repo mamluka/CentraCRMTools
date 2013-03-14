@@ -30,16 +30,18 @@ class LeadForm
     @document_metadata = JSON.parse(File.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
   end
 
-  def mark_as_requested(document_id, document_title)
+  def self.mark_as_requested(document_id, document_title)
 
     connect_to_db
     custom_data = get_custom_data_by_doc_id(document_id)
 
     if contract_for_product?(document_title, "local-listing")
+      puts "local liusting marked"
       custom_data.googlelocal_echosign_in_c = true
     end
 
     if contract_for_product?(document_title, "mobileweb")
+      puts "mobiule web marked"
       custom_data.mobileweb_echosign_in_c = true
     end
 
