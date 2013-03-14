@@ -121,23 +121,19 @@ class MobileWebFormTests < EchoSignTestsBase
     }
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web"
-
-    asset lead.is_checked('mobileweb_echosign_in_c')
+    assert lead.is_checked('mobileweb_echosign_in_c')
 
   end
 
   def test_when_no_contact_is_selected_notify_user
 
-    lead = CrmLead.new @driver, {
+    CrmLead.new @driver, {
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
     }
 
-    assert_includes @email_client.get_first_email_subject, "Mobile Web"
-
     assert_includes @driver.text, "You must select a contract"
-
   end
 
 
