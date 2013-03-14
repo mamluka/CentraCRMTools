@@ -35,6 +35,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
     sleep 3
 
+    lead.refresh
     assert !lead.is_checked('billing_same_address_c')
 
     assert_billing_address_when_not_the_same(lead)
