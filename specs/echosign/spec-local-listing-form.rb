@@ -135,10 +135,11 @@ class LocalListingFormTests < EchoSignTestsBase
         :googlelocal_contract_type_c => 'select Centra 99'
     }
 
+
+
     assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
-
-
+    lead.refresh
     assert lead.is_checked('googlelocal_echosign_in_c')
   end
 

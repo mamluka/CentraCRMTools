@@ -121,6 +121,8 @@ class MobileWebFormTests < EchoSignTestsBase
     }
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web"
+
+    lead.refresh
     assert lead.is_checked('mobileweb_echosign_in_c')
 
   end

@@ -83,13 +83,17 @@ class CrmLead
     @driver.hidden(:id => id).value
   end
 
+  def refresh
+    @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+  end
+
   def is_checked(id)
     unless @driver.url.include?(@id)
       @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
 
     show_all_panels
-    @driver.screenshot.save '1.png'
+
     @driver.checkbox(:id => id).set?
   end
 
