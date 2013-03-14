@@ -89,7 +89,7 @@ class CrmLead
     end
 
     show_all_panels
-
+    @driver.screenshot.save '1.png'
     @driver.checkbox(:id => id).set?
   end
 
