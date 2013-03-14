@@ -32,7 +32,9 @@ class LeadForm
 
   def self.mark_as_requested(document_id, document_title)
 
-    connect_to_db
+    db = CrmDatabase.new
+    db.connect
+
     custom_data = get_custom_data_by_doc_id(document_id)
 
     if contract_for_product?(document_title, "local-listing")
