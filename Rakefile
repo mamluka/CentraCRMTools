@@ -18,5 +18,8 @@ namespace :crm do
   task :testing do
     puts "Stating echosign..."
     `thin -d -a soa.centracorporation.com -p 9050 -R echosign/config.ru start`
+
+    puts "Stating noting service..."
+    `thin -d -a soa.centracorporation.com -p 9060 -R crm-noting/config.ru start`
   end
 end
