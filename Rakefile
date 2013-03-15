@@ -22,4 +22,8 @@ namespace :crm do
     puts "Stating noting service..."
     `thin -d -a soa.centracorporation.com -p 9060 -P crmnoting.pid -R crm-noting/config.ru start`
   end
+
+  task :stop_testing do
+
+  end
 end
