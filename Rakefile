@@ -24,6 +24,10 @@ namespace :crm do
   end
 
   task :stop_testing do
+    puts "Stop echosign..."
+    `thin -P echosign.pid stop`
 
+    puts "Stop noting service..."
+    `thin -P crmnoting.pid stop`
   end
 end
