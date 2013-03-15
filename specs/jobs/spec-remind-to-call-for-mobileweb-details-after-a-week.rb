@@ -8,7 +8,7 @@ class Tests < JobsTestBase
     end
 
     lead.add_custom_data do |data|
-      data.mobileweb_sale_date_c = 7.days.ago
+      data.mobileweb_sale_date_c = 8.days.ago
       data.mobileweb_check_c = true
     end
 
