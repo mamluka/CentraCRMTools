@@ -1,6 +1,11 @@
 require 'rest_client'
 
 class ApiEmailer
+
+  def initialize
+    @config = JSON.parse(File.read(Fir.dirname(__FILE__) + "/config.json"))
+  end
+
   def first_system_pipeline(email, previewUrl)
     email 'first-system-pipeline', email, {:previewUrl => previewUrl}
   end
@@ -35,6 +40,6 @@ class ApiEmailer
       apiCallParams = apiCallParams.merge(more)
     end
 
-    RestClient.get "http://apps.centracorporation.com/api/email/#{api}", {:params => apiCallParams}
+    RestClient.get "#{@config["CentraAppsApiBaseUrl"]}/email/#{api}", {:params => apiCallParams}
   end
 end
