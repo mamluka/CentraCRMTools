@@ -1,4 +1,5 @@
 require 'securerandom'
+require 'time'
 
 class Lead < ActiveRecord::Base
   self.primary_key = 'id'
@@ -78,4 +79,28 @@ class EmailRelation < ActiveRecord::Base
 
   belongs_to :lead, :primary_key => 'id', :foreign_key => 'bean_id'
   belongs_to :email, :primary_key => 'id', :foreign_key => 'email_address_id'
+end
+
+class Note < ActiveRecord::Base
+  def self.add(id, message, description)
+
+    note = Note.new
+
+    system_pipe_line_user = '92b0bdb7-bb6c-449f-fa73-510054673707'
+
+    note.assigned_user_id = system_pipe_line_user
+
+    note.parent_type = 'Lead'
+    note.parent_id = id
+
+    note.date_entered = Time.now
+    note.date_modified = Time.now
+    note.date_modified = Time.now
+    note.created_by = system_pipe_line_user
+
+    note.name = message
+    note.description = description
+
+    note.save
+  end
 end
