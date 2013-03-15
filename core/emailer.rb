@@ -34,12 +34,37 @@ class ApiEmailer
     email 'google-local-listing-verification-reminder', email, {:customerId => customerId}
   end
 
-  def email(api, email, more = nil)
-    apiCallParams = {:email => email}
-    if not more.nil?
-      apiCallParams = apiCallParams.merge(more)
+  def local_listing_system_message(subject, message)
+
+    mail = Mail.new do
+      from 'service@centracorporation.com'
+      to @config['LocalListingEmail']
+      subject subject
+      body message
     end
 
-    RestClient.get "#{@config["CentraAppsApiBaseUrl"]}/email/#{api}", {:params => apiCallParams}
+    deliver_local_emails mail
+
   end
+
+  def deliver_local_emails(mail)
+    mail.delivery_method :smtp, {:address => @config['Host'],
+                                 :port => 25,
+                                 :user_name => @config['Username'],
+                                 :password => @config['Password'],
+                                 :authentication => 'plain'}
+
+    mail.deliver
+  end
+
+  def email(api, email, more = nil)
+    api_call_params = {:email => email}
+
+    unless more.nil?
+      api_call_params = api_call_params.merge(more)
+    end
+
+    RestClient.get "#{@config["CentraAppsApiBaseUrl"]}/email/#{api}", {:params => api_call_params}
+  end
+
 end

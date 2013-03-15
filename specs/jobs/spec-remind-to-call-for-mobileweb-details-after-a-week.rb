@@ -16,8 +16,6 @@ class Tests < JobsTestBase
 
     load_job 'remind-to-call-for-mobileweb-details-after-a-week'
 
-    result = lead.reload
-
-    assert result.custom_data.mobileweb_info_req_sent_c > 5.minutes.ago
+    assert_note_added lead.id, "Call for mobile web details reminder sent"
   end
 end

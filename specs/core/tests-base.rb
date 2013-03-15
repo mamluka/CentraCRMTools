@@ -53,6 +53,10 @@ class TestsBase < MiniTest::Unit::TestCase
 
   end
 
+  def assert_note_added(id, message)
+    assert Note.where("parent_id =? and name like '%#{message}%'", id).any?
+  end
+
   def clean_databases
     ActiveRecord::Base.connection.execute("DELETE FROM leads;")
     ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
