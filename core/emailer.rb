@@ -3,7 +3,7 @@ require 'rest_client'
 class ApiEmailer
 
   def initialize
-    @config = JSON.parse(File.read(Fir.dirname(__FILE__) + "/config.json"))
+    @config = JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
   end
 
   def first_system_pipeline(email, previewUrl)
