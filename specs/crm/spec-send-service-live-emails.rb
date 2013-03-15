@@ -13,6 +13,7 @@ class TestMini < CrmTestBase
         :mobileweb_check_c => 'check',
         :mobileweb_live_c => 'check',
         :email => "email crmtesting@centracorporation.com",
+        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_email_contains 'Your mobile website is now live and available for you to check out'
@@ -25,8 +26,24 @@ class TestMini < CrmTestBase
         :googlelocal_check_c => 'check',
         :googlelocal_live_c => 'check',
         :email => "email crmtesting@centracorporation.com",
+        :googlelocal_contract_type_c => 'select Centra 99'
     }
 
     assert_email_contains 'Google has indexed your listing and is now live at its most basic level'
+  end
+
+  def test_when_local_listing_is_live_save_who_did_it_and_when
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :googlelocal_check_c => 'check',
+        :googlelocal_live_c => 'check',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    assert_equal lead.get('googlelocal_live_assign_name_c'), 'David MZ'
+    assert_equal lead.get('googlelocal_live_assign_date_c'), today_crm_date
+
   end
 end
