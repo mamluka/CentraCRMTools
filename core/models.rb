@@ -90,7 +90,7 @@ class Note < ActiveRecord::Base
 
     note.assigned_user_id = system_pipe_line_user
 
-    note.parent_type = 'Lead'
+    note.parent_type = 'Leads'
     note.parent_id = id
 
     note.date_entered = Time.now
