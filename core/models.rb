@@ -82,6 +82,11 @@ class EmailRelation < ActiveRecord::Base
 end
 
 class Note < ActiveRecord::Base
+
+  def before_create()
+    self.id = SecureRandom.uuid
+  end
+
   def self.add(id, message, description)
 
     note = Note.new
