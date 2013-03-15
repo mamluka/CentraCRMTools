@@ -1,9 +1,9 @@
 require_relative "lib/jobs-base"
 
-class ResendMobileWebCustomerDataRequestJpb < JobsBase
+class ResendMobileWebCustomerDataRequestJob < JobsBase
 
   def execute
-    leads = CustomData.where('mobileweb_info_req_sent_c < ? and host_login_c is null and mobileweb_check_c = 1', 3.days.ago).select { |x| !x.do_not_email }.map { |x| x.lead }.select { |x| x.status =="client" && x.emails.any? }
+    leads = CustomData.where('host_login_c is null and mobileweb_check_c = 1').select { |x| !x.do_not_email }.map { |x| x.lead }.select { |x| x.status =="client" && x.emails.any? }
     logger.info "Found #{leads.length.to_s} mobile web clients that did not enter their data"
 
     leads.each do |lead|
@@ -26,5 +26,5 @@ class ResendMobileWebCustomerDataRequestJpb < JobsBase
   end
 end
 
-job = ResendMobileWebCustomerDataRequestJpb.new
+job = ResendMobileWebCustomerDataRequestJob.new
 job.execute

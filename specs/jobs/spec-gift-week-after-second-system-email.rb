@@ -3,6 +3,8 @@ require_relative "base/jobs-base.rb"
 class Tests < JobsTestBase
   def test_week_after_second_system_email_send_out_gift_email
 
+    skip()
+
     lead = lead_with do |lead|
       lead.status = 'SP'
     end
