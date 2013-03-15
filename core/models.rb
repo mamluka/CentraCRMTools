@@ -83,16 +83,13 @@ end
 
 class Note < ActiveRecord::Base
 
-  def before_create()
-    self.id = SecureRandom.uuid
-  end
-
   def self.add(id, message, description)
 
     note = Note.new
 
     system_pipe_line_user = '92b0bdb7-bb6c-449f-fa73-510054673707'
 
+    note.id = SecureRandom.uuid
     note.assigned_user_id = system_pipe_line_user
 
     note.parent_type = 'Leads'
