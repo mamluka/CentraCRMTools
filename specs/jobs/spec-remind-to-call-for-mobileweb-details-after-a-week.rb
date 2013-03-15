@@ -1,6 +1,4 @@
-current_dir = File.dirname(__FILE__)
-
-require current_dir + "/base/jobs-base.rb"
+require_relative "base/jobs-base.rb"
 
 class Tests < JobsTestBase
   def test_when_3_days_passed_after_request_info_and_no_mobileweb_info_should_update_sending_date
