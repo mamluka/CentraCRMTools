@@ -83,7 +83,7 @@ end
 
 class Note < ActiveRecord::Base
 
-  def self.add(id, message, description)
+  def self.add(id, message, description = "")
 
     note = Note.new
 

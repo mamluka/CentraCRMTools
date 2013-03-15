@@ -16,6 +16,6 @@ class Tests < JobsTestBase
 
     load_job 'remind-to-call-for-mobileweb-details-after-a-week'
 
-    assert_note_added lead.id, "Call for mobile web details reminder sent"
+    assert_note_added lead.id, "A reminder was send to call collect hosting provider details, because they are still missing after a week"
   end
 end

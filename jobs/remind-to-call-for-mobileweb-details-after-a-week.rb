@@ -19,6 +19,8 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
 
       mailer.local_listing_system_message "#{lead.name} still did not fill in his provider details for mobile web", message
 
+      Note.add lead.id, "A reminder was send to call collect hosting provider details, because they are still missing after a week"
+
       sleep 5
     end
 
