@@ -50,10 +50,10 @@ class ApiEmailer
   end
 
   def deliver_local_emails(mail)
-    mail.delivery_method :smtp, {:address => @config['Host'],
+    mail.delivery_method :smtp, {:address => @config['host'],
                                  :port => 25,
-                                 :user_name => @config['Username'],
-                                 :password => @config['Password'],
+                                 :user_name => @config['username'],
+                                 :password => @config['password'],
                                  :authentication => 'plain'}
 
     mail.deliver

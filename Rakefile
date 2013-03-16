@@ -18,7 +18,7 @@ task :config do
   #database
 
   database = Hash.new
-  puts "Enter sugarcrm database hosts"
+  puts "Enter sugarcrm database hosts #{reload_config[:database, 'host']}"
   database['host'] = STDIN.gets.strip
 
   puts "Enter sugarcrm database username"
@@ -69,21 +69,28 @@ task :config do
   puts "Enter local listing dedicated email address"
   crm['localListingEmail'] = STDIN.gets.strip
 
-  File.open('core/config.json', 'w') { |file| file.write(JSON.generate(email.merge(crm))) }
-  File.open('core/database.json', 'w') { |file| file.write(JSON.generate(database)) }
+  File.open('core/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
+  File.open('core/database.json', 'w') { |file| file.write(JSON.pretty_generate(database)) }
 
-  File.open('api/echosign/echosign.json', 'w') { |file| file.write(JSON.generate(echosign)) }
+  File.open('api/echosign/echosign.json', 'w') { |file| file.write(JSON.pretty_generate(echosign)) }
 
   File.open('config-history.json', 'w') do |file|
-    file.write(JSON.generate({
-                                 :crm => crm,
-                                 :echosign => echosign,
-                                 :database => database,
-                                 :email => email
-                             }))
+    file.write(JSON.pretty_generate({
+                                        :crm => crm,
+                                        :echosign => echosign,
+                                        :database => database,
+                                        :email => email
+                                    }))
   end
 
+end
 
+def reload_config(hash_name, key)
+  if File.exists?('config-history.json')
+    return JSON.parse(File.read('config-history.json'))[hash_name.to_s][key]
+  end
+
+  "Not set yet!"
 end
 
 namespace :crm do
