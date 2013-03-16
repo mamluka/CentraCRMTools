@@ -7,9 +7,6 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
     logger.info "Found #{leads.length.to_s} mobile web clients that did not enter their data for a whole week"
 
     leads.each do |lead|
-      email = lead.email
-      logger.info "#{lead.name} will get an email to #{email}"
-
       message = <<-EOS
       Dear jordan #{lead.name} still did not fill in his details,
 
