@@ -36,7 +36,7 @@ class ApiEmailer
 
   def local_listing_system_message(subject, message)
 
-    to = @config['LocalListingEmail']
+    to = @config['localListingEmail']
 
     mail = Mail.new do
       from 'service@centracorporation.com'
@@ -66,7 +66,7 @@ class ApiEmailer
       api_call_params = api_call_params.merge(more)
     end
 
-    RestClient.get "#{@config["CentraAppsApiBaseUrl"]}/email/#{api}", {:params => api_call_params}
+    RestClient.get "#{@config["centraAppsApiBaseUrl"]}/email/#{api}", {:params => api_call_params}
   end
 
 end

@@ -9,7 +9,7 @@ class EchoSignApi < Grape::API
 
   helpers do
     def get_config
-      JSON.parse(File.read(File.dirname(__FILE__) + "/config.json"))
+      JSON.parse(File.read(File.dirname(__FILE__) + "/echosign.json"))
     end
   end
 
