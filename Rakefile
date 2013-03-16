@@ -1,4 +1,5 @@
 require 'rake/testtask'
+require 'io/console'
 
 Rake::TestTask.new("test:crm") do |t|
   t.pattern = "specs/crm/spec-*.rb"
