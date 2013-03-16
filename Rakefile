@@ -18,49 +18,34 @@ task :config do
   #database
 
   database = Hash.new
-  database['host'] = config_unit "Enter sugarcrm database hosts", "host", :database
-  database['username'] = config_unit "Enter sugarcrm database username", "username", :database
-  database['password'] = config_unit "Enter sugarcrm database password", "password", :database
-  database['database'] = config_unit "Enter sugarcrm database name", "database", :database
+  database['host'] = read_config_value "Enter sugarcrm database hosts", "host", :database
+  database['username'] = read_config_value "Enter sugarcrm database username", "username", :database
+  database['password'] = read_config_value "Enter sugarcrm database password", "password", :database
+  database['database'] = read_config_value "Enter sugarcrm database name", "database", :database
 
   #echosign
 
   echosign = Hash.new
 
-  puts "Enter echosign API key"
-  echosign['apiKey'] = STDIN.gets.strip
-
-  puts "Enter echosign username"
-  echosign['username'] = STDIN.gets.strip
-
-  puts "Enter echosign password"
-  echosign['password'] = STDIN.gets.strip
-
-  puts "Enter echosign callback url"
-  echosign['callbackUrl'] = STDIN.gets.strip
+  echosign['apiKey'] = read_config_value "Enter echosign API key", "apiKey", :echosign
+  echosign['username'] = Sconfig_unit "Enter echosign username", "username", :echosign
+  echosign['password'] = read_config_value "Enter echosign password", "password", :echosign
+  echosign['callbackUrl'] = read_config_value "Enter echosign callback url", "callbackUrl", :echosign
 
   #email
 
   email = Hash.new
 
-  puts "Enter service email login"
-  email['username'] = STDIN.gets.strip
-
-  puts "Enter service email password"
-  email['password'] = STDIN.gets.strip
-
-  puts "Enter service email host"
-  email['host'] = STDIN.gets.strip
+  email['username'] = read_config_value "Enter service email login", "username", :email
+  email['password'] = read_config_value "Enter service email password", "password", :email
+  email['host'] =read_config_value "Enter service email host", "host", :email
 
   #crm
 
   crm = Hash.new
 
-  puts "Enter Centra apps base API url"
-  crm['centraAppsApiBaseUrl'] = STDIN.gets.strip
-
-  puts "Enter local listing dedicated email address"
-  crm['localListingEmail'] = STDIN.gets.strip
+  crm['centraAppsApiBaseUrl'] =read_config_value "Enter Centra apps base API url", "centraAppsApiBaseUrl", :crm
+  crm['localListingEmail'] = read_config_value "Enter local listing dedicated email address", "localListingEmail", :crm
 
   File.open('core/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
   File.open('core/database.json', 'w') { |file| file.write(JSON.pretty_generate(database)) }
@@ -78,8 +63,8 @@ task :config do
 
 end
 
-def config_unit(text, key, section)
-  saved_value = reload_config(section, key)
+def read_config_value(text, key, section)
+  saved_value = reload_config_from_history(section, key)
 
   puts "#{text} [#{saved_value}]"
   tmp = STDIN.gets.strip
@@ -90,7 +75,7 @@ def config_unit(text, key, section)
 end
 
 
-def reload_config(hash_name, key)
+def reload_config_from_history(hash_name, key)
   if File.exists?('config-history.json')
     return JSON.parse(File.read('config-history.json'))[hash_name.to_s][key]
   end
