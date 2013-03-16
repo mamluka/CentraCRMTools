@@ -6,7 +6,7 @@ require_relative "../core/crm-database"
 class CrmNotingApi2 < Grape::API
 
   resource :crmtools do
-    get :one do
+    get :two do
       "yeah sexy"
     end
   end
