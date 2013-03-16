@@ -36,6 +36,8 @@ class ApiEmailer
 
   def local_listing_system_message(subject, message)
 
+    puts @config
+
     mail = Mail.new do
       from 'service@centracorporation.com'
       to @config['LocalListingEmail']
