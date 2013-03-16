@@ -18,17 +18,10 @@ task :config do
   #database
 
   database = Hash.new
-  puts "Enter sugarcrm database hosts #{reload_config(:database, 'host')}"
-  database['host'] = STDIN.gets.strip
-
-  puts "Enter sugarcrm database username"
-  database['username'] = STDIN.gets.strip
-
-  puts "Enter sugarcrm database password"
-  database['password'] = STDIN.gets.strip
-
-  puts "Enter sugarcrm database name"
-  database['database'] = STDIN.gets.strip
+  database['host'] = config_unit "Enter sugarcrm database hosts", "host", :database
+  database['username'] = config_unit "Enter sugarcrm database username", "username", :database
+  database['password'] = config_unit "Enter sugarcrm database password", "password", :database
+  database['database'] = config_unit "Enter sugarcrm database name", "database", :database
 
   #echosign
 
@@ -84,6 +77,18 @@ task :config do
   end
 
 end
+
+def config_unit(text, key, section)
+  saved_value = reload_config(section, key)
+
+  puts "#{text} [#{saved_value}]"
+  tmp = STDIN.gets.strip
+  using_value = !tmp.empty? ? tmp : saved_value
+  puts "using => #{using_value}"
+
+  using_value
+end
+
 
 def reload_config(hash_name, key)
   if File.exists?('config-history.json')
