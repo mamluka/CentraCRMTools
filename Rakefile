@@ -18,7 +18,7 @@ task :config do
   #database
 
   database = Hash.new
-  puts "Enter sugarcrm database hosts #{reload_config[:database, 'host']}"
+  puts "Enter sugarcrm database hosts #{reload_config(:database, 'host')}"
   database['host'] = STDIN.gets.strip
 
   puts "Enter sugarcrm database username"
