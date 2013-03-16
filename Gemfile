@@ -1,0 +1,1 @@
+gem "rack-stack", :git => "https://github.com/remi/rack-stack.git"
