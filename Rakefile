@@ -17,55 +17,55 @@ task :config do
 
   database = Hash.new
   puts "Enter sugarcrm database hosts"
-  database['host'] = gets.chomp
+  database['host'] = $stdin.read
 
   puts "Enter sugarcrm database username"
-  database['username'] = gets.chomp
+  database['username'] = $stdin.read
 
   puts "Enter sugarcrm database password"
-  database['password'] = gets.chomp
+  database['password'] = $stdin.read
 
   puts "Enter sugarcrm database name"
-  database['database'] = gets.chomp
+  database['database'] = $stdin.read
 
   #echosign
 
   echosign = Hash.new
 
   puts "Enter echosign API key"
-  echosign['apiKey'] = gets.chomp
+  echosign['apiKey'] = $stdin.read
 
   puts "Enter echosign username"
-  echosign['username'] = gets.chomp
+  echosign['username'] = $stdin.read
 
   puts "Enter echosign password"
-  echosign['password'] = gets.chomp
+  echosign['password'] = $stdin.read
 
   puts "Enter echosign callback url"
-  echosign['callbackUrl'] = gets.chomp
+  echosign['callbackUrl'] = $stdin.read
 
   #email
 
   email = Hash.new
 
   puts "Enter service email login"
-  email['username'] = gets.chomp
+  email['username'] = $stdin.read
 
   puts "Enter service email password"
-  email['password'] = gets.chomp
+  email['password'] = $stdin.read
 
   puts "Enter service email host"
-  email['host'] = gets.chomp
+  email['host'] = $stdin.read
 
   #crm
 
   crm = Hash.new
 
   puts "Enter Centra apps base API url"
-  crm['centraAppsApiBaseUrl'] = gets.chomp
+  crm['centraAppsApiBaseUrl'] = $stdin.read
 
   puts "Enter local listing dedicated email address"
-  crm['localListingEmail'] = gets.chomp
+  crm['localListingEmail'] = $stdin.read
 
   File.open('core/config.json', 'w') { |file| file.write(JSON.generate(email.merge(crm))) }
   File.open('core/database.json', 'w') { |file| file.write(JSON.generate(database)) }
