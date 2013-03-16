@@ -12,7 +12,7 @@ class EchoSign
     @client = Savon.client do
       wsdl "https://centra.echosign.com/services/EchoSignDocumentService15?wsdl"
       ssl_verify_mode :none
-      log false
+      log true
     end
   end
 
