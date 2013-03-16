@@ -15,6 +15,8 @@ class SecondSystemPipelineEmailJob < JobsBase
       if res=="OK"
         lead.custom_data.system_pipeline_email_2_c = Time.now
         lead.save
+
+        Note.add lead.id, "Second system pipeline was sent 7 days after the first system pipeline"
       else
         logger.info "Api returned an error " + res
       end

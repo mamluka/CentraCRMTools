@@ -14,6 +14,8 @@ class MoveDoNotEmailToDeadStatusJob < JobsBase
       logger.info "Moved #{lead.name} to dead status"
 
       lead.save
+
+      Note.add lead.id, "Moved to dead because lead has no email"
     end
 
     logger.info "#{leads.length.to_s} moved to dead status"

@@ -39,6 +39,22 @@ class Tests < JobsTestBase
 
   end
 
+  def test_when_3_days_passed_after_request_info_and_no_mobileweb_info_should_add_note
+
+    lead = lead_with do |lead|
+      lead.status = 'client'
+    end
+
+    lead.add_custom_data do |data|
+      data.mobileweb_info_req_sent_c = 4.days.ago
+      data.mobileweb_check_c = true
+    end
+
+    load_job 'reoccuring-mobile-web-information-request-email'
+
+    assert_note_added lead.id, "Sent a mobile web hosting provider details request"
+  end
+
   def test_when_mobile_web_is_not_sold_should_do_nothing
 
     lead = lead_with do |lead|

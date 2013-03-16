@@ -15,6 +15,8 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
       if res=="OK"
         lead.custom_data.mobileweb_info_req_sent_c = Time.now
         lead.save
+
+        Note.add lead.id, "Sent a mobile web hosting provider details request"
       else
         logger.info "Api returned error response: " + res
       end

@@ -14,6 +14,8 @@ class ReminderToFillInGoogleLocalListingCode < JobsBase
 
       if res=="OK"
         sleep 5
+
+        Note.add lead.id, "Sent a reminder to enter PIN from google"
       else
         logger.info "Api returned error response: " + res
       end

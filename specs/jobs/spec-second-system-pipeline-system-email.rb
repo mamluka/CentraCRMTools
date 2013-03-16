@@ -39,4 +39,22 @@ class Tests < JobsTestBase
     assert_email_contains 'Centra Small Business is built around the idea of absorbing the stresses'
     assert_email_contains 'http://prevurl'
   end
+
+  def test_when_7_days_passed_after_first_system_email_should_add_note
+
+    lead = lead_with do |lead|
+      lead.status = 'SP'
+      lead.assigned_user_id = system_pipeline_user_id
+    end
+
+    lead.add_custom_data do |data|
+      data.system_pipeline_email_1_c = 10.days.ago
+      data.prev_url_c = "http://prevurl"
+    end
+
+    load_job 'second-system-pipeline-system-email'
+
+    assert_note_added lead.id, "Second system pipeline was sent 7 days after the first system pipeline"
+
+  end
 end

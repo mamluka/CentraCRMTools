@@ -11,6 +11,8 @@ class MoveDeadLeadsToSystemPipelineJob < JobsBase
 
       logger.info "Moved #{lead.name} to system pipeline"
       lead.save
+
+      Note.add lead.id, "Moved to system pipeline because the lead is dead"
     end
 
     logger.info "#{leads.length.to_s} dead leads moved to system  pipeline"
