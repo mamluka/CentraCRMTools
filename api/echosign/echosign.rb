@@ -6,7 +6,7 @@ class EchoSign
 
   def initialize
     config = JSON.parse File.read(File.dirname(__FILE__) + "/echosign.json")
-    @api_key = config['apikey']
+    @api_key = config['apiKey']
 
 
     @client = Savon.client do
