@@ -11,16 +11,22 @@ class EchoSignApi < Grape::API
     def get_config
       JSON.parse(File.read(File.dirname(__FILE__) + "/echosign.json"))
     end
+
+    def get_documents
+      JSON.parse(File.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
+    end
   end
 
   get :send do
     begin
       config = get_config
+      documents = get_documents
+
       echosign = EchoSign.new
 
       contract_id = params[:contractId]
 
-      document_title = config['documents'].select { |doc| doc['id'] == contract_id }.first['title']
+      document_title = documents.select { |doc| doc['id'] == contract_id }.first['title']
 
       echosign.send params[:email], contract_id, config['callbackUrl'], document_title
     rescue => exception
