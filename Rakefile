@@ -17,7 +17,7 @@ namespace :crm do
   desc "Start services that support crm testing"
   task :testing do
     puts "Stating Apis..."
-    `thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R api/config.ru start`
+    puts `thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R api/config.ru start`
   end
 
   task :stop_testing do

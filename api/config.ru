@@ -1,6 +1,6 @@
 require 'rack'
 
-require File.expand_path("../crm2excel/crm2excel.rb", __FILE__)
+require File.expand_path("../crm2excel/crm2excel-api.rb", __FILE__)
 require File.expand_path("../crmnoting/crm-noting-api.rb", __FILE__)
 require File.expand_path("../echosign/echosign-api.rb", __FILE__)
 
