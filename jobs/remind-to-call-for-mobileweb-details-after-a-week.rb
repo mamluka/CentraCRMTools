@@ -8,10 +8,10 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
 
     leads.each do |lead|
       message = <<-EOS
-      Dear jordan #{lead.name} still did not fill in his details,
+Dear jordan #{lead.name} still did not fill in his details,
 
-      You need to call him to his #{lead.phone_work} and ask for the details
-      Here is a link to the crm http://crm.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{lead.id}
+You need to call him to his #{lead.phone_work} and ask for the details
+Here is a link to the crm http://crm.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{lead.id}
       EOS
 
       mailer.local_listing_system_message "#{lead.name} still did not fill in his provider details for mobile web", message
