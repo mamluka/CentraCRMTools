@@ -36,11 +36,11 @@ class ApiEmailer
 
   def local_listing_system_message(subject, message)
 
-    puts @config
+    to = @config['LocalListingEmail']
 
     mail = Mail.new do
       from 'service@centracorporation.com'
-      to @config['LocalListingEmail']
+      to to
       subject subject
       body message
     end
