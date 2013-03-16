@@ -16,6 +16,8 @@ class CancellationEmailJob < JobsBase
         lead.custom_data.cancellation_email_sent_c = Time.now
         lead.save
 
+        Note.add lead.id, "Cancellation email was sent 3 days after status was set to cancelled"
+
         sleep 5
       else
         logger.info "Api returned error response: " + res

@@ -19,6 +19,8 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
       if res == "OK"
         lead.custom_data.system_pipeline_email_1_c = Time.now
         lead.save
+
+        Note.add lead.id, "System pipeline email #1 was sent a week after a lead moved to System pipeline user"
       else
         logger.info "Api response was: " + res
       end

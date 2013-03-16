@@ -16,7 +16,7 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def teardown
-    #@email_client.clear_inbox
+    @email_client.clear_inbox
 
     stop_echosign
   end

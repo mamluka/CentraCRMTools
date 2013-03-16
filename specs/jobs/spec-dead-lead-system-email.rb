@@ -39,6 +39,22 @@ class Tests < JobsTestBase
 
   end
 
+  def test_when_7_days_passed_from_dead_status_set_should_add_note
+
+    lead = lead_with do |lead|
+      lead.status = 'Dead'
+      lead.assigned_user_id = system_pipeline_user_id
+    end
+
+    lead.add_custom_data do |data|
+      data.dead_status_assigned_date_c = 10.days.ago
+    end
+
+    load_job 'dead-lead-system-email'
+
+    assert_note_added lead.id, "Dead email was sent 7 days after dead status was assigned"
+  end
+
   def test_when_4_days_passed_from_dead_status_set_should_not_send_email
 
     lead = lead_with do |lead|

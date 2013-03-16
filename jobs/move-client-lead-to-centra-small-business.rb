@@ -11,6 +11,8 @@ class MoveCancelledLeadsToSystemPipelineJob < JobsBase
       logger.info "Moved #{lead.name } to centra small business user"
 
       lead.save
+
+      Note.add lead.id, "Moved to system pipeline because lead became a client"
     end
 
     logger.info "#{leads.length.to_s} clients moved to centra small business"

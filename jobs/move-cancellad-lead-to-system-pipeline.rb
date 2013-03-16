@@ -11,6 +11,8 @@ class MoveCancelledLeadsToSystemPipelineJob < JobsBase
       lead.custom_data.cancellation_change_date_c = Time.now
 
       lead.save
+
+      Note.add lead.id, "Moved to System pipeline because was cancelled"
     end
 
     logger.info "#{leads.length.to_s} cancelled leads moved to system  pipeline"

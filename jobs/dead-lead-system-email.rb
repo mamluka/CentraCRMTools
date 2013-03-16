@@ -15,6 +15,8 @@ class DeadEmailJob < JobsBase
       if res=="OK"
         lead.custom_data.dead_client_email_sent_c = Time.now
         lead.save
+
+        Note.add lead.id, "Dead email was sent 7 days after dead status was assigned"
       else
         logger.info "Api returned error response: " + res
       end

@@ -57,4 +57,21 @@ class Tests < JobsTestBase
     assert_email_contains 'This past week we attempted to deliver and host your mobile website.'
     assert_email_contains 'http://david.com'
   end
+
+  def test_when_user_has_mobile_preview_url_and_7_days_passed_should_add_note
+
+    lead = lead_with do |lead|
+      lead.date_entered = 8.days.ago
+      lead.status = 'FU'
+    end
+
+    lead.add_custom_data do |data|
+      data.prev_url_c = 'http://david.com'
+    end
+
+    load_job 'move-assigned-leads-to-system-pipeline'
+
+    assert_note_added lead.id, "System pipeline email #1 was sent a week after a lead moved to System pipeline user"
+
+  end
 end
