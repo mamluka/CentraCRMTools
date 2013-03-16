@@ -1,5 +1,5 @@
 require 'date'
-require_relative "../core/crm-database"
+require_relative "../../core/crm-database"
 
 class SafeCsvHash
 

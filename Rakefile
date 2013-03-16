@@ -16,18 +16,12 @@ namespace :crm do
 
   desc "Start services that support crm testing"
   task :testing do
-    puts "Stating echosign..."
-    `thin -d -a soa.centracorporation.com -p 9050 -P echosign.pid -R echosign/config.ru start`
-
-    puts "Stating noting service..."
-    `thin -d -a soa.centracorporation.com -p 9060 -P crmnoting.pid -R crm-noting/config.ru start`
+    puts "Stating Apis..."
+    `thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R api/config.ru start`
   end
 
   task :stop_testing do
-    puts "Stop echosign..."
-    `thin -P echosign.pid stop`
-
-    puts "Stop noting service..."
-    `thin -P crmnoting.pid stop`
+    puts "Stop Apis..."
+    `thin -P api.pid stop`
   end
 end

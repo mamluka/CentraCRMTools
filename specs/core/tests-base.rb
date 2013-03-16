@@ -12,13 +12,13 @@ class TestsBase < MiniTest::Unit::TestCase
     @email_client = EmailClient.new
     @email_client.clear_inbox
 
-    start_echosign
+    start_api
   end
 
   def teardown
     @email_client.clear_inbox
 
-    stop_echosign
+    stop_api
   end
 
   def today_mysql_time
@@ -69,11 +69,11 @@ class TestsBase < MiniTest::Unit::TestCase
     crm_database.connect
   end
 
-  def start_echosign
-    `screen -L -dmS echosign  rackup -p 9050 #{File.dirname(__FILE__)}/../../echosign/config.ru`
+  def start_api
+    `screen -L -dmS echosign thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R #{File.dirname(__FILE__)}/../../echosign/config.ru start`
   end
 
-  def stop_echosign
+  def stop_api
     `pkill -f 9050`
   end
 

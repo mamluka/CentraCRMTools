@@ -1,4 +1,4 @@
-require_relative "../../core/tests-base.rb"
+require_relative "../../core/tests-base"
 require_relative "../../../echosign/echosign"
 
 require 'watir-webdriver'
