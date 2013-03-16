@@ -28,7 +28,7 @@ task :config do
   echosign = Hash.new
 
   echosign['apiKey'] = read_config_value "Enter echosign API key", "apiKey", :echosign
-  echosign['username'] = Sconfig_unit "Enter echosign username", "username", :echosign
+  echosign['username'] = read_config_value "Enter echosign username", "username", :echosign
   echosign['password'] = read_config_value "Enter echosign password", "password", :echosign
   echosign['callbackUrl'] = read_config_value "Enter echosign callback url", "callbackUrl", :echosign
 
