@@ -27,6 +27,10 @@ class EchoSignTestsBase < TestsBase
     echosign = EchoSign.new
     documents = echosign.get_documents
 
+    if documents == nil
+      return
+    end
+
     keys = documents.select { |doc| doc[:name] == name }.map { |doc| doc[:document_key] }
 
     keys.each do |key|

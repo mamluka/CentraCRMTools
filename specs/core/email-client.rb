@@ -23,6 +23,10 @@ class EmailClient
 
     mail = get_first_mail
 
+    if mail == nil
+      return ""
+    end
+
     if mail.multipart?
       mail.part[0].body
     else
@@ -32,6 +36,11 @@ class EmailClient
 
   def get_first_email_subject
     mail = get_first_mail
+
+    if mail == nil
+      return ""
+    end
+
     mail.subject
   end
 
@@ -39,7 +48,7 @@ class EmailClient
     number_of_emails = wait_for_emails
 
     if number_of_emails == 0
-      return ""
+      return nil
     end
 
     Mail.all.first
