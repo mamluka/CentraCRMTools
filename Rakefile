@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require 'io/console'
+require 'json'
 
 Rake::TestTask.new("test:crm") do |t|
   t.pattern = "specs/crm/spec-*.rb"
@@ -18,55 +19,55 @@ task :config do
 
   database = Hash.new
   puts "Enter sugarcrm database hosts"
-  database['host'] = STDIN.getch
+  database['host'] = STDIN.gets.strip
 
   puts "Enter sugarcrm database username"
-  database['username'] = STDIN.getch
+  database['username'] = STDIN.gets.strip
 
   puts "Enter sugarcrm database password"
-  database['password'] = STDIN.getch
+  database['password'] = STDIN.gets.strip
 
   puts "Enter sugarcrm database name"
-  database['database'] = STDIN.getch
+  database['database'] = STDIN.gets.strip
 
   #echosign
 
   echosign = Hash.new
 
   puts "Enter echosign API key"
-  echosign['apiKey'] = STDIN.getch
+  echosign['apiKey'] = STDIN.gets.strip
 
   puts "Enter echosign username"
-  echosign['username'] = STDIN.getch
+  echosign['username'] = STDIN.gets.strip
 
   puts "Enter echosign password"
-  echosign['password'] = STDIN.getch
+  echosign['password'] = STDIN.gets.strip
 
   puts "Enter echosign callback url"
-  echosign['callbackUrl'] = STDIN.getch
+  echosign['callbackUrl'] = STDIN.gets.strip
 
   #email
 
   email = Hash.new
 
   puts "Enter service email login"
-  email['username'] = STDIN.getch
+  email['username'] = STDIN.gets.strip
 
   puts "Enter service email password"
-  email['password'] = STDIN.getch
+  email['password'] = STDIN.gets.strip
 
   puts "Enter service email host"
-  email['host'] = STDIN.getch
+  email['host'] = STDIN.gets.strip
 
   #crm
 
   crm = Hash.new
 
   puts "Enter Centra apps base API url"
-  crm['centraAppsApiBaseUrl'] = STDIN.getch
+  crm['centraAppsApiBaseUrl'] = STDIN.gets.strip
 
   puts "Enter local listing dedicated email address"
-  crm['localListingEmail'] = STDIN.getch
+  crm['localListingEmail'] = STDIN.gets.strip
 
   File.open('core/config.json', 'w') { |file| file.write(JSON.generate(email.merge(crm))) }
   File.open('core/database.json', 'w') { |file| file.write(JSON.generate(database)) }
