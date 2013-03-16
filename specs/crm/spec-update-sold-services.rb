@@ -61,7 +61,7 @@ class TestMini < CrmTestBase
         :status => 'select Client',
         :googlelocal_check_c => 'check',
         :email => "email #{email}",
-        :mobileweb_contract_type_c => 'select Centra 24'
+        :googlelocal_contract_type_c => 'select Centra 99'
     }
 
     assert_equal lead.get('googlelocal_sale_date_c'), today_crm_date
@@ -75,7 +75,6 @@ class TestMini < CrmTestBase
         :status => 'select Client',
         :merch_check_c => 'check',
         :email => "email #{email}",
-        :mobileweb_contract_type_c => 'select Centra 24'
     }
 
     assert_equal lead.get('marchent_sale_date_c'), today_crm_date
