@@ -30,7 +30,7 @@ class TestMini < CrmTestBase
         :email => "email crmtesting@centracorporation.com",
     }
 
-    assert_note_added lead.id, "Google local listing pin was entered at " + today_crm_date
+    assert_note_added lead.id, "Google local listing pin was entered"
   end
 
   def test_when_verify_is_checked_shoould_update_verified_date
@@ -40,7 +40,7 @@ class TestMini < CrmTestBase
         :googlelocal_check_c => 'check',
         :googlelocal_verified_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99',
-        :email => "email crmtesting@centracorporation.com"
+        :email => " email crmtesting @centracorporation.com "
     }
 
     assert_equal lead.get('googlelocal_verified_date_c'), today_crm_date

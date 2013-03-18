@@ -21,6 +21,10 @@ class TestsBase < MiniTest::Unit::TestCase
     stop_api
   end
 
+  def capture_failed_snapshot(driver)
+    driver.screenshot.save @__name__ + '.png'
+  end
+
   def today_mysql_time
     Time.now.strftime('%Y-%m-%d %H:%M')
   end

@@ -22,6 +22,8 @@ class EchoSignTestsBase < TestsBase
     clean_echosign_documents "Mobile Web"
     clean_echosign_documents "Centra Gift"
 
+    capture_failed_snapshot @sriver
+
     @driver.close
   end
 

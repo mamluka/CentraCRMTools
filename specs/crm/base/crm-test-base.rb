@@ -19,8 +19,9 @@ class CrmTestBase < TestsBase
 
   def teardown
     super
+    capture_failed_snapshot @driver
+
     @auth.logout
     @driver.close
-
   end
 end
