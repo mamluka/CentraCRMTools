@@ -30,5 +30,6 @@ class CrmTestBase < TestsBase
 
     @auth.logout
     @driver.close
+    headless.destroy
   end
 end
