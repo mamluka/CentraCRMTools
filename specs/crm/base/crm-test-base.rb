@@ -16,7 +16,7 @@ class CrmTestBase < TestsBase
     headless = Headless.new
     headless.start
 
-    @driver = Watir::Browser.start
+    @driver = Watir::Browser.start 'crmtesting.centracorporation.com'
     @auth = Auth.new @driver
     @auth.login
 
