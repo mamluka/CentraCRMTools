@@ -21,6 +21,8 @@ class EchoSignTestsBase < TestsBase
     clean_echosign_documents "Mobile Web Presence Discount"
     clean_echosign_documents "Mobile Web"
     clean_echosign_documents "Centra Gift"
+
+    @driver.close
   end
 
   def clean_echosign_documents(name)

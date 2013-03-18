@@ -20,6 +20,19 @@ class TestMini < CrmTestBase
     assert_email_contains 'http://centracorporation.com/google-local-listing-code#!' + lead.id
   end
 
+  def test_when_verify_is_checked_shoould_add_note
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :googlelocal_check_c => 'check',
+        :googlelocal_verified_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99',
+        :email => "email crmtesting@centracorporation.com",
+    }
+
+    assert_note_added lead.id, "Google local listing pin was entered at " + today_crm_date
+  end
+
   def test_when_verify_is_checked_shoould_update_verified_date
 
     lead = CrmLead.new @driver, {

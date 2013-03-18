@@ -31,6 +31,17 @@ class TestMini < CrmTestBase
 
   end
 
+  def test_when_has_preview_url_should_add_note
+
+    lead = CrmLead.new @driver,
+                       {:prev_url_c => 'http://preview.flowmobileapps.com/compare/testing',
+                        :email => "email crmtesting@centracorporation.com"
+                       }
+
+    assert_note_added lead.id, "Site preview was sent to crmtesting@centracorporation.com"
+
+  end
+
   def test_when_has_no_preview_url_should_not_send_preview_email
     email = "#{SecureRandom.uuid}@david.com"
 
