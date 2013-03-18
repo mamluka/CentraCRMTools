@@ -18,10 +18,7 @@ class CrmLead
     set_values(values)
 
     @driver.button(:value => 'Save').click
-
-    if @driver.button(:value => '  Save  ').exists?
-      @driver.button(:value => '  Save  ').click
-    end
+    @driver.button(:value => 'Save').wait_while_present
 
     url_match = @driver.url.match(/record=(.+?)&/)
 
