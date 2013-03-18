@@ -19,7 +19,7 @@ class CrmLead
 
     @driver.button(:value => 'Save').click
 
-    @driver.button(:id => '#edit_button').wait_until_present
+    @driver.button(:id => 'edit_button').wait_until_present
 
     url_match = @driver.url.match(/record=(.+?)&/)
 
