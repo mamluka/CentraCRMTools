@@ -17,11 +17,10 @@ class CrmLead
     @driver.link(:text => 'Create').click
     set_values(values)
 
-    #@driver.button(:value => 'Save').click
+    @driver.button(:value => 'Save').click
 
-    @driver.execute_script("$('input[value=Save]').click()")
-
-    @driver.a(:id => 'edit_button').wait_until_present
+    #@driver.execute_script("$('input[value=Save]').click()")
+    #@driver.a(:id => 'edit_button').wait_until_present
 
     url_match = @driver.url.match(/record=(.+?)&/)
 

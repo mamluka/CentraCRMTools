@@ -40,7 +40,7 @@ class TestMini < CrmTestBase
         :googlelocal_check_c => 'check',
         :googlelocal_verified_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99',
-        :email => " email crmtesting @centracorporation.com "
+        :email => " email crmtesting@centracorporation.com "
     }
 
     assert_equal lead.get('googlelocal_verified_date_c'), today_crm_date
