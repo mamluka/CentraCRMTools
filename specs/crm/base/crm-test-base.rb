@@ -13,8 +13,8 @@ class CrmTestBase < TestsBase
   def setup
     super
 
-    headless = Headless.new
-    headless.start
+    @headless = Headless.new
+    @headless.start
 
     @driver = Watir::Browser.start 'crmtesting.centracorporation.com'
     @auth = Auth.new @driver
@@ -30,6 +30,6 @@ class CrmTestBase < TestsBase
 
     @auth.logout
     @driver.close
-    headless.destroy
+    @headless.destroy
   end
 end
