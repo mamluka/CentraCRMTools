@@ -22,7 +22,10 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def capture_failed_snapshot(driver)
-    driver.screenshot.save @__name__ + '.png'
+    if !@passed
+      driver.screenshot.save @__name__ + '.png'
+    end
+
   end
 
   def today_mysql_time
