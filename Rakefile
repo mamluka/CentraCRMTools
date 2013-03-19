@@ -89,7 +89,7 @@ namespace :crm do
 
   task :start do
     puts "Stating APIs"
-    puts `thin -d -a soa.centracorporation.com -P api.pid -R api/config.ru start`
+    puts `thin -d -a soa.centracorporation.com -p 80 -P api.pid -R api/config.ru start`
   end
 
 
