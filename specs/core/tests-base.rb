@@ -77,11 +77,11 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def start_api
-    `screen -L -dmS echosign thin -a soa.centracorporation.com -p 9050 -V -P /tmp/api.pid -R #{File.dirname(__FILE__)}/../../api/config.ru start`
+    `screen -L -dmS echosign thin -a soa.centracorporation.com -p 9050 -V -R #{File.dirname(__FILE__)}/../../api/config.ru start`
   end
 
   def stop_api
-    `screen -L -dmS echosign thin -P /tmp/api.pid stop`
+    `screen -L -dmS echosign thin -p 9050 stop`
   end
 
 end
