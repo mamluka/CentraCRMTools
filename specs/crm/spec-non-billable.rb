@@ -27,7 +27,7 @@ class TestMini < CrmTestBase
         :non_billable_reason_c => 'select Invalid url'
     }
 
-    assert_note_added lead.id, "Moved to pit stop because of invalid url, invalid url email was sent tocrmtesting@centracorporation.com"
+    assert_note_added lead.id, "Moved to pit stop because of invalid url, invalid url email was sent to crmtesting@centracorporation.com"
   end
 
   def test_when_non_billable_and_reason_is_invalid_url_should_send_out_an_email
