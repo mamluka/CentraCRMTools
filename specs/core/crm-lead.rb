@@ -19,9 +19,6 @@ class CrmLead
 
     @driver.button(:value => 'Save').click
 
-    #@driver.execute_script("$('input[value=Save]').click()")
-    @driver.a(:id => 'edit_button').wait_until_present
-
     url_match = @driver.url.match(/record=(.+?)&/)
 
     unless url_match.nil?
