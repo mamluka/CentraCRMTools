@@ -30,7 +30,7 @@ class TestMini < CrmTestBase
         :email => "email crmtesting@centracorporation.com",
     }
 
-    assert_note_added lead.id, "Google local listing pin was entered"
+    assert_note_added lead.id, "Google local listing details was verified"
   end
 
   def test_when_verify_is_checked_shoould_update_verified_date
