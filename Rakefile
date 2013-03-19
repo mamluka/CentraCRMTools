@@ -85,12 +85,21 @@ end
 
 namespace :crm do
 
+  desc "put the services up"
+
+  task :start do
+    puts "Stating APIs"
+    puts `thin -d -a soa.centracorporation.com -P api.pid -R api/config.ru start`
+  end
+
+
   desc "Start services that support crm testing"
   task :testing do
     puts "Stating Apis..."
     puts `thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R api/config.ru start`
   end
 
+  desc "Stop crm testing"
   task :stop_testing do
     puts "Stop Apis..."
     `thin -P api.pid stop`
