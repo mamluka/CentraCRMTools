@@ -82,6 +82,11 @@ class TestsBase < MiniTest::Unit::TestCase
 
   def stop_api
     `screen -L -dmS echosign thin -p 9050 stop`
+
+    until `ps aux | grep 9050 | grep -v grep`.empty?
+      puts "waiting for thin to quit"
+      sleep 1
+    end
   end
 
 end
