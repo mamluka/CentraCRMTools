@@ -81,7 +81,7 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def stop_api
-    `pkill -f 9050`
+    `screen -L -dmS echosign thin -P api.pid stop`
   end
 
 end
