@@ -32,6 +32,8 @@ class TestMini < CrmTestBase
     assert_note_added lead.id, "Mobile web was set to live by David MZ"
   end
 
+
+
   def test_when_local_listing_is_live_should_email_the_client
 
     CrmLead.new @driver, {
@@ -43,7 +45,7 @@ class TestMini < CrmTestBase
     }
 
     assert_email_contains 'Google has indexed your listing and is now live at its most basic level'
-    end
+  end
 
   def test_when_local_listing_is_live_should_add_note
 
@@ -55,7 +57,7 @@ class TestMini < CrmTestBase
         :googlelocal_contract_type_c => 'select Centra 99'
     }
 
-    assert_note_added lead.id,"Google local listing is set live by David MZ"
+    assert_note_added lead.id, "Google local listing is set live by David MZ"
   end
 
   def test_when_local_listing_is_live_save_who_did_it_and_when

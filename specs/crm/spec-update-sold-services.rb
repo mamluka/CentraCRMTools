@@ -33,6 +33,17 @@ class TestMini < CrmTestBase
     assert_note_added lead.id, "Mobile web was sold by David MZ"
   end
 
+  def test_when_mobile_web_is_sold__should_change_to_client_status
+
+    lead = CrmLead.new @driver, {
+        :mobileweb_check_c => 'check',
+        :email => "email crmtesting@centracorporation.com",
+        :mobileweb_contract_type_c => 'select Centra 24'
+    }
+
+    assert_equal lead.get('status'), 'Client'
+  end
+
   def test_when_mobile_web_is_sold_should_send_email
 
     skip("not sure if this is still needed")
@@ -81,14 +92,26 @@ class TestMini < CrmTestBase
     assert_equal lead.get('googlelocal_sale_rep_c'), 'David MZ'
   end
 
+  def test_when_google_local_listing_is_sold_should_change_to_client_status
+    email = "#{SecureRandom.uuid}@david.com"
+
+    lead = CrmLead.new @driver, {
+        :googlelocal_check_c => 'check',
+        :email => "email #{email}",
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    assert_equal lead.get('status'), 'Client'
+  end
+
   def test_when_google_local_listing_is_sold_should_add_note
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
-        :googlelocal_check_c => 'check',
+        :status => ' select Client ',
+        :googlelocal_check_c => ' check ',
         :email => "email #{email}",
-        :googlelocal_contract_type_c => 'select Centra 99'
+        :googlelocal_contract_type_c => ' select Centra 99 '
     }
 
     assert_note_added lead.id, "Google local listing was sold by David MZ"
@@ -98,13 +121,13 @@ class TestMini < CrmTestBase
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
-        :merch_check_c => 'check',
+        :status => ' select Client ',
+        :merch_check_c => ' check ',
         :email => "email #{email}",
     }
 
-    assert_equal lead.get('marchent_sale_date_c'), today_crm_date
-    assert_equal lead.get('marchent_sale_rep_c'), 'David MZ'
+    assert_equal lead.get(' marchent_sale_date_c '), today_crm_date
+    assert_equal lead.get(' marchent_sale_rep_c '), ' David MZ '
   end
 
 end
