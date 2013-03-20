@@ -95,7 +95,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
-    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
     @driver.goto contract_url
 
@@ -136,7 +136,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
-    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
     @driver.goto contract_url
 
@@ -177,7 +177,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
-    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
     @driver.goto contract_url
 
@@ -218,7 +218,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
-    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
 
     @driver.goto contract_url
 
