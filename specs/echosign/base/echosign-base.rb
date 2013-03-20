@@ -18,13 +18,12 @@ class EchoSignTestsBase < TestsBase
 
   def teardown
     super
-
     capture_failed_snapshot @driver
 
     @driver.close
   end
 
-  def clean_echosign_documents(name)
+  def clean_echosign_documents
     echosign = EchoSign.new
     documents = echosign.get_documents
 
@@ -32,7 +31,7 @@ class EchoSignTestsBase < TestsBase
       return
     end
 
-    keys = documents.select { |doc| doc[:name] == name }.map { |doc| doc[:document_key] }
+    keys = documents.select { |doc| doc[:display_user_info][:full_name_or_email] == "david mz" || doc[:display_user_info][:full_name_or_email] == "crmtesting@centracorporation.com" }.map { |doc| doc[:document_key] }
 
     keys.each do |key|
       echosign.cancel_document key
