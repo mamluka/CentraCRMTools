@@ -19,7 +19,7 @@ class EchoSignTestsBase < TestsBase
   def teardown
     super
 
-    capture_failed_snapshot @sriver
+    capture_failed_snapshot @driver
 
     @driver.close
   end
