@@ -18,9 +18,6 @@ class EchoSignTestsBase < TestsBase
 
   def teardown
     super
-    clean_echosign_documents "Mobile Web Presence Discount"
-    clean_echosign_documents "Mobile Web"
-    clean_echosign_documents "Centra Gift"
 
     capture_failed_snapshot @sriver
 
