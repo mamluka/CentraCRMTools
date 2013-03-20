@@ -15,8 +15,6 @@ class LocalListingFormTests < EchoSignTestsBase
 
     @driver.goto contract_url
 
-    assert_price_point '99'
-
     fill_basic_info
     fill_billing_info
 
@@ -75,7 +73,169 @@ class LocalListingFormTests < EchoSignTestsBase
     fill_sign_details
     sign_form
 
-    assert_price_point '79.99'
+    sleep 3
+
+    assert !lead.is_checked('billing_same_address_c')
+
+    assert_billing_address_when_not_the_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
+
+  end
+
+  def test_when_selling_local_listing_119_price_point_should_send_out_agreement_and_update_the_fields
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 119'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
+
+    sleep 3
+
+    assert !lead.is_checked('billing_same_address_c')
+
+    assert_billing_address_when_not_the_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
+
+  end
+
+  def test_when_selling_local_listing_129_price_point_should_send_out_agreement_and_update_the_fields
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 129'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
+
+    sleep 3
+
+    assert !lead.is_checked('billing_same_address_c')
+
+    assert_billing_address_when_not_the_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
+
+  end
+
+  def test_when_selling_local_listing_139_price_point_should_send_out_agreement_and_update_the_fields
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 139'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
+
+    sleep 3
+
+    assert !lead.is_checked('billing_same_address_c')
+
+    assert_billing_address_when_not_the_same(lead)
+    assert_client_details(lead)
+    assert_google_local_details(lead)
+    assert_mobile_web_details(lead)
+    assert_signing(lead)
+
+  end
+
+  def test_when_selling_local_listing_149_price_point_should_send_out_agreement_and_update_the_fields
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 114'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Centra Gift"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
 
     sleep 3
 
@@ -135,7 +295,6 @@ class LocalListingFormTests < EchoSignTestsBase
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99'
     }
-
 
 
     assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"

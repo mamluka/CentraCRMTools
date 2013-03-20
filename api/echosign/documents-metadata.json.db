@@ -16,5 +16,29 @@
             "crmId":"centra24",
             "title":"Mobile Web",
             "products":["mobileweb"]
+        },
+        {
+            "id":"SLM44RXT5Q7Y4Q",
+            "crmId":"centra119",
+            "title":"Mobile Web Presence Discount",
+            "products":["local-listing", "mobileweb"]
+        },
+        {
+            "id":"SLM453XYI5ZI6A",
+            "crmId":"centra129",
+            "title":"Mobile Web Presence Discount",
+            "products":["local-listing", "mobileweb"]
+        },
+        {
+            "id":"SLM4576M4T587E",
+            "crmId":"centra139",
+            "title":"Mobile Web Presence Discount",
+            "products":["local-listing", "mobileweb"]
+        },
+        {
+            "id":"SLM45BXX523B57",
+            "crmId":"centra149",
+            "title":"Mobile Web Presence Discount",
+            "products":["local-listing", "mobileweb"]
         }
 ]

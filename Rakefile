@@ -94,7 +94,7 @@ namespace :crm do
 
   task :stop do
     puts "Stopping APIs"
-    puts `thin -P api.pid -p 8081 stop`
+    puts `thin -P api.pidyeah s -p 8081 stop`
   end
 
 
