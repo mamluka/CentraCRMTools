@@ -214,7 +214,7 @@ class LocalListingFormTests < EchoSignTestsBase
         :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
-        :googlelocal_contract_type_c => 'select Centra 114'
+        :googlelocal_contract_type_c => 'select Centra 149'
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
