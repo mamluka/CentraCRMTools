@@ -18,6 +18,7 @@ class EchoSignTestsBase < TestsBase
 
   def teardown
     super
+    clean_echosign_documents
     capture_failed_snapshot @driver
 
     @driver.close
