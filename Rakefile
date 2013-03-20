@@ -90,6 +90,11 @@ namespace :crm do
   task :start do
     puts "Stating APIs"
     puts `thin -d -a soa.centracorporation.com -p 8081 -P api.pid -R api/config.ru start`
+    end
+
+  task :stop do
+    puts "Stopping APIs"
+    puts `thin -p 8081 stop`
   end
 
 
