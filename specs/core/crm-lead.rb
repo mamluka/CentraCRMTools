@@ -32,16 +32,16 @@ class CrmLead
 
   def show_all_panels
     @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
   end
 
   def set_values(values)
 
-    show_all_panels
-    show_all_panels
-    show_all_panels
-    show_all_panels
-    show_all_panels
-    show_all_panels
     show_all_panels
 
     values.each do |key, value|
