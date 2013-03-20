@@ -41,7 +41,7 @@ class TestMini < CrmTestBase
         :mobileweb_contract_type_c => 'select Centra 24'
     }
 
-    assert_equal lead.get_list('status'), 'Client'
+    assert_equal lead.get_list('status'), 'client'
   end
 
   def test_when_mobile_web_is_sold_should_send_email
@@ -101,7 +101,7 @@ class TestMini < CrmTestBase
         :googlelocal_contract_type_c => 'select Centra 99'
     }
 
-    assert_equal lead.get_list('status'), 'Client'
+    assert_equal lead.get_list('status'), 'client'
   end
 
   def test_when_google_local_listing_is_sold_should_add_note
