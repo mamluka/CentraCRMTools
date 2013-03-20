@@ -63,4 +63,9 @@ class EchoSignApi < Grape::API
     echosign.get_documents.select { |x| x[:display_user_info][:full_name_or_email] == "Reusable Document" }
   end
 
+  get 'document-list-full' do
+    echosign = EchoSign.new
+    echosign.get_documents
+  end
+
 end
