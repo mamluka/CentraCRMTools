@@ -41,7 +41,7 @@ class TestMini < CrmTestBase
         :mobileweb_contract_type_c => 'select Centra 24'
     }
 
-    assert_equal lead.get('status'), 'Client'
+    assert_equal lead.get_list('status'), 'Client'
   end
 
   def test_when_mobile_web_is_sold_should_send_email
@@ -101,17 +101,17 @@ class TestMini < CrmTestBase
         :googlelocal_contract_type_c => 'select Centra 99'
     }
 
-    assert_equal lead.get('status'), 'Client'
+    assert_equal lead.get_list('status'), 'Client'
   end
 
   def test_when_google_local_listing_is_sold_should_add_note
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = CrmLead.new @driver, {
-        :status => ' select Client ',
-        :googlelocal_check_c => ' check ',
+        :status => 'select Client',
+        :googlelocal_check_c => 'check',
         :email => "email #{email}",
-        :googlelocal_contract_type_c => ' select Centra 99 '
+        :googlelocal_contract_type_c => 'select Centra 99'
     }
 
     assert_note_added lead.id, "Google local listing was sold by David MZ"
@@ -121,13 +121,13 @@ class TestMini < CrmTestBase
     email = "#{SecureRandom.uuid}@david.com"
 
     lead = CrmLead.new @driver, {
-        :status => ' select Client ',
-        :merch_check_c => ' check ',
+        :status => 'select Client',
+        :merch_check_c => 'check',
         :email => "email #{email}",
     }
 
-    assert_equal lead.get(' marchent_sale_date_c '), today_crm_date
-    assert_equal lead.get(' marchent_sale_rep_c '), ' David MZ '
+    assert_equal lead.get('marchent_sale_date_c'), today_crm_date
+    assert_equal lead.get('marchent_sale_rep_c'), 'David MZ'
   end
 
 end
