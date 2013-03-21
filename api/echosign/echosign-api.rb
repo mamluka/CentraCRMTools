@@ -61,7 +61,9 @@ class EchoSignApi < Grape::API
       contract_id = contract_id_by_title contract_title
 
       sent_contract_id = send_contract contract_id, contract_title, lead.email
-      lead.custom_data.echosign_doc_id_c = sent_contract_id
+      lead.add_custom_data do |data|
+        data.echosign_doc_id_c = sent_contract_id
+      end
 
       lead.save
 
