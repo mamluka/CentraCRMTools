@@ -47,6 +47,9 @@ class EchoSignApi < Grape::API
 
   get 'sign-me-up' do
     begin
+
+      CrmDatabase.new.connect
+
       lead_id = params[:id]
 
       unless Lead.where(:id => lead_id).any?
