@@ -73,26 +73,32 @@ class EchoSignApi < Grape::API
   end
 
   get :notify do
-    if params[:eventType] == "ESIGNED"
-      document_key = params[:documentKey]
-      echosign = EchoSign.new
-      info = echosign.get_document_info document_key
 
-      csv_hash = echosign.get_form_data document_key
+    begin
+      if params[:eventType] == "ESIGNED"
+        document_key = params[:documentKey]
+        echosign = EchoSign.new
+        info = echosign.get_document_info document_key
 
-      lead_form = LeadForm.new
-      lead_form.update_crm csv_hash, document_key, info[:name]
-    end
+        csv_hash = echosign.get_form_data document_key
 
-    if params[:eventType] == "SIGNATURE_REQUESTED"
+        lead_form = LeadForm.new
+        lead_form.update_crm csv_hash, document_key, info[:name]
+      end
 
-      document_key = params[:documentKey]
-      echosign = EchoSign.new
-      info = echosign.get_document_info document_key
+      if params[:eventType] == "SIGNATURE_REQUESTED"
 
-      lead_form = LeadForm.new
-      lead_form.mark_as_requested document_key, info[:name]
+        document_key = params[:documentKey]
+        echosign = EchoSign.new
+        info = echosign.get_document_info document_key
 
+        lead_form = LeadForm.new
+        lead_form.mark_as_requested document_key, info[:name]
+
+      end
+
+    rescue => exception
+      exception.message
     end
   end
 
