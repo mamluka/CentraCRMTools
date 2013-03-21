@@ -15,25 +15,47 @@ class EchoSignApi < Grape::API
     def get_documents
       JSON.parse(File.read(File.dirname(__FILE__)+"/documents-metadata.json.db"))
     end
+
+    def send_contract(contract_id, contract_title, email)
+      config = get_config
+      echosign = EchoSign.new
+
+      echosign.send email, contract_id, config['callbackUrl'], contract_title
+    end
+
+    def contract_title_by_id(contract_id)
+      documents = get_documents
+      documents.select { |doc| doc['id'] == contract_id }.first['title']
+    end
+
+    def contract_id_by_title(contract_title)
+      documents = get_documents
+      documents.select { |doc| doc['title'] == contract_title }.first['id']
+    end
   end
 
   get :send do
     begin
-      config = get_config
-      documents = get_documents
-
-      echosign = EchoSign.new
-
-      contract_id = params[:contractId]
-
-      document_title = documents.select { |doc| doc['id'] == contract_id }.first['title']
-
-      echosign.send params[:email], contract_id, config['callbackUrl'], document_title
+      contract_title = contract_title_by_id params[:contractId]
+      send_contract params[:contractId], contract_title, params[:email]
 
     rescue => exception
       exception.message
 
     end
+  end
+
+  get 'sign-me-up' do
+    lead_id = params[:id]
+
+    unless Lead.where(:id => lead_id).any?
+      return "No such lead"
+    end
+
+    contract_title = params[:title]
+    contract_id = contract_id_by_title contract_title
+
+    send_contract contract_id, contract_title, params[:email]
   end
 
   get :notify do
