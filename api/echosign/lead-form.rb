@@ -45,6 +45,8 @@ class LeadForm
 
     custom_data.save
 
+    Note.add custom_data.lead.id, "Contract received by user"
+
   end
 
   def get_custom_data_by_doc_id(document_id)
@@ -120,6 +122,8 @@ class LeadForm
     end
 
     custom_data.save
+
+    Note.add lead.id, "Contract was signed"
 
   end
 

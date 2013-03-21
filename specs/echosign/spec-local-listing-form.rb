@@ -44,6 +44,42 @@ class LocalListingFormTests < EchoSignTestsBase
 
   end
 
+  def test_when_selling_local_listing_99_price_point_should_add_note
+
+    lead = CrmLead.new @driver, {
+        :status => 'select Client',
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
+
+
+    sleep 3
+
+    assert_note_added lead.id, "Contract received by user"
+    assert_note_added lead.id, "Contract was signed"
+  end
+
   def test_when_selling_local_listing_79_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
