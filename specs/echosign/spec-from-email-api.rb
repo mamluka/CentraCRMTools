@@ -7,6 +7,7 @@ class FromEmailTests < EchoSignTestsBase
     lead = Lead.new
 
     lead.first_name = "david"
+    lead.add_email "crmtesting@centracorporation.com"
     lead.save
 
     RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {

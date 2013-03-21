@@ -51,15 +51,16 @@ class EchoSignApi < Grape::API
       CrmDatabase.new.connect
 
       lead_id = params[:id]
+      lead = Lead.find(:id => lead_id)
 
-      unless Lead.where(:id => lead_id).any?
-        return "No such lead"
+      if lead.nil?
+        return "Not such lead"
       end
 
       contract_title = params[:title]
-      contract_id = contract_id_by_title contract_title
+      contract_id = contract_id_by_title contract_title, lead.email
 
-      send_contract contract_id, contract_title, params[:email]
+      send_contract contract_id, contract_title,
     rescue => exception
       exception.message
 
