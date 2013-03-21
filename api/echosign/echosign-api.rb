@@ -46,16 +46,21 @@ class EchoSignApi < Grape::API
   end
 
   get 'sign-me-up' do
-    lead_id = params[:id]
+    begin
+      lead_id = params[:id]
 
-    unless Lead.where(:id => lead_id).any?
-      return "No such lead"
+      unless Lead.where(:id => lead_id).any?
+        return "No such lead"
+      end
+
+      contract_title = params[:title]
+      contract_id = contract_id_by_title contract_title
+
+      send_contract contract_id, contract_title, params[:email]
+    rescue => exception
+      exception.message
+
     end
-
-    contract_title = params[:title]
-    contract_id = contract_id_by_title contract_title
-
-    send_contract contract_id, contract_title, params[:email]
   end
 
   get :notify do
