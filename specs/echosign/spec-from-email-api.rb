@@ -15,9 +15,15 @@ class FromEmailTests < EchoSignTestsBase
         :title => 'Mobile Web Presence Discount'
     }}
 
+    result = lead.reload
+
     subject = @email_client.get_first_email_subject
 
     assert_includes subject, 'Mobile Web Presence Discount'
+
+    assert result.custom_data.googlelocal_echosign_in_c
+    refute result.custom_data.echosign_doc_id_c.empty?
+
   end
 
 end

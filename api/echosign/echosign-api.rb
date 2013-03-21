@@ -60,7 +60,9 @@ class EchoSignApi < Grape::API
       contract_title = params[:title]
       contract_id = contract_id_by_title contract_title
 
-      send_contract contract_id, contract_title, lead.email
+      sent_contract_id = send_contract contract_id, contract_title, lead.email
+      lead.custom_data.echosign_doc_id_c = sent_contract_id
+
     rescue => exception
       exception.message
     end
