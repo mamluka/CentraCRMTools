@@ -51,7 +51,7 @@ class EchoSignApi < Grape::API
       CrmDatabase.new.connect
 
       lead_id = params[:id]
-      lead = Lead.find(:id => lead_id)
+      lead = Lead.where(lead_id)
 
       if lead.nil?
         return "Not such lead"
