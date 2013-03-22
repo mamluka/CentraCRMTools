@@ -14,6 +14,10 @@ Rake::TestTask.new("test:echosign") do |t|
   t.pattern = "specs/echosign/spec-*.rb"
 end
 
+Rake::TestTask.new("test:all") do |t|
+  t.pattern = "specs/**/spec-*.rb"
+end
+
 task :config do
   #database
 
