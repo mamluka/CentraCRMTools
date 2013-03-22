@@ -8,7 +8,7 @@ class TestMini < CrmTestBase
     lead = CrmLead.new @driver, {:status => 'select Dead'}
 
     assert_equal lead.get('dead_status_assigner_c'), "David MZ"
-    assert_includes lead.get('dead_status_assigned_date_c'), today_mysql_time
+    assert_includes lead.get('dead_status_assigned_date_c'), today_crm_date
   end
 
   def test_when_change_status_to_dead_should_add_note
