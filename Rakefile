@@ -18,6 +18,7 @@ Rake::TestTask.new("test:all") do |t|
   t.pattern = "specs/**/spec-*.rb"
 end
 
+desc "configure services"
 task :config do
   #database
 

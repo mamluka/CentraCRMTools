@@ -29,13 +29,25 @@ ActionMailer::Base.smtp_settings = {
 ActionMailer::Base.view_paths= File.dirname(__FILE__)
 
 class LeadEmails < ActionMailer::Base
+  include Emails::Config
+
   def prepare_email(options)
 
     config = get_config 'config'
 
+    @unsubscribe_link = config['unsubscribe_base'] + "?email=" + options[:to]
+
+    if options.has_key?(:from)
+      from = config['from_'+options[:from].to_s]
+    else
+      from = config['from_service']
+    end
+
     emailing_options = {:to => options[:to],
-                        :from => options.has_key?(:from) ? options[:from] : config['service_email'],
-                        :subject => options[:subject]}
+                        :from => from,
+                        :subject => options[:subject],
+                        :reply_to => from}
+
 
     mail(emailing_options) do |format|
       format.text
@@ -46,3 +58,7 @@ end
 
 
 require_relative 'google_local_listing'
+require_relative 'mobile_web'
+require_relative 'non_billable'
+require_relative 'system_pipeline'
+require_relative 'status'

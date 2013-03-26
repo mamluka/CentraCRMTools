@@ -6,8 +6,8 @@ class NonBillableEmails < LeadEmails
     prepare_email({to: email, subject: 'Please forward'})
   end
 
-  def invalid_url(email, customer_id)
-    @customer_id = customer_id
+  def invalid_url(email, more)
+    @customer_id = more[:customerId]
 
     prepare_email({to: email, subject: 'Account update'})
   end

@@ -4,21 +4,21 @@ class GoogleLocalListingEmails < LeadEmails
 
   def google_local_listing_live(email)
 
-    prepare_email({to: email, subject: "Your Business is now Live in Google"})
+    prepare_email({to: email, subject: "Your Business is now Live in Google", from: :local_listing})
 
   end
 
-  def google_local_listing_heads_up(email, customerId)
+  def google_local_listing_heads_up(email, more)
 
-    @customer_id = customerId
+    @customer_id = more[:customerId]
 
-    prepare_email({to: email, subject: "Google Verification"})
+    prepare_email({to: email, subject: "Google Verification", from: :local_listing})
   end
 
-  def google_local_listing_pin_reminder(email, customerId)
+  def google_local_listing_pin_reminder(email, more)
 
-    @customer_id = customerId
+    @customer_id = more[:customerId]
 
-    prepare_email({to: email, subject: "Google Reminder"})
+    prepare_email({to: email, subject: "Google Reminder", from: :local_listing})
   end
 end

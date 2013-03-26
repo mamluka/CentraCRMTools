@@ -65,6 +65,8 @@ class Email < ActiveRecord::Base
     self.id = SecureRandom.uuid
   end
 
+  has_one :email_relation, :primary_key => 'id', :foreign_key => 'email_address_id', :autosave => true
+
 end
 
 class EmailRelation < ActiveRecord::Base
@@ -77,8 +79,8 @@ class EmailRelation < ActiveRecord::Base
     self.id = SecureRandom.uuid
   end
 
-  belongs_to :lead, :primary_key => 'id', :foreign_key => 'bean_id'
-  belongs_to :email, :primary_key => 'id', :foreign_key => 'email_address_id'
+  belongs_to :lead, :primary_key => 'id', :foreign_key => 'bean_id', :autosave => true
+  belongs_to :email, :primary_key => 'id', :foreign_key => 'email_address_id', :autosave => true
 end
 
 class Note < ActiveRecord::Base
