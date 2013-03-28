@@ -38,12 +38,18 @@ class LeadEmails < ActionMailer::Base
     @unsubscribe_link = config['unsubscribe_base'] + "?email=" + options[:to]
 
     if options.has_key?(:from)
-      from = config['from_'+options[:from].to_s]
+      from = config[options[:from].to_s+'_email']
     else
-      from = config['from_service']
+      from = config['service_email']
     end
 
-    emailing_options = {:to => options[:to],
+    if options[:to].is_a?(Symbol)
+      to =config[options[:to].to_s + '_email']
+    else
+      to = options[:to]
+    end
+
+    emailing_options = {:to => to,
                         :from => from,
                         :subject => options[:subject],
                         :reply_to => from}

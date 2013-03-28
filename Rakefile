@@ -32,10 +32,10 @@ task :config do
 
   echosign = Hash.new
 
-  echosign['apiKey'] = read_config_value "Enter echosign API key", "apiKey", :echosign
+  echosign['api_key'] = read_config_value "Enter echosign API key", "api_key", :echosign
   echosign['username'] = read_config_value "Enter echosign username", "username", :echosign
   echosign['password'] = read_config_value "Enter echosign password", "password", :echosign
-  echosign['callbackUrl'] = read_config_value "Enter echosign callback url", "callbackUrl", :echosign
+  echosign['callback_url'] = read_config_value "Enter echosign callback url", "callbac_url", :echosign
 
   #email
 
@@ -49,13 +49,15 @@ task :config do
 
   crm = Hash.new
 
-  crm['centraAppsApiBaseUrl'] =read_config_value "Enter Centra apps base API url", "centraAppsApiBaseUrl", :crm
-  crm['localListingEmail'] = read_config_value "Enter local listing dedicated email address", "localListingEmail", :crm
+  crm['local_listing_email'] = read_config_value "Enter local listing dedicated email address", "local_listing_email", :crm
+  crm['mobile_web_email'] = read_config_value "Enter mobile web dedicated email address", "mobile_web_email", :crm
+  crm['service_email'] = read_config_value "Enter service dedicated email address", "service_email", :crm
 
   File.open('core/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
   File.open('core/database.json', 'w') { |file| file.write(JSON.pretty_generate(database)) }
 
-  File.open('api/echosign/echosign.json', 'w') { |file| file.write(JSON.pretty_generate(echosign)) }
+  File.open('soa/echosign/echosign.json', 'w') { |file| file.write(JSON.pretty_generate(echosign)) }
+  File.open('soa/emails/config.json', 'w') { |file| file.write(JSON.pretty_generate()) }
 
   File.open('config-history.json', 'w') do |file|
     file.write(JSON.pretty_generate({
@@ -94,19 +96,19 @@ namespace :crm do
 
   task :start do
     puts "Stating APIs"
-    puts `thin -d -a soa.centracorporation.com -p 8081 -P api.pid -R api/config.ru start`
+    puts `thin -d -a soa.centracorporation.com -p 8081 -P api.pid -R soa/config.ru start`
     end
 
   task :stop do
     puts "Stopping APIs"
-    puts `thin -P api.pidyeah s -p 8081 stop`
+    puts `thin -P api.pid -p 8081 stop`
   end
 
 
   desc "Start services that support crm testing"
   task :testing do
     puts "Stating Apis..."
-    puts `thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R api/config.ru start`
+    puts `thin -d -a soa.centracorporation.com -p 9050 -P api.pid -R soa/config.ru start`
   end
 
   desc "Stop crm testing"

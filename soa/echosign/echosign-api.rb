@@ -20,7 +20,7 @@ class EchoSignApi < Grape::API
       config = get_config
       echosign = EchoSign.new
 
-      echosign.send email, contract_id, config['callbackUrl'], contract_title
+      echosign.send email, contract_id, config['callback_url'], contract_title
     end
 
     def contract_title_by_id(contract_id)

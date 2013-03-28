@@ -6,7 +6,7 @@
     label.valid {
         width: 24px;
         height: 24px;
-        background: url(/images/valid.png) center center no-repeat;
+        background: url(/forms/images/valid.png) center center no-repeat;
         display: inline-block;
         text-indent: -9999px;
     }
@@ -21,18 +21,20 @@
 
 <div>
   <form action="/forms/invalid-url" method="POST" class="form-horizontal">
-    <input type="hidden" value="<%= @id %>">
+    <input type="hidden" value="<%= @id %>" name="id">
+
     <div class="row-fluid">
       <div class="control-group">
         <label class="control-label">*Website Url:</label>
+
         <div class="controls">
-          @this.TextBox(x => x.WebsiteUrl).Class("input-xlarge required")
+          <input type="text" class="input-xlarge required url" name="url">
         </div>
       </div>
 
       <div class="control-group">
         <div class="controls">
-          <input type="submit" value="Update" class="btn-large btn-primary" />
+          <input type="submit" value="Update" class="btn-large btn-primary"/>
         </div>
       </div>
 
