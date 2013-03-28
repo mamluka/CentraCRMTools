@@ -77,11 +77,11 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def start_api
-    `screen -L -dmS echosign rackup -p 9050 #{File.dirname(__FILE__)}/../../api/config.ru`
+    `screen -L -dmS echosign thin -d -a soa.centracorporation.com -p 9050 -V -R #{File.dirname(__FILE__)}/../../api/config.ru start`
   end
 
   def stop_api
-    `pkill -f 9050`
+    `screen -L -dmS echosign thin -p 9050 stop`
 
     until `ps aux | grep 9050 | grep -v grep`.empty?
       sleep 1
