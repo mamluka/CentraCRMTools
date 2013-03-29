@@ -54,6 +54,8 @@ class MobileWebFormTests < EchoSignTestsBase
     assert lead.is_checked('mobileweb_echosign_signed_c')
 
     assert_includes lead.get('mobileweb_sign_date_c'), today_crm_date
+
+    assert_status lead
   end
 
 
@@ -109,6 +111,8 @@ class MobileWebFormTests < EchoSignTestsBase
     assert lead.is_checked('mobileweb_echosign_signed_c')
 
     assert_includes lead.get('mobileweb_sign_date_c'), today_crm_date
+
+    assert_status lead
   end
 
   def test_when_echosign_is_sent_should_mark_as_docs_in
@@ -203,5 +207,9 @@ class MobileWebFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'contact_name').set 'David mz'
     @driver.text_field(:name => 'contact_email').set 'david.mazvovsky@gmail.com'
     @driver.text_field(:name => 'contact_phone').set '1234567890'
+  end
+
+  def assert_status(lead)
+    assert_equal lead.get_list('status'), 'client'
   end
 end

@@ -41,7 +41,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
-
+    assert_status(lead)
   end
 
   def test_when_selling_local_listing_99_price_point_should_add_note
@@ -118,6 +118,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
+    assert_status(lead)
 
   end
 
@@ -159,6 +160,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
+    assert_status(lead)
 
   end
 
@@ -200,6 +202,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
+    assert_status(lead)
 
   end
 
@@ -241,6 +244,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
+    assert_status(lead)
 
   end
 
@@ -282,8 +286,10 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
+    assert_status(lead)
 
   end
+
 
   def test_when_selling_local_listing_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
 
@@ -321,6 +327,8 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_google_local_details(lead)
     assert_mobile_web_details(lead)
     assert_signing(lead)
+    assert_status lead
+
   end
 
   def test_when_echosign_contract_sent_mark_document_in
@@ -519,5 +527,9 @@ class LocalListingFormTests < EchoSignTestsBase
     @driver.text_field(:name => 'contact_name').set 'David mz'
     @driver.text_field(:name => 'contact_email').set 'david.mazvovsky@gmail.com'
     @driver.text_field(:name => 'contact_phone').set '1234567890'
+  end
+
+  def assert_status(lead)
+    assert_equal lead.get_list('status'), 'client'
   end
 end
