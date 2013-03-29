@@ -8,8 +8,7 @@ class ReportReminderJob < JobsBase
     logger.info "Found #{leads.length.to_s} clients that signed the contract 3 weeks ago and did not get a report"
 
     leads.each do |lead|
-      email = lead.email
-      logger.info "#{lead.name} will get an cancellation email to #{email}"
+      logger.info "#{lead.name} will be sending a reminder"
 
       begin
 
