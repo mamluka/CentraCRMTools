@@ -121,6 +121,7 @@ class LeadForm
       custom_data.mobileweb_echosign_signed_c = true
     end
 
+    lead.status = 'contract_out'
     custom_data.save
 
     Note.add lead.id, "Contract was signed"
