@@ -11,11 +11,8 @@ class ReportReminderJob < JobsBase
       logger.info "#{lead.name} will be sending a reminder"
 
       begin
-        logger.info "1"
         AnnouncementsEmails.remind_to_generate_a_report(lead.id).deliver
-        logger.info "2"
         Note.add lead.id, "Sent a reminder for generating a progress report for the client"
-        logger.info "3"
 
         sleep 5
       rescue => ex
