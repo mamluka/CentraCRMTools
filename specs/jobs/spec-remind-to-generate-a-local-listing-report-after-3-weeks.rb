@@ -11,7 +11,7 @@ class Tests < JobsTestBase
       data.googlelocal_sign_date_c = 22.days.ago
     end
 
-    load_job 'spec-remind-to-generate-a-local-listing-report-after-3-weeks'
+    load_job 'remind-to-generate-a-local-listing-report-after-3-weeks'
 
     assert_email_contains "3 Weeks passed it's time to send a report to this client"
   end
@@ -27,7 +27,7 @@ class Tests < JobsTestBase
       data.googlelocal_report_sent_date_c = 2.days.ago
     end
 
-    load_job 'spec-remind-to-generate-a-local-listing-report-after-3-weeks'
+    load_job 'remind-to-generate-a-local-listing-report-after-3-weeks'
 
     assert_email_not_sent
   end
