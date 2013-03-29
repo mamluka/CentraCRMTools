@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require_relative '../../core/crm-database'
+require_relative '../../emails/announcements'
 
 class Forms < Sinatra::Base
   set :static, true
@@ -18,6 +19,8 @@ class Forms < Sinatra::Base
     lead = Lead.find(params[:id])
     lead.website = params[:url]
     lead.save
+
+    AnnouncementsEmails.invalid_url_updated(lead.id).deliver
 
     erb :invalid_url_done
   end

@@ -13,6 +13,16 @@ module Emails
   end
 end
 
+class String
+  def underscore
+    self.gsub(/::/, '/').
+        gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2').
+        gsub(/([a-z\d])([A-Z])/, '\1_\2').
+        tr("-", "_").
+        downcase
+  end
+end
+
 config = Emails::Config.get_config 'config'
 
 ActionMailer::Base.raise_delivery_errors = true
@@ -35,8 +45,6 @@ class LeadEmails < ActionMailer::Base
 
     config = get_config 'config'
 
-    @unsubscribe_link = config['unsubscribe_base'] + "?email=" + options[:to]
-
     if options.has_key?(:from)
       from = config[options[:from].to_s+'_email']
     else
@@ -49,15 +57,23 @@ class LeadEmails < ActionMailer::Base
       to = options[:to]
     end
 
+    @unsubscribe_link = config['unsubscribe_base'] + "?email=" + to
+    @crm_base_url = config['crm_base_url']
+
     emailing_options = {:to => to,
                         :from => from,
                         :subject => options[:subject],
                         :reply_to => from}
 
-
-    mail(emailing_options) do |format|
-      format.text
-      format.html
+    unless File.exist?(File.dirname(__FILE__) + "/#{self.class.name.underscore}/#{caller[0][/`.*'/][1..-2]}.html.erb")
+      mail(emailing_options) do |format|
+        format.text
+      end
+    else
+      mail(emailing_options) do |format|
+        format.text
+        format.html
+      end
     end
   end
 end
