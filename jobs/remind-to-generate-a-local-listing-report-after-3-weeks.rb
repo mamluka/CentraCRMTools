@@ -13,9 +13,6 @@ class ReportReminderJob < JobsBase
       begin
 
         AnnouncementsEmails.remind_to_generate_a_report(lead.id).deliver
-        lead.custom_data.cancellation_email_sent_c = Time.now
-        lead.save
-
         Note.add lead.id, "Sent a reminder for generating a progress report for the client"
 
         sleep 5
