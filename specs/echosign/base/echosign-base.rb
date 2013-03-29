@@ -20,7 +20,7 @@ class EchoSignTestsBase < TestsBase
     super
 
     clean_databases
-    clean_echosign_documents
+    #clean_echosign_documents
     capture_failed_snapshot @driver
 
     @driver.close
