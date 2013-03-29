@@ -18,8 +18,23 @@ class AnnouncementsEmails < LeadEmails
 
   def remind_to_generate_a_report(customerId)
     lead = Lead.find(customerId)
+    @name = lead.name
 
     prepare_email({to: :local_listing, subject: "A progress report should be generated for #{lead.name} as 3 weeks passed"})
+  end
+
+  def local_listing_contract_signed(customerId)
+    lead = Lead.find(customerId)
+    @name = lead.name
+
+    prepare_email({to: :local_listing, subject: "#{lead.name} just signed a local listing contract"})
+  end
+
+  def mobile_web_contract_signed(customerId)
+    lead = Lead.find(customerId)
+    @name = lead.name
+
+    prepare_email({to: :local_listing, subject: "#{lead.name} just signed a mobile web contract"})
   end
 
 end

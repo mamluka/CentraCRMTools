@@ -1,5 +1,6 @@
 require 'date'
 require_relative "../../core/crm-database"
+require_relative "../../emails/mailer_base"
 
 class SafeCsvHash
 
@@ -119,6 +120,12 @@ class LeadForm
     if contract_for_product?(document_title, "mobileweb")
       custom_data.mobileweb_sign_date_c = Time.now
       custom_data.mobileweb_echosign_signed_c = true
+    end
+
+    if contract_for_product?(document_title, "local-listing")
+      AnnouncementsEmails.local_listing_contract_signed(lead.id).deliver
+    else
+      AnnouncementsEmails.mobile_web_contract_signed(lead.id).deliver
     end
 
     lead.status = 'contract_out'

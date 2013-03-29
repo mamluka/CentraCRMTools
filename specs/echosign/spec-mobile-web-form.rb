@@ -57,6 +57,37 @@ class MobileWebFormTests < EchoSignTestsBase
     assert_status lead
   end
 
+  def test_when_mobile_web_contract_is_signed_should_sendout_an_email_to_mobile_web
+
+    CrmLead.new @driver, {
+        :email => "email crmtesting@centracorporation.com",
+        :mobileweb_check_c => 'check',
+        :mobileweb_contract_type_c => 'select Centra 24'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Mobile Web"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+    not_same_billing_address
+    fill_billing_address
+    fill_client_details
+    full_mobile_web_information
+    fill_sign_details
+
+    sign_form
+
+    assert_price_point '24.99'
+
+    sleep 3
+
+    assert_email_contains "just signed a mobile web contract"
+
+  end
+
 
   def test_when_selling_mobile_web_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
 
