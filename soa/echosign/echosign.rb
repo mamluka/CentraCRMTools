@@ -7,6 +7,8 @@ class EchoSign
   def initialize
     config = JSON.parse File.read(File.dirname(__FILE__) + "/echosign.json")
     @api_key = config['api_key']
+    @echosign_username = config['username']
+    @echosign_password = config['password']
 
 
     @client = Savon.client do
@@ -19,7 +21,11 @@ class EchoSign
   def send(email, document_id, callback_url, document_title)
     response = call :send_document, %{
             <tns:apiKey>#{@api_key}</tns:apiKey>
-            <tns:senderInfo xsi:nil="true"/>
+            <tns:senderInfo>
+              <ins0:email>#{@echosign_username}</ins0:email>
+              <ins0:password>#{@echosign_password}</ins0:password>
+              <ins0:userKey xsi:nil="true"></ins0:userKey>
+            </tns:senderInfo>
             <tns:documentCreationInfo>
               <ins0:recipients>
                 <ins8:recipientInfo>
