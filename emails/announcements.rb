@@ -19,7 +19,7 @@ class AnnouncementsEmails < LeadEmails
   def remind_to_generate_a_report(customerId)
     lead = Lead.find(customerId)
 
-    prepare_email({to: :mobile_web, subject: "A progress report should be generated for  #{lead.name} as 3 weeks passed"})
+    prepare_email({to: :local_listing, subject: "A progress report should be generated for #{lead.name} as 3 weeks passed"})
   end
 
 end
