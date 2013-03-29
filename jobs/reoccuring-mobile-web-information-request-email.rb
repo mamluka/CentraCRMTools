@@ -12,7 +12,7 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
       logger.info "#{lead.name} will get an email to #{email}"
 
       begin
-        MobileWebEmails.mobile_web_details_request(email, name: lead.name, customerId: lead.id)
+        MobileWebEmails.mobile_web_details_request(email, lead.name, lead.id).deliver
 
         lead.custom_data.mobileweb_info_req_sent_c = Time.now
         lead.save

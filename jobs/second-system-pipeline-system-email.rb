@@ -12,7 +12,7 @@ class SecondSystemPipelineEmailJob < JobsBase
       logger.info "#{lead.name} will get an cancellation email to #{email}"
 
       begin
-        SystemPipelineEmails.second_system_pipeline email, lead.custom_data.prev_url_c
+        SystemPipelineEmails.second_system_pipeline(email, lead.custom_data.prev_url_c).deliver
 
         lead.custom_data.system_pipeline_email_2_c = Time.now
         lead.save

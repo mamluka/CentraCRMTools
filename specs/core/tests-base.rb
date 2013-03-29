@@ -72,6 +72,7 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def load_database
+
     crm_database = CrmDatabase.new
     crm_database.connect
   end
