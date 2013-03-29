@@ -13,7 +13,7 @@ class Tests < JobsTestBase
 
     load_job 'remind-to-generate-a-local-listing-report-after-3-weeks'
 
-    assert_email_contains "3 Weeks passed it's time to send a report to this client"
+    assert_email_contains "#{lead.name} did not fill his hosting details after a week on been a client"
   end
 
   def test_when_3_weeks_passed_after_contract_signed_and_report_was_send_do_npt_remind_again
