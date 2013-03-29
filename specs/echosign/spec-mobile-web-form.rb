@@ -4,7 +4,6 @@ class MobileWebFormTests < EchoSignTestsBase
   def test_when_selling_mobile_web_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
         :mobileweb_contract_type_c => 'select Centra 24'
@@ -62,7 +61,6 @@ class MobileWebFormTests < EchoSignTestsBase
   def test_when_selling_mobile_web_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
         :mobileweb_contract_type_c => 'select Centra 24'
@@ -118,7 +116,6 @@ class MobileWebFormTests < EchoSignTestsBase
   def test_when_echosign_is_sent_should_mark_as_docs_in
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
         :mobileweb_contract_type_c => 'select Centra 24'
@@ -134,7 +131,6 @@ class MobileWebFormTests < EchoSignTestsBase
   def test_when_no_contact_is_selected_notify_user
 
     CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :mobileweb_check_c => 'check',
     }

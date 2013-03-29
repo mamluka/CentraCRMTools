@@ -4,7 +4,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_99_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99'
@@ -47,7 +46,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_99_price_point_should_add_note
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99'
@@ -83,7 +81,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_79_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 80'
@@ -125,7 +122,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_119_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 119'
@@ -167,7 +163,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_129_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 129'
@@ -209,7 +204,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_139_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 139'
@@ -251,7 +245,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_149_price_point_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 149'
@@ -294,7 +287,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_selling_local_listing_and_billing_address_is_the_same_should_send_out_agreement_and_update_the_fields
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99'
@@ -334,7 +326,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_echosign_contract_sent_mark_document_in
 
     lead = CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
         :googlelocal_contract_type_c => 'select Centra 99'
@@ -350,7 +341,6 @@ class LocalListingFormTests < EchoSignTestsBase
   def test_when_no_contract_is_selected_notice_user
 
     CrmLead.new @driver, {
-        :status => 'select Client',
         :email => "email crmtesting@centracorporation.com",
         :googlelocal_check_c => 'check',
     }
