@@ -29,7 +29,13 @@ def rebuild_config(crm, database, echosign, email)
   File.open('emails/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
 
 
-  File.open('specs/core/email-config.json', 'w') { |file| file.write(JSON.pretty_generate(email)) }
+  File.open('specs/core/email-config.json', 'w') { |file| file.write(JSON.pretty_generate(
+                                                                         {
+                                                                             username: email['testing_username'],
+                                                                             password: email['testing_password'],
+                                                                             host: email['host']
+                                                                         }
+                                                                     )) }
 end
 
 task :config do
@@ -59,6 +65,9 @@ task :config do
   email['host'] =read_config_value "Enter service email host", "host", :email
   email['domain'] =read_config_value "Enter email domain", "domain", :email
   email['unsubscribe_base'] =read_config_value "Enter unsubscribe base url", "unsubscribe_base", :email
+
+  email['testing_username'] = read_config_value "Enter testing email login", "testing_username", :email
+  email['testing_password'] = read_config_value "Enter testing email password", "testing_password", :email
 
   #crm
 

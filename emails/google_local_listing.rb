@@ -15,9 +15,9 @@ class GoogleLocalListingEmails < LeadEmails
     prepare_email({to: email, subject: "Google Verification", from: :local_listing})
   end
 
-  def google_local_listing_pin_reminder(email, more)
+  def google_local_listing_pin_reminder(email, customer_id)
 
-    @customer_id = more[:customerId]
+    @customer_id = customer_id
 
     prepare_email({to: email, subject: "Google Reminder", from: :local_listing})
   end

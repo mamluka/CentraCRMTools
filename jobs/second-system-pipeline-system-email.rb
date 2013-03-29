@@ -1,4 +1,5 @@
 require_relative "lib/jobs-base"
+require_relative "../emails/mailer_base"
 
 class SecondSystemPipelineEmailJob < JobsBase
 
@@ -10,15 +11,15 @@ class SecondSystemPipelineEmailJob < JobsBase
       email = lead.email
       logger.info "#{lead.name} will get an cancellation email to #{email}"
 
-      res = mailer.second_system_pipeline email, lead.custom_data.prev_url_c
+      begin
+        SystemPipelineEmails.second_system_pipeline email, lead.custom_data.prev_url_c
 
-      if res=="OK"
         lead.custom_data.system_pipeline_email_2_c = Time.now
         lead.save
 
         Note.add lead.id, "Second system pipeline was sent 7 days after the first system pipeline"
-      else
-        logger.info "Api returned an error " + res
+      rescue => ex
+        logger.info "Emailing returned an error " + ex.message
       end
 
       sleep 5

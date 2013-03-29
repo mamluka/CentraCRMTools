@@ -1,5 +1,5 @@
 require_relative "lib/jobs-base"
-require_relative "../emails/status"
+require_relative "../emails/mailer_base"
 
 class DeadEmailJob < JobsBase
 

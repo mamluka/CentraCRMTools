@@ -1,4 +1,5 @@
 require_relative "lib/jobs-base"
+require_relative "../emails/mailer_base"
 
 class JobAssignLeadsToSystemPipelineJob < JobsBase
 
@@ -11,18 +12,18 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
       lead.status = 'SP'
       lead.assigned_user_id = system_pipeline_user_id
 
-      email = lead.email
-      logger.info "#{lead.name} will get an email to #{email}"
+      begin
+        email = lead.email
+        logger.info "#{lead.name} will get an email to #{email}"
 
-      res = mailer.first_system_pipeline email, lead.custom_data.prev_url_c
+        SystemPipelineEmails.first_system_pipeline(email, lead.custom_data.prev_url_c).deliver
 
-      if res == "OK"
         lead.custom_data.system_pipeline_email_1_c = Time.now
         lead.save
 
         Note.add lead.id, "System pipeline email #1 was sent a week after a lead moved to System pipeline user"
-      else
-        logger.info "Api response was: " + res
+      rescue => ex
+        logger.info "Email response was: " + ex.message
       end
 
       sleep 5
