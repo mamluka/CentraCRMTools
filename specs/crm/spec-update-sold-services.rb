@@ -91,7 +91,7 @@ class TestMini < CrmTestBase
   def test_when_google_local_listing_is_sold_should_change_status_to_contract_out
     email = "#{SecureRandom.uuid}@david.com"
 
-    CrmLead.new @driver, {
+    lead = CrmLead.new @driver, {
         :googlelocal_check_c => 'check',
         :email => "email #{email}",
         :googlelocal_contract_type_c => 'select Centra 99'
