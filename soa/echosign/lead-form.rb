@@ -128,7 +128,7 @@ class LeadForm
       AnnouncementsEmails.mobile_web_contract_signed(lead.id).deliver
     end
 
-    lead.status = 'contract_out'
+    lead.status = 'client'
     custom_data.save
 
     Note.add lead.id, "Contract was signed"
