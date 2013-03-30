@@ -34,6 +34,12 @@ def rebuild_config(crm, database, echosign, email)
                                                                              username: email['testing_username'],
                                                                              password: email['testing_password'],
                                                                              host: email['host']
+                                                                         })) }
+ 
+  File.open('specs/core/config-crm.json', 'w') { |file| file.write(JSON.pretty_generate(
+                                                                         {
+                                                                             admin_username: crm['admin_username'],
+                                                                             admin_password: crm['admin_password']
                                                                          }
                                                                      )) }
 end
@@ -77,6 +83,8 @@ task :config do
   crm['mobile_web_email'] = read_config_value "Enter mobile web dedicated email address", "mobile_web_email", :crm
   crm['service_email'] = read_config_value "Enter service dedicated email address", "service_email", :crm
   crm['crm_base_url'] = read_config_value "Enter CRM base url", "crm_base_url", :crm
+  crm['admin_username'] = read_config_value "Testing CRM admin login", "admin_username", :crm
+  crm['admin_password'] = read_config_value "Testing CRM asmin password", "admin_password", :crm
 
   rebuild_config(crm, database, echosign, email)
 
