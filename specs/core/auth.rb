@@ -22,13 +22,15 @@ class Auth
     begin
       @driver.button(:name => 'Login').click
     rescue
+      @driver.screenshot.save @__name__ + "_login problem.png"
       @driver.button(:name => 'Login').click
     end
 
   end
 
   def logout
-    link = @driver.link(:text => 'Log Out')
-    link.click if link.exists?
+    #link = @driver.link(:text => 'Log Out')
+    #link.click if link.exists?
+    @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Users&action=Logout'
   end
 end
