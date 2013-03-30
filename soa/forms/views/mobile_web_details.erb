@@ -1,0 +1,64 @@
+<div>
+    <form action="/forms/mobile-web-details" method="POST" class="form-horizontal">
+      <input type="hidden" value="<%= @id %>" name="id">
+        <div class="span12">
+            <p style="font-size: 16px">We are excited to bring you on as a Centra Partner. are a few things we need to do so your mobile website can go live.
+                <br />
+                <br />
+                We will need access to your current hosting and possibly your domain registrar. Below are the fields we will need filled out so our technical team can move the process forward.</p>
+        </div>
+        <h4>Hosting provider details</h4>
+        <div class="control-group">
+            <label class="control-label">Provider name*</label>
+            <div class="controls">
+              <input type="text" name="hostingCompany" class="input-xlarge required"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="control-label">User name*</div>
+            <div class="controls">
+              <input type="text" name="hostingUsername" class="input-large required"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="control-label">Password*</div>
+            <div class="controls">
+              <input type="password" name="hostingPassword" class="input-large required"/>
+            </div>
+        </div>
+
+        <h4>Domain provider details</h4>
+        <div class="control-group">
+            <div class="control-label">Domain provider name</div>
+            <div class="controls">
+              <input type="text" name="domainCompany" class="input-xlarge"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="control-label">User name</div>
+            <div class="controls">
+              <input type="text" name="domainUsername" class="input-large"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="control-label">Password</div>
+            <div class="controls">
+              <input type="password" name="domainPassword" class="input-large"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Save" class="btn-large btn-primary" />
+            </div>
+        </div>
+        <div class="span12">
+            <h6 class="remark">Fields marked with * are required</h6>
+        </div>
+    </form>
+
+
+</div>

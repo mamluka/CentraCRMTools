@@ -72,16 +72,17 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def load_database
+
     crm_database = CrmDatabase.new
     crm_database.connect
   end
 
   def start_api
-    `screen -L -dmS echosign thin -d -a soa.centracorporation.com -p 9050 -V -R #{File.dirname(__FILE__)}/../../api/config.ru start`
+    `screen -L -dmS echosign thin -P api.pid -d -p 9050 -V -R #{File.dirname(__FILE__)}/../../soa/config.ru start`
   end
 
   def stop_api
-    `screen -L -dmS echosign thin -p 9050 stop`
+    `screen -L -dmS echosign thin -p 9050 -P api.pid stop`
 
     until `ps aux | grep 9050 | grep -v grep`.empty?
       sleep 1

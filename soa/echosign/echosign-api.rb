@@ -20,7 +20,7 @@ class EchoSignApi < Grape::API
       config = get_config
       echosign = EchoSign.new
 
-      echosign.send email, contract_id, config['callbackUrl'], contract_title
+      echosign.send email, contract_id, config['callback_url'], contract_title
     end
 
     def contract_title_by_id(contract_id)
@@ -111,5 +111,23 @@ class EchoSignApi < Grape::API
     echosign = EchoSign.new
     echosign.get_documents
   end
+
+  get 'document-list-clean' do
+    echosign = EchoSign.new
+    keys = echosign.get_documents.select { |x| x[:display_user_info][:full_name_or_email].to_s.include?('david.com') }.map { |x| x[:document_key] }
+    keys.each do |key|
+      echosign.cancel_document key
+    end
+  end
+
+  get 'send-from-test-user' do
+    contract_title = contract_title_by_id params[:contractId]
+
+    config = get_config
+    echosign = EchoSign.new
+
+    echosign.send_from_test_user params[:email], params[:contractId], config['callback_url'], contract_title
+  end
+
 
 end

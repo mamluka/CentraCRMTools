@@ -1,6 +1,4 @@
-current_dir = File.dirname(__FILE__)
-
-require current_dir + "/base/jobs-base.rb"
+require_relative "base/jobs-base"
 
 
 class Tests < JobsTestBase

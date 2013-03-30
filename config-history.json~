@@ -1,0 +1,23 @@
+{
+  "crm": {
+    "centraAppsApiBaseUrl": "Not set yet!",
+    "localListingEmail": "centralocallisting@centracorporation.com"
+  },
+  "echosign": {
+    "apiKey": "ZBVYTJ6J34656N",
+    "username": "billing@centracorporation.com",
+    "password": "$3m@J@7tN3c",
+    "callbackUrl": "Not set yet!"
+  },
+  "database": {
+    "host": "63.141.234.34",
+    "username": "root",
+    "password": "0953acb",
+    "database": "sugarcrm"
+  },
+  "email": {
+    "username": "service@centracorporation.com",
+    "password": "centra13",
+    "host": "gator20.hostgator.com"
+  }
+}

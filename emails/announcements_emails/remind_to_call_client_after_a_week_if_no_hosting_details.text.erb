@@ -1,0 +1,7 @@
+Hey Team,
+
+<%= @name %> did not fill his hosting details after a week of been a client, you will have to contact him
+
+The phone number we have in the system is: <%= @phone %>
+
+visit the lead at <%= "#{@crm_base_url}/index.php?module=Leads&action=DetailView&record=#{@id}" %>

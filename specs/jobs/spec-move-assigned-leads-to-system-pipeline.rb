@@ -54,7 +54,7 @@ class Tests < JobsTestBase
 
     load_job 'move-assigned-leads-to-system-pipeline'
 
-    assert_email_contains 'This past week we attempted to deliver and host your mobile website.'
+    assert_email_contains 'This past week we attempted to deliver and host your mobile website for free'
     assert_email_contains 'http://david.com'
   end
 

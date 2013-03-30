@@ -1,5 +1,5 @@
 require_relative "../../core/tests-base"
-require_relative "../../../api/echosign/echosign"
+require_relative "../../../soa/echosign/echosign"
 
 require 'watir-webdriver'
 
@@ -18,7 +18,9 @@ class EchoSignTestsBase < TestsBase
 
   def teardown
     super
-    clean_echosign_documents
+
+    clean_databases
+    #clean_echosign_documents
     capture_failed_snapshot @driver
 
     @driver.close
@@ -32,7 +34,7 @@ class EchoSignTestsBase < TestsBase
       return
     end
 
-    keys = documents.select { |doc| doc[:display_user_info][:full_name_or_email] == "david mz" || doc[:display_user_info][:full_name_or_email] == "crmtesting@centracorporation.com" }.map { |doc| doc[:document_key] }
+    keys = documents.select { |doc| doc[:display_user_info][:full_name_or_email] == "david mz" || doc[:display_user_info][:full_name_or_email] == "crmtesting@centracorporation.com" || doc[:display_user_info][:full_name_or_email].to_s.include?('@david.com') }.map { |doc| doc[:document_key] }
 
     keys.each do |key|
       echosign.cancel_document key

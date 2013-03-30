@@ -1,4 +1,5 @@
 require_relative "lib/jobs-base"
+require_relative "../emails/mailer_base"
 
 class DeadEmailJob < JobsBase
 
@@ -10,15 +11,14 @@ class DeadEmailJob < JobsBase
       email = lead.email
       logger.info "#{lead.name} will get an email to #{email}"
 
-      res = mailer.dead_client email
-
-      if res=="OK"
+      begin
+        StatusEmails.dead(email).deliver
         lead.custom_data.dead_client_email_sent_c = Time.now
         lead.save
 
         Note.add lead.id, "Dead email was sent 7 days after dead status was assigned"
-      else
-        logger.info "Api returned error response: " + res
+      rescue => ex
+        logger.info "Email sending returned error response: " + ex.meesage
       end
 
       sleep 5

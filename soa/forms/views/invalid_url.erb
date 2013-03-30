@@ -1,0 +1,46 @@
+<style>
+    .remark {
+        margin-top: 15px;
+    }
+
+    label.valid {
+        width: 24px;
+        height: 24px;
+        background: url(/forms/images/valid.png) center center no-repeat;
+        display: inline-block;
+        text-indent: -9999px;
+    }
+
+    label.error {
+        font-weight: bold;
+        color: red;
+        padding: 2px 8px;
+        margin-top: 2px;
+    }
+</style>
+
+<div>
+  <form action="/forms/invalid-url" method="POST" class="form-horizontal">
+    <input type="hidden" value="<%= @id %>" name="id">
+
+    <div class="row-fluid">
+      <div class="control-group">
+        <label class="control-label">*Website Url:</label>
+
+        <div class="controls">
+          <input type="text" class="input-xlarge required url" name="url">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <input type="submit" value="Update" class="btn-large btn-primary"/>
+        </div>
+      </div>
+
+      <div class="span12">
+        <h6 class="remark">Fields marked with * are required</h6>
+      </div>
+    </div>
+  </form>
+</div>

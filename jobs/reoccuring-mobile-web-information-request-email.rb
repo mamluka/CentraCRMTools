@@ -1,4 +1,5 @@
 require_relative "lib/jobs-base"
+require_relative "../emails/mailer_base"
 
 class ResendMobileWebCustomerDataRequestJob < JobsBase
 
@@ -10,15 +11,15 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
       email = lead.email
       logger.info "#{lead.name} will get an email to #{email}"
 
-      res = mailer.mobileweb_info_request email, lead.first_name, lead.id
+      begin
+        MobileWebEmails.mobile_web_details_request(email, lead.name, lead.id).deliver
 
-      if res=="OK"
         lead.custom_data.mobileweb_info_req_sent_c = Time.now
         lead.save
 
         Note.add lead.id, "Sent a mobile web hosting provider details request"
-      else
-        logger.info "Api returned error response: " + res
+      rescue => ex
+        logger.info "Email returned error response: " + ex.message
       end
 
       sleep 5

@@ -1,4 +1,5 @@
 require_relative "lib/jobs-base"
+require_relative "../emails/mailer_base"
 
 class ReminderToFillInGoogleLocalListingCode < JobsBase
 
@@ -10,14 +11,14 @@ class ReminderToFillInGoogleLocalListingCode < JobsBase
       email = lead.email
       logger.info "#{lead.name} will get a reminder to fill in google code to #{email}"
 
-      res = mailer.google_local_listing_verification_reminder email, lead.id
+      begin
+        GoogleLocalListingEmails.google_local_listing_pin_reminder(email, lead.id).deliver
 
-      if res=="OK"
         sleep 5
 
         Note.add lead.id, "Sent a reminder to enter PIN from google"
-      else
-        logger.info "Api returned error response: " + res
+      rescue => ex
+        logger.info "Emailing returned error response: " + ex.message
       end
     end
 
