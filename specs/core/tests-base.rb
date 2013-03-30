@@ -85,8 +85,8 @@ class TestsBase < MiniTest::Unit::TestCase
   def stop_api
 
     date_start = Time.now
-    `screen -L -dmS echosign thin -p 9050 -P api.pid stop`
-
+    #`screen -L -dmS echosign thin -p 9050 -P api.pid stop`
+    'pkill -9 -f 9050'
     until `ps aux | grep 9050 | grep -v grep`.empty?
       sleep 1
     end
