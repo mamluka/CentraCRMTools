@@ -18,7 +18,13 @@ class Auth
 
     @driver.text_field(:name => 'user_name').set username
     @driver.text_field(:name => 'user_password').set password
-    @driver.button(:name => 'Login').click
+
+    begin
+      @driver.button(:name => 'Login').click
+    rescue
+      @driver.button(:name => 'Login').click
+    end
+
   end
 
   def logout
