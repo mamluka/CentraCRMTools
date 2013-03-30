@@ -84,16 +84,11 @@ class TestsBase < MiniTest::Unit::TestCase
 
   def stop_api
 
-    date_start = Time.now
-    #`screen -L -dmS echosign thin -p 9050 -P api.pid stop`
-    puts "start killing"
-
     `pkill -9 -f 9050`
+
     until `ps aux | grep 9050 | grep -v grep`.empty?
       sleep 0.1
     end
-
-    puts "The stopping of the API took #{Time.now-date_start} seconds"
   end
 
 end
