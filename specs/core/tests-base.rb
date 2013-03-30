@@ -5,6 +5,7 @@ require_relative "../../core/crm-database"
 
 require 'active_record'
 require 'mail'
+require 'time'
 
 class TestsBase < MiniTest::Unit::TestCase
 
@@ -82,11 +83,15 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def stop_api
+
+    date_start = Time.now
     `screen -L -dmS echosign thin -p 9050 -P api.pid stop`
 
     until `ps aux | grep 9050 | grep -v grep`.empty?
       sleep 1
     end
+
+    puts "The stopping of the API took #{Time.now-date_start} seconds"
   end
 
 end
