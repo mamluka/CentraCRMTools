@@ -2,7 +2,7 @@ require 'grape'
 require 'json'
 
 require_relative '../../emails/mailer_base'
-require_relative '../../core/crm-database'
+require_relative '../../core/databases'
 
 class EmailsApi < Grape::API
   format :json
@@ -23,7 +23,7 @@ class EmailsApi < Grape::API
 
   get 'unsubscribe' do
 
-    crm = CrmDatabase.new
+    crm = Databases.new
     crm.connect
 
     email = Email.where(:email_address => params[:email]).first

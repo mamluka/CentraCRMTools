@@ -3,7 +3,7 @@ require "securerandom"
 require 'time'
 
 require_relative "../../core/emailer"
-require_relative "../../core/crm-database"
+require_relative "../../core/databases"
 
 class JobsBase
 
@@ -14,7 +14,7 @@ class JobsBase
   end
 
   def connect_to_db
-    crm_database = CrmDatabase.new
+    crm_database = Databases.new
     crm_database.connect
   end
 

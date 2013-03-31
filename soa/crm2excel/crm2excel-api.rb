@@ -3,7 +3,7 @@ require 'json'
 require 'axlsx'
 require 'date'
 
-require_relative "../../core/crm-database"
+require_relative "../../core/databases"
 
 class Crm2ExcelApi < Grape::API
 
@@ -11,7 +11,7 @@ class Crm2ExcelApi < Grape::API
 
   get :get do
 
-    crm = CrmDatabase.new
+    crm = Databases.new
     crm.connect
 
     rows = ActiveRecord::Base.connection.select_all('SELECT * FROM leads left join leads_cstm on leads.id = leads_cstm.id_c')

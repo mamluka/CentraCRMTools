@@ -1,5 +1,5 @@
 require 'date'
-require_relative "../../core/crm-database"
+require_relative "../../core/databases"
 require_relative "../../emails/mailer_base"
 
 class SafeCsvHash
@@ -136,7 +136,7 @@ class LeadForm
   end
 
   def connect_to_db
-    db = CrmDatabase.new
+    db = Databases.new
     db.connect
   end
 

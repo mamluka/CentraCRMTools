@@ -48,7 +48,7 @@ class EchoSignApi < Grape::API
   get 'sign-me-up' do
     begin
 
-      CrmDatabase.new.connect
+      Databases.new.connect
 
       lead_id = params[:id]
       lead = Lead.find(lead_id)

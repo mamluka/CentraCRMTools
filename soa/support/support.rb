@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require_relative '../../core/crm-database'
+require_relative '../../core/databases'
 require 'savon'
 
 class Support < Sinatra::Base

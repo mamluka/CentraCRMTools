@@ -1,7 +1,7 @@
 require_relative "email-client"
 require_relative "crm-lead"
 require_relative "auth"
-require_relative "../../core/crm-database"
+require_relative "../../core/databases"
 
 require 'active_record'
 require 'mail'
@@ -66,6 +66,8 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def clean_databases
+    ActiveRecord::Base.establish_connection 'crm'
+
     ActiveRecord::Base.connection.execute("DELETE FROM leads;")
     ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
     ActiveRecord::Base.connection.execute("DELETE FROM email_addresses;")
@@ -74,7 +76,7 @@ class TestsBase < MiniTest::Unit::TestCase
 
   def load_database
 
-    crm_database = CrmDatabase.new
+    crm_database = Databases.new
     crm_database.connect
   end
 

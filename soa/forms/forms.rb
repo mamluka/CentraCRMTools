@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require_relative '../../core/crm-database'
+require_relative '../../core/databases'
 require_relative '../../emails/announcements'
 
 class Forms < Sinatra::Base
@@ -13,7 +13,7 @@ class Forms < Sinatra::Base
 
   post '/invalid-url' do
 
-    crm = CrmDatabase.new
+    crm = Databases.new
     crm.connect
 
     lead = Lead.find(params[:id])
@@ -34,7 +34,7 @@ class Forms < Sinatra::Base
   post '/mobile-web-details' do
     @id = params[:id]
 
-    crm = CrmDatabase.new
+    crm = Databases.new
     crm.connect
 
     lead = Lead.find(params[:id])

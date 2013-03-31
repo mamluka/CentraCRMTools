@@ -1,7 +1,7 @@
 require 'grape'
 require 'json'
 
-require_relative "../../core/crm-database"
+require_relative "../../core/databases"
 
 class CrmNotingApi < Grape::API
   post :note do
@@ -9,7 +9,7 @@ class CrmNotingApi < Grape::API
     message = params[:message]
     description = params[:description]
 
-    db = CrmDatabase.new
+    db = Databases.new
     db.connect
 
     Note.add id, message, description
