@@ -6,6 +6,7 @@ require File.expand_path("../crmnoting/crm-noting-api.rb", __FILE__)
 require File.expand_path("../echosign/echosign-api.rb", __FILE__)
 require File.expand_path("../emails/emails-api.rb", __FILE__)
 require File.expand_path("../forms/forms.rb", __FILE__)
+require File.expand_path("../support/support.rb", __FILE__)
 
 map '/api/crm2excel' do
   run Crm2ExcelApi
@@ -25,4 +26,8 @@ end
 
 map '/forms' do
   run Forms.new
+end
+
+map '/support' do
+  run Support.new
 end

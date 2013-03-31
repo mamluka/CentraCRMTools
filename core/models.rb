@@ -2,6 +2,8 @@ require 'securerandom'
 require 'time'
 
 class Lead < ActiveRecord::Base
+  establish_connection "crm"
+
   self.primary_key = 'id'
   has_one :custom_data, :primary_key => 'id', :foreign_key => 'id_c', :autosave => true
   has_one :email_relation, :primary_key => 'id', :foreign_key => 'bean_id'
@@ -48,6 +50,8 @@ class Lead < ActiveRecord::Base
 end
 
 class CustomData < ActiveRecord::Base
+  establish_connection "crm"
+
   self.table_name = 'leads_cstm'
   self.primary_key = 'id_c'
 
@@ -60,6 +64,8 @@ end
 
 
 class Email < ActiveRecord::Base
+  establish_connection "crm"
+
   self.table_name = 'email_addresses'
   self.primary_key = 'id'
 
@@ -74,6 +80,8 @@ class Email < ActiveRecord::Base
 end
 
 class EmailRelation < ActiveRecord::Base
+  establish_connection "crm"
+
   self.table_name = 'email_addr_bean_rel'
   self.primary_key = 'id'
 
@@ -88,6 +96,7 @@ class EmailRelation < ActiveRecord::Base
 end
 
 class Note < ActiveRecord::Base
+  establish_connection "crm"
 
   def self.add(id, message, description = "")
 

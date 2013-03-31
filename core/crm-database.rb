@@ -8,12 +8,13 @@ class CrmDatabase
 
       config = JSON.parse(File.read(File.dirname(__FILE__) + "/database.json"))
 
-      ActiveRecord::Base.establish_connection(
+      ActiveRecord::Base.configurations["crm"] = {
           :adapter => 'mysql2',
           :database => config['database'],
           :username => config['username'],
           :password => config['password'],
-          :host => config['host'])
+          :host => config['host']
+      }
     end
   end
 end
