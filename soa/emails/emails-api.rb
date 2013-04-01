@@ -33,7 +33,7 @@ class EmailsApi < Grape::API
     email.email_relation.lead.custom_data.do_not_email_c = true
     email.save
 
-    "#{params[:email]} was successfully removed from mailing list of Centra"
+    "#{params[:email]} was successfully removed from the mailing list of Centra"
   end
 
 
