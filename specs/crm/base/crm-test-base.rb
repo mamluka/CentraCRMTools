@@ -20,7 +20,6 @@ class CrmTestBase < TestsBase
     @auth = Auth.new @driver
     @auth.login
 
-    load_database
     clean_databases
   end
 

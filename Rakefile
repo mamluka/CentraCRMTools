@@ -35,23 +35,28 @@ def rebuild_config(crm, database, echosign, email)
                                                                              password: email['testing_password'],
                                                                              host: email['host']
                                                                          })) }
- 
+
   File.open('specs/core/config-crm.json', 'w') { |file| file.write(JSON.pretty_generate(
-                                                                         {
-                                                                             admin_username: crm['admin_username'],
-                                                                             admin_password: crm['admin_password']
-                                                                         }
-                                                                     )) }
+                                                                       {
+                                                                           admin_username: crm['admin_username'],
+                                                                           admin_password: crm['admin_password']
+                                                                       }
+                                                                   )) }
 end
 
 task :config do
   #database
 
   database = Hash.new
-  database['host'] = read_config_value "Enter sugarcrm database hosts", "host", :database
-  database['username'] = read_config_value "Enter sugarcrm database username", "username", :database
-  database['password'] = read_config_value "Enter sugarcrm database password", "password", :database
-  database['database'] = read_config_value "Enter sugarcrm database name", "database", :database
+  database['crm_host'] = read_config_value "Enter sugarcrm database hosts", "crm_host", :database
+  database['crm_username'] = read_config_value "Enter sugarcrm database username", "crm_username", :database
+  database['crm_password'] = read_config_value "Enter sugarcrm database password", "crm_password", :database
+  database['crm_database'] = read_config_value "Enter sugarcrm database name", "crm_database", :database
+
+  database['otrs_host'] = read_config_value "Enter OTRS database hosts", "otrs_host", :database
+  database['otrs_username'] = read_config_value "Enter OTRS database username", "otrs_username", :database
+  database['otrs_password'] = read_config_value "Enter OTRS database password", "otrs_password", :database
+  database['otrs_database'] = read_config_value "Enter OTRS database name", "otrs_database", :database
 
   #echosign
 

@@ -9,9 +9,6 @@ class CrmNotingApi < Grape::API
     message = params[:message]
     description = params[:description]
 
-    db = Databases.new
-    db.connect
-
     Note.add id, message, description
   end
 end

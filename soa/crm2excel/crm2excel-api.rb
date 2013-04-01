@@ -11,9 +11,6 @@ class Crm2ExcelApi < Grape::API
 
   get :get do
 
-    crm = Databases.new
-    crm.connect
-
     rows = ActiveRecord::Base.connection.select_all('SELECT * FROM leads left join leads_cstm on leads.id = leads_cstm.id_c')
 
     filename = 'crm-report-' + Date.today.to_s + ".xlsx"

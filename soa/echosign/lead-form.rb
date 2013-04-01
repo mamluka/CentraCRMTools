@@ -33,7 +33,6 @@ class LeadForm
 
   def mark_as_requested(document_id, document_title)
 
-    connect_to_db
     custom_data = get_custom_data_by_doc_id(document_id)
 
     if contract_for_product?(document_title, "local-listing")
@@ -57,8 +56,6 @@ class LeadForm
   def update_crm(csv_hash, document_id, document_title)
 
     @csv_hash = SafeCsvHash.new csv_hash
-
-    connect_to_db
 
     custom_data = get_custom_data_by_doc_id(document_id)
     lead = custom_data.lead
@@ -133,11 +130,6 @@ class LeadForm
 
     Note.add lead.id, "Contract was signed"
 
-  end
-
-  def connect_to_db
-    db = Databases.new
-    db.connect
   end
 
   def contract_for_product?(document_title, product)

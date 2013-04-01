@@ -48,8 +48,6 @@ class EchoSignApi < Grape::API
   get 'sign-me-up' do
     begin
 
-      Databases.new.connect
-
       lead_id = params[:id]
       lead = Lead.find(lead_id)
 

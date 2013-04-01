@@ -41,7 +41,11 @@ class Lead < ActiveRecord::Base
   end
 
   def email
-    emails.first.email_address
+    first_email = emails.first
+    if first_email.nil?
+      return ''
+    end
+    first_email.email_address
   end
 
   def phone

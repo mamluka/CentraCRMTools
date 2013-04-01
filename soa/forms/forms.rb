@@ -13,9 +13,6 @@ class Forms < Sinatra::Base
 
   post '/invalid-url' do
 
-    crm = Databases.new
-    crm.connect
-
     lead = Lead.find(params[:id])
     lead.website = params[:url]
     lead.save
@@ -33,9 +30,6 @@ class Forms < Sinatra::Base
 
   post '/mobile-web-details' do
     @id = params[:id]
-
-    crm = Databases.new
-    crm.connect
 
     lead = Lead.find(params[:id])
     lead.custom_data.host_dash_url_c = params[:hostingCompany]

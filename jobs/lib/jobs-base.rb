@@ -8,14 +8,8 @@ require_relative "../../core/databases"
 class JobsBase
 
   def initialize
-    connect_to_db
     @logger = get_logger
     @mailer = ApiEmailer.new
-  end
-
-  def connect_to_db
-    crm_database = Databases.new
-    crm_database.connect
   end
 
   def get_logger

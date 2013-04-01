@@ -23,9 +23,6 @@ class EmailsApi < Grape::API
 
   get 'unsubscribe' do
 
-    crm = Databases.new
-    crm.connect
-
     email = Email.where(:email_address => params[:email]).first
 
     if email.nil?

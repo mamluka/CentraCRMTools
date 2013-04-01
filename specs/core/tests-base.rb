@@ -76,8 +76,6 @@ class TestsBase < MiniTest::Unit::TestCase
 
   def load_database
 
-    crm_database = Databases.new
-    crm_database.connect
   end
 
   def start_api

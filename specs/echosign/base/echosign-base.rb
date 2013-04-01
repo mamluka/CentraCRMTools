@@ -9,7 +9,6 @@ class EchoSignTestsBase < TestsBase
     @driver = Watir::Browser.new :phantomjs
     @email_client = EmailClient.new
 
-    load_database
     clean_databases
 
     @auth = Auth.new @driver
