@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Master</title>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.no-icons.min.css" rel="stylesheet">
+  <link href="/forms/css/app.css" rel="stylesheet">
+</head>
+<body style="background-color: rgb(247, 247, 249);">
+<div>
+  <div class="container" id="page">
+    <form action="/forms/mobile-web-details" method="POST" class="form-horizontal">
+      <input type="hidden" value="<%= @id %>" name="id">
+
+      <div class="control-group">
+        <label class="control-label">Provider name*</label>
+
+        <div class="controls">
+          <input type="text" name="hostingCompany" class="input-xlarge required"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div>
+  <div id="siteseal">
+    <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=e4HsCZaOevbjVp1RgFVG4kUorutpgpo10vaIZMv2Uvjp6LvNKSBvYs"></script>
+  </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+<script src="/forms/js/app.js"></script>
+
+
+</body>
+</html>
