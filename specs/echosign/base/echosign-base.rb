@@ -17,7 +17,7 @@ class EchoSignTestsBase < TestsBase
 
   def teardown
     super
-
+    load_database
     clean_databases
     #clean_echosign_documents
     capture_failed_snapshot @driver
