@@ -1,5 +1,5 @@
 require 'json'
-
+require 'securerandom'
 class Auth
   @@config = File.dirname(__FILE__) + '/config-crm.json'
 
@@ -22,7 +22,7 @@ class Auth
     begin
       @driver.button(:name => 'Login').click
     rescue
-      @driver.screenshot.save @__name__ + "_login problem.png"
+      @driver.screenshot.save SecureRandom.uuid + "_login problem.png"
       @driver.button(:name => 'Login').click
     end
 
