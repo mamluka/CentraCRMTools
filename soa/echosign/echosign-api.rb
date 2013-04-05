@@ -106,7 +106,7 @@ class EchoSignApi < Grape::API
 
   get 'document-list' do
     echosign = EchoSign.new
-    echosign.get_documents.select { |x| x[:display_user_info][:full_name_or_email] == "Reusable Document" }
+    echosign.get_documents.select { |x| x[:display_user_info][:full_name_or_email] == "Reusable Document" }.map { |x| {name: x[:name], document_key: x[:document_key]} }
   end
 
   get 'document-list-full' do
