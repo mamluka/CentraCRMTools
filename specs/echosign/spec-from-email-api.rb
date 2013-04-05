@@ -10,10 +10,15 @@ class FromEmailTests < EchoSignTestsBase
     lead.add_email "crmtesting@centracorporation.com"
     lead.save
 
-    RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
-        :id => lead.id,
-        :title => 'Mobile Web Presence Discount'
-    }}
+    begin
+      RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
+          :id => lead.id,
+          :title => 'Mobile Web Presence Discount'
+      }}
+
+    rescue => ex
+      puts ex.message
+    end
 
     result = lead.reload
 
