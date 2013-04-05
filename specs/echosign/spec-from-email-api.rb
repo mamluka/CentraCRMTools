@@ -9,6 +9,8 @@ class FromEmailTests < TestsBase
 
     lead.first_name = "david"
     lead.add_email "crmtesting@centracorporation.com"
+    lead.add_custom_data
+
     lead.save
 
     wait_for_api
