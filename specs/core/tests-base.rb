@@ -93,14 +93,13 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def wait_for_api
-    while begin
-      RestClient.get 'http://soa.centracorporation.com:9050'
-    rescue
-      return
+    while true
+      begin
+        RestClient.get 'http://soa.centracorporation.com:9050'
+      rescue
+        sleep 1
+      end
     end
-    end
-
-
   end
 
 end
