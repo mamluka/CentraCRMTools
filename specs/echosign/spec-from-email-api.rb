@@ -5,12 +5,13 @@ class FromEmailTests < TestsBase
 
   def test_when_called_sending_endpoint_with_existing_lead_should_send_out_email
 
-    clean_databases
     lead = Lead.new
 
     lead.first_name = "david"
     lead.add_email "crmtesting@centracorporation.com"
     lead.save
+
+    sleep 10
 
     RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
         :id => lead.id,
