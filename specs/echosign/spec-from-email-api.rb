@@ -40,6 +40,7 @@ class FromEmailTests < TestsBase
 
     lead.save
 
+    wait_for_api
     result RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
         :id => lead.id,
         :title => 'Mobile Web Presence Discount'
@@ -50,6 +51,7 @@ class FromEmailTests < TestsBase
 
   def test_when_called_sending_endpoint_with_and_lead_doesnt_exist_should_raise_error
 
+    wait_for_api
     result = RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
         :id => 'xxxx',
         :title => 'Mobile Web Presence Discount'
