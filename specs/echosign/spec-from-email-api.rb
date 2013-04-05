@@ -1,24 +1,21 @@
 require_relative "base/echosign-base"
 require 'rest-client'
 
-class FromEmailTests < EchoSignTestsBase
+class FromEmailTests < TestsBase
 
   def test_when_called_sending_endpoint_with_existing_lead_should_send_out_email
+
+    clean_databases
     lead = Lead.new
 
     lead.first_name = "david"
     lead.add_email "crmtesting@centracorporation.com"
-    lead.save
+    lead.save                    0
 
-    begin
-      RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
-          :id => lead.id,
-          :title => 'Mobile Web Presence Discount'
-      }}
-
-    rescue => ex
-      puts ex.message
-    end
+    RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
+        :id => lead.id,
+        :title => 'Mobile Web Presence Discount'
+    }}
 
     result = lead.reload
 
