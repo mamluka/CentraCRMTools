@@ -29,8 +29,6 @@ class Auth
   end
 
   def logout
-    #link = @driver.link(:text => 'Log Out')
-    #link.click if link.exists?
     @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Users&action=Logout'
   end
 end

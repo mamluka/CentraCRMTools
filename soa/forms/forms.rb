@@ -4,6 +4,7 @@ require_relative '../../emails/announcements'
 
 class Forms < Sinatra::Base
   set :static, true
+  set :protection, :except => :frame_options
 
   get '/invalid-url' do
     @id = params[:c]
