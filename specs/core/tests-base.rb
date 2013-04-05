@@ -93,13 +93,12 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def wait_for_api
-    while true
-      begin
-        RestClient.get 'http://soa.centracorporation.com:9050'
-        break
-      rescue
-        sleep 1
-      end
+    while begin
+      RestClient.get 'http://soa.centracorporation.com:9050/forms/invalid-url'
+      break
+    rescue Errno::ECONNREFUSED
+      sleep 1
+    end
     end
   end
 
