@@ -8,6 +8,13 @@ class CrmLead
     create_new_lead(values)
   end
 
+  def edit(values)
+    @driver.goto 'http://crm.centracorporation.com/index.php?module=Leads&action=DetailView&record=' + @id
+    set_values(values)
+
+    @driver.button(:value => 'Save').click
+  end
+
   def create_new_lead(values)
     values ||= Hash.new
     values = values.merge({:first_name => SecureRandom.uuid, :last_name => SecureRandom.uuid})
