@@ -2,6 +2,7 @@ require_relative "email-client"
 require_relative "crm-lead"
 require_relative "auth"
 require_relative "../../core/databases"
+require 'rest-client'
 
 require 'active_record'
 require 'mail'
@@ -89,6 +90,17 @@ class TestsBase < MiniTest::Unit::TestCase
     until `ps aux | grep 9050 | grep -v grep`.empty?
       sleep 0.1
     end
+  end
+
+  def wait_for_api
+    while begin
+      RestClient.get 'http://soa.centracorporation.com:9050'
+    rescue
+      return
+    end
+    end
+
+
   end
 
 end

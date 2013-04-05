@@ -11,8 +11,7 @@ class FromEmailTests < TestsBase
     lead.add_email "crmtesting@centracorporation.com"
     lead.save
 
-    sleep 10
-
+    wait_for_api
     RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
         :id => lead.id,
         :title => 'Mobile Web Presence Discount'
