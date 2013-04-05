@@ -34,7 +34,7 @@ class FromEmailTests < TestsBase
     lead.first_name = "david"
     lead.add_email "crmtesting@centracorporation.com"
 
-    lead.custom_data do |data|
+    lead.add_custom_data do |data|
       data.echosign_doc_id_c = "xxx"
     end
 
