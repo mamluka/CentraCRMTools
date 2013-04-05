@@ -41,7 +41,7 @@ class FromEmailTests < TestsBase
     lead.save
 
     wait_for_api
-    result RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
+    result = RestClient.get 'http://soa.centracorporation.com:9050/api/echosign/sign-me-up', {:params => {
         :id => lead.id,
         :title => 'Mobile Web Presence Discount'
     }}
