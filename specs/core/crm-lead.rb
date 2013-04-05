@@ -9,7 +9,7 @@ class CrmLead
   end
 
   def edit(values)
-    @driver.goto 'http://crm.centracorporation.com/index.php?module=Leads&action=DetailView&record=' + @id
+    @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=' + @id
     set_values(values)
 
     @driver.button(:value => 'Save').click
