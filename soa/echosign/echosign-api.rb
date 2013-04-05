@@ -49,7 +49,10 @@ class EchoSignApi < Grape::API
     begin
 
       lead_id = params[:id]
-      lead = Lead.find(lead_id) rescue return "No such lead"
+
+      return "No such lead" if Lead.exists?(:id => lead_id)
+
+      lead = Lead.find(lead_id)
 
       return "Contract was already sent" unless lead.custom_data.echosign_doc_id_c.nil?
 
