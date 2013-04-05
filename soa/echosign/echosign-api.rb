@@ -50,7 +50,7 @@ class EchoSignApi < Grape::API
 
       lead_id = params[:id]
 
-      return "No such lead" if Lead.exists?(:id => lead_id)
+      return "No such lead" unless Lead.exists?(:id => lead_id)
 
       lead = Lead.find(lead_id)
 
