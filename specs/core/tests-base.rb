@@ -96,7 +96,7 @@ class TestsBase < MiniTest::Unit::TestCase
     while true
       begin
         RestClient.get 'http://soa.centracorporation.com:9050'
-        return
+        break
       rescue
         sleep 1
       end
