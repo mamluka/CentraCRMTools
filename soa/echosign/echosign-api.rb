@@ -55,7 +55,7 @@ class EchoSignApi < Grape::API
         return "No such lead"
       end
 
-      unless lead.custom_date.echosign_doc_id_c.nil?
+      unless lead.custom_data.echosign_doc_id_c.nil?
         return "Contract was already sent"
       end
 
