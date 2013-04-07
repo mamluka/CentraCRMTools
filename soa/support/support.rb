@@ -93,7 +93,7 @@ class Support < Sinatra::Base
       customer = create_customer({
                                      email: lead.email,
                                      first_name: lead.first_name,
-                                     last_name: lead.last_name,
+                                     last_name: lead.last_name.nil? ? lead.last_name : 'Not specified',
                                      phone: lead.phone_work,
                                      owner_id: 3
                                  })
