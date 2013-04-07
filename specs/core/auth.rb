@@ -13,6 +13,7 @@ class Auth
 
   def login(username = nil, password = nil)
 
+
     username ||= @config['admin_username']
     password ||= @config['admin_password']
 
@@ -25,7 +26,7 @@ class Auth
       @driver.button(:name => 'Login').click
     rescue
       @driver.screenshot.save SecureRandom.uuid + "_login problem.png"
-      @driver.button(:name => 'Login').click
+      @driver.button(:name => 'Login').click if @driver.button(:name => 'Login').exists?
     end
 
   end

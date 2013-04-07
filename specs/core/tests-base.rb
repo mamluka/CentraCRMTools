@@ -95,8 +95,11 @@ class TestsBase < MiniTest::Unit::TestCase
   end
 
   def wait_for_api
+
+    @base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/crm-config.json'))['base_url']
+
     while begin
-      RestClient.get 'http://soa.centracorporation.com:9050/forms/invalid-url'
+      RestClient.get @base_url + '/forms/invalid-url'
       break
     rescue Errno::ECONNREFUSED
       sleep 1
