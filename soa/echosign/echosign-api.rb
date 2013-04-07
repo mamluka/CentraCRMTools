@@ -113,7 +113,7 @@ class EchoSignApi < Grape::API
 
   get 'document-list-clean' do
     echosign = EchoSign.new
-    keys = echosign.get_documents.select { |x| x[:display_user_info][:full_name_or_email].to_s.include?('david.com') }.map { |x| x[:document_key] }
+    keys = echosign.get_documents.select { |x| x[:display_user_info][:full_name_or_email].to_s.include?('david.com') || x[:display_user_info][:full_name_or_email].to_s == "crmtesting@centracorporation.com" }.map { |x| x[:document_key] }
     keys.each do |key|
       echosign.cancel_document key
     end

@@ -1,20 +1,22 @@
 require 'json'
 require 'securerandom'
 class Auth
-  @@config = File.dirname(__FILE__) + '/config-crm.json'
+
 
   def initialize(driver)
     @driver = driver
+
+    config = File.dirname(__FILE__) + '/crm-config.json'
+    @config = JSON.parse(File.read(config))
   end
 
 
   def login(username = nil, password = nil)
-    config = JSON.parse(File.read(@@config))
 
-    username ||= config['admin_username']
-    password ||= config['admin_password']
+    username ||= @config['admin_username']
+    password ||= @config['admin_password']
 
-    @driver.goto 'crmtesting.centracorporation.com'
+    @driver.goto @config['base_url']
 
     @driver.text_field(:name => 'user_name').set username
     @driver.text_field(:name => 'user_password').set password
@@ -29,6 +31,6 @@ class Auth
   end
 
   def logout
-    @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Users&action=Logout'
+    @driver.goto @config['base_url'] + '/index.php?module=Users&action=Logout'
   end
 end

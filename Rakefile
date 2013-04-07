@@ -20,13 +20,15 @@ end
 
 desc "configure services"
 
-def rebuild_config(crm, database, echosign, email)
+def rebuild_config(crm, database, echosign, email, jobs)
   File.open('core/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
   File.open('core/database.json', 'w') { |file| file.write(JSON.pretty_generate(database)) }
 
   File.open('soa/echosign/echosign.json', 'w') { |file| file.write(JSON.pretty_generate(echosign)) }
 
   File.open('emails/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
+
+  File.open('jobs/lib/config.json', 'w') { |file| file.write(JSON.pretty_generate(jobs)) }
 
 
   File.open('specs/core/email-config.json', 'w') { |file| file.write(JSON.pretty_generate(
@@ -36,10 +38,11 @@ def rebuild_config(crm, database, echosign, email)
                                                                              host: email['host']
                                                                          })) }
 
-  File.open('specs/core/config-crm.json', 'w') { |file| file.write(JSON.pretty_generate(
+  File.open('specs/core/crm-config.json', 'w') { |file| file.write(JSON.pretty_generate(
                                                                        {
                                                                            admin_username: crm['admin_username'],
-                                                                           admin_password: crm['admin_password']
+                                                                           admin_password: crm['admin_password'],
+                                                                           base_url: crm['crm_base_url']
                                                                        }
                                                                    )) }
 end
@@ -91,14 +94,19 @@ task :config do
   crm['admin_username'] = read_config_value "Testing CRM admin login", "admin_username", :crm
   crm['admin_password'] = read_config_value "Testing CRM asmin password", "admin_password", :crm
 
-  rebuild_config(crm, database, echosign, email)
+  jobs = Hash.new
+  jobs['wait_between_emails'] = read_config_value "Time between email sending", "wait_between_emails", :jobs
+
+  rebuild_config crm, database, echosign, email, jobs
 
   File.open('config-history.json', 'w') do |file|
     file.write(JSON.pretty_generate({
                                         :crm => crm,
                                         :echosign => echosign,
                                         :database => database,
-                                        :email => email
+                                        :email => email,
+                                        :jobs => jobs
+
                                     }))
   end
 
@@ -118,7 +126,8 @@ end
 
 def reload_config_from_history(hash_name, key)
   if File.exists?('config-history.json')
-    return JSON.parse(File.read('config-history.json'))[hash_name.to_s][key]
+    json_parse = JSON.parse(File.read('config-history.json'))
+    return json_parse[hash_name.to_s][key] if json_parse.has_key?(hash_name.to_s)
   end
 
   "Not set yet!"

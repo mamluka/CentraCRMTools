@@ -2,14 +2,13 @@ require "logging"
 require "securerandom"
 require 'time'
 
-require_relative "../../core/emailer"
 require_relative "../../core/databases"
 
 class JobsBase
 
   def initialize
     @logger = get_logger
-    @mailer = ApiEmailer.new
+    @config = JSON.parse(File.read(File.dirname(__FILE__) +'/config.json'))
   end
 
   def get_logger
@@ -30,8 +29,8 @@ class JobsBase
     @logger
   end
 
-  def mailer
-    @mailer
+  def wait_between_emails_interval
+    @config['wait_between_emails'].to_i
   end
 
   def system_pipeline_user_id

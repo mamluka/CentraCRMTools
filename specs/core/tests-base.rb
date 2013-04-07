@@ -87,8 +87,10 @@ class TestsBase < MiniTest::Unit::TestCase
 
     `pkill -9 -f 9050`
 
-    until `ps aux | grep 9050 | grep -v grep`.empty?
+    counter = 0
+    until `ps aux | grep 9050 | grep -v grep`.empty? || counter < 100
       sleep 0.1
+      counter=counter+1
     end
   end
 

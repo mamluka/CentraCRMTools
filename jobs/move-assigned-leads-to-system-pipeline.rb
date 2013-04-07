@@ -26,7 +26,7 @@ class JobAssignLeadsToSystemPipelineJob < JobsBase
         logger.info "Email response was: " + ex.message
       end
 
-      sleep 5
+      sleep wait_between_emails_interval
     end
 
     logger.info "#{leads.length.to_s} send system pipeline email #1"

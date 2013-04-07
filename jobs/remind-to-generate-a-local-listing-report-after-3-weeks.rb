@@ -14,7 +14,7 @@ class ReportReminderJob < JobsBase
         AnnouncementsEmails.remind_to_generate_a_report(lead.id).deliver
         Note.add lead.id, "Sent a reminder for generating a progress report for the client"
 
-        sleep 5
+        sleep wait_between_emails_interval
       rescue => ex
         logger.info "Email sending returned error response: " + ex.message
       end

@@ -14,7 +14,7 @@ class ReminderToFillInGoogleLocalListingCode < JobsBase
       begin
         GoogleLocalListingEmails.google_local_listing_pin_reminder(email, lead.id).deliver
 
-        sleep 5
+        sleep wait_between_emails_interval
 
         Note.add lead.id, "Sent a reminder to enter PIN from google"
       rescue => ex

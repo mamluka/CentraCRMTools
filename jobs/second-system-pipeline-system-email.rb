@@ -22,7 +22,7 @@ class SecondSystemPipelineEmailJob < JobsBase
         logger.info "Emailing returned an error " + ex.message
       end
 
-      sleep 5
+      sleep wait_between_emails_interval
 
     end
 

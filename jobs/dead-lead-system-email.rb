@@ -21,7 +21,7 @@ class DeadEmailJob < JobsBase
         logger.info "Email sending returned error response: " + ex.meesage
       end
 
-      sleep 5
+      sleep wait_between_emails_interval
     end
 
     logger.info "#{leads.length.to_s} cancelled leads got an email"

@@ -12,10 +12,13 @@ class CrmTestBase < TestsBase
 
   def setup
     super
+
+    base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/../../core/crm-config.json'))['base_url']
+
     @headless = Headless.new
     @headless.start
 
-    @driver = Watir::Browser.start 'crmtesting.centracorporation.com'
+    @driver = Watir::Browser.start base_url
 
     @auth = Auth.new @driver
     @auth.login

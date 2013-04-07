@@ -19,7 +19,7 @@ class CancellationEmailJob < JobsBase
 
         Note.add lead.id, "Cancellation email was sent 3 days after status was set to cancelled"
 
-        sleep 5
+        sleep wait_between_emails_interval
       rescue => ex
         logger.info "Email sending returned error response: " + ex.message
       end

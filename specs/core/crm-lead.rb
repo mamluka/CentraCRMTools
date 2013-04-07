@@ -4,12 +4,13 @@ require_relative 'driver-extentions.rb'
 
 class CrmLead
   def initialize(driver, values = nil)
+    @base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/crm-config.json'))['base_url']
     @driver = driver
     create_new_lead(values)
   end
 
   def edit(values)
-    @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=' + @id
+    @driver.goto @base_url  + '/index.php?module=Leads&action=DetailView&record=' + @id
     @driver.link(:id => 'edit_button').click
 
     set_values(values)
@@ -21,7 +22,7 @@ class CrmLead
     values ||= Hash.new
     values = values.merge({:first_name => SecureRandom.uuid, :last_name => SecureRandom.uuid})
 
-    @driver.goto 'http://crmtesting.centracorporation.com/index.php?module=Leads&action=index&parentTab=Sales'
+    @driver.goto @base_url  + '/index.php?module=Leads&action=index&parentTab=Sales'
 
     @driver.link(:text => 'Create').click
     set_values(values)
@@ -40,13 +41,7 @@ class CrmLead
   end
 
   def show_all_panels
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
-    @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')")
+    (0..5).each { @driver.execute_script("$('.yui-hidden').removeClass('yui-hidden')") }
   end
 
   def set_values(values)
@@ -75,7 +70,7 @@ class CrmLead
   def get(name)
 
     unless @driver.url.include?(@id)
-      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+      @driver.goto @base_url  + "/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
 
     show_all_panels
@@ -86,7 +81,7 @@ class CrmLead
   def get_list(id)
 
     unless @driver.url.include?(@id)
-      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+      @driver.goto @base_url  + "/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
 
     show_all_panels
@@ -95,12 +90,12 @@ class CrmLead
   end
 
   def refresh
-    @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+    @driver.goto @base_url  + "/index.php?module=Leads&action=DetailView&record=#{@id}"
   end
 
   def is_checked(id)
     unless @driver.url.include?(@id)
-      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+      @driver.goto @base_url  + "/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
 
     show_all_panels
@@ -110,7 +105,7 @@ class CrmLead
 
   def status
     unless @driver.url.include?(@id)
-      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+      @driver.goto @base_url  + "/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
     show_all_panels
 
@@ -119,7 +114,7 @@ class CrmLead
 
   def get_by_label(label)
     unless @driver.url.include?(@id)
-      @driver.goto "http://crmtesting.centracorporation.com/index.php?module=Leads&action=DetailView&record=#{@id}"
+      @driver.goto @base_url  + "/index.php?module=Leads&action=DetailView&record=#{@id}"
     end
 
     show_all_panels

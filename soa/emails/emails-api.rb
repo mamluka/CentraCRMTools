@@ -5,7 +5,7 @@ require_relative '../../emails/mailer_base'
 require_relative '../../core/databases'
 
 class EmailsApi < Grape::API
-  format :json
+  format :txt
 
   get ':email_domain/:email_name' do
     method_name = params[:email_name].gsub(/-/, '_')

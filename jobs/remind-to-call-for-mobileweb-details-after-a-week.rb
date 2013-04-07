@@ -14,7 +14,7 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
         AnnouncementsEmails.remind_to_call_client_after_a_week_if_no_hosting_details(lead.id).deliver
         Note.add lead.id, "A reminder was send to call collect hosting provider details, because they are still missing after a week"
 
-        sleep 5
+        sleep wait_between_emails_interval
       rescue => ex
         logger.info "Emailing failed with message: " + ex.message
       end

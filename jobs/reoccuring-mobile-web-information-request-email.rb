@@ -22,7 +22,7 @@ class ResendMobileWebCustomerDataRequestJob < JobsBase
         logger.info "Email returned error response: " + ex.message
       end
 
-      sleep 5
+      sleep wait_between_emails_interval
     end
 
     logger.info "#{leads.length.to_s} mobile web clients got a request data reminder"
