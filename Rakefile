@@ -42,7 +42,8 @@ def rebuild_config(crm, database, echosign, email, jobs)
                                                                        {
                                                                            admin_username: crm['admin_username'],
                                                                            admin_password: crm['admin_password'],
-                                                                           base_url: crm['crm_base_url']
+                                                                           crm_base_url: crm['crm_base_url'],
+                                                                           soa_base_url: crm['soa_base_url']
                                                                        }
                                                                    )) }
 end
@@ -91,6 +92,7 @@ task :config do
   crm['mobile_web_email'] = read_config_value "Enter mobile web dedicated email address", "mobile_web_email", :crm
   crm['service_email'] = read_config_value "Enter service dedicated email address", "service_email", :crm
   crm['crm_base_url'] = read_config_value "Enter CRM base url", "crm_base_url", :crm
+  crm['soa_base_url'] = read_config_value "Enter SOA base url", "soa_base_url", :crm
   crm['admin_username'] = read_config_value "Testing CRM admin login", "admin_username", :crm
   crm['admin_password'] = read_config_value "Testing CRM asmin password", "admin_password", :crm
 

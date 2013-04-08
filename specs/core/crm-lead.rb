@@ -4,7 +4,7 @@ require_relative 'driver-extentions.rb'
 
 class CrmLead
   def initialize(driver, values = nil)
-    @base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/crm-config.json'))['base_url']
+    @base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/crm-config.json'))['crm_base_url']
     @driver = driver
     create_new_lead(values)
   end

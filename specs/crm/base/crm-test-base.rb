@@ -13,7 +13,7 @@ class CrmTestBase < TestsBase
   def setup
     super
 
-    base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/../../core/crm-config.json'))['base_url']
+    base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/../../core/crm-config.json'))['crm_base_url']
 
     @headless = Headless.new
     @headless.start

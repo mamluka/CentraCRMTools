@@ -17,7 +17,7 @@ class Auth
     username ||= @config['admin_username']
     password ||= @config['admin_password']
 
-    @driver.goto @config['base_url']
+    @driver.goto @config['crm_base_url']
 
     @driver.text_field(:name => 'user_name').set username
     @driver.text_field(:name => 'user_password').set password
@@ -32,6 +32,6 @@ class Auth
   end
 
   def logout
-    @driver.goto @config['base_url'] + '/index.php?module=Users&action=Logout'
+    @driver.goto @config['crm_base_url'] + '/index.php?module=Users&action=Logout'
   end
 end

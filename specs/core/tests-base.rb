@@ -96,7 +96,7 @@ class TestsBase < MiniTest::Unit::TestCase
 
   def wait_for_api
 
-    @base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/crm-config.json'))['base_url']
+    @base_url = JSON.parse(File.read(File.dirname(__FILE__) + '/crm-config.json'))['soa_base_url']
 
     while begin
       RestClient.get @base_url + '/forms/invalid-url'
