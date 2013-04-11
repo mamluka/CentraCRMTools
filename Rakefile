@@ -26,6 +26,10 @@ def rebuild_config(crm, database, echosign, email, jobs)
 
   File.open('soa/echosign/echosign.json', 'w') { |file| file.write(JSON.pretty_generate(echosign)) }
 
+  File.open('soa/notes/config.json', 'w') { |file| file.write(JSON.pretty_generate({
+                                                                                       crm_base_url: crm['crm_base_url']
+                                                                                   })) }
+
   File.open('emails/config.json', 'w') { |file| file.write(JSON.pretty_generate(email.merge(crm))) }
 
   File.open('jobs/lib/config.json', 'w') { |file| file.write(JSON.pretty_generate(jobs)) }

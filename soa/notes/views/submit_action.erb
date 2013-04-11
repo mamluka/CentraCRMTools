@@ -1,0 +1,49 @@
+<div>
+  <link href="<%= @base_url %>/crm/notes/css/app.css" rel="stylesheet">
+  <link href="<%= @base_url %>/crm/notes/css/bootstrap.css" rel="stylesheet">
+
+  <div class="fluent-container">
+    <link href="/crm/notes/app.js" rel="stylesheet">
+
+    <h3>Please add a note, logging your action</h3>
+
+    <p>Centra wants to help convergence and lead support, we would like you to fill in as much details as possible</p>
+
+    <form action="/crm/note/log" method="post" class="form-horizontal">
+
+
+      <div class="control-group">
+        <label class="control-label">Pre-fill subject:</label>
+
+        <div class="controls">
+          <select id="subjectList">
+            <option>Scheduled another call</option>
+            <option>Lead is not interested</option>
+            <option>Offered to make a website</option>
+            <option>Was not available</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Subject:</label>
+
+        <div class="controls">
+          <input type="text" name="subject" placeholder="Subject"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Note:</label>
+
+        <div class="controls">
+          <textarea rows="10" name="note" placeholder="Your note"/>
+        </div>
+      </div>
+
+      <input type="submit" value="submit" class="btn btn-primary">
+    </form>
+  </div>
+
+  <link href="/crm/notes/app.js" rel="stylesheet">
+</div>

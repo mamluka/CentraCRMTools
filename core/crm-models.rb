@@ -41,7 +41,7 @@ class Lead < ActiveRecord::Base
   end
 
   def email
-    first_email = emails.first
+    first_email = emails.select { |email| email.email_relation.deleted == false }.first
     if first_email.nil?
       return ''
     end

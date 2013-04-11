@@ -1,13 +1,30 @@
 require 'sinatra/base'
+require 'sinatra/cross_origin'
 require_relative '../../core/databases'
 require 'savon'
 require 'time'
 
 class Support < Sinatra::Base
   set :static, true
+  register Sinatra::CrossOrigin
+
+  configure do
+    enable :cross_origin
+  end
 
   get '/submit-ticket' do
     erb :submit_ticket
+  end
+
+  get '/crm-dashboard' do
+    customer_id = params[:id]
+
+    lead = Lead.find(customer_id)
+
+    @email = lead.email
+    @ticket_count = Ticket.count(:conditions => "customer_user_id = '#{@email}' and (ticket_state_id = 1 or ticket_state_id = 4)")
+
+    erb :crm_dashboard
   end
 
   post '/submit-ticket' do
@@ -77,7 +94,7 @@ class Support < Sinatra::Base
 
     leads_data = CustomData.where('has_otrs_user_c is null or has_otrs_user_c = 0')
 
-    puts "#{leads_data.length} leads found"
+    puts " #{leads_data.length} leads found"
 
     leads_data.each do |data|
 
