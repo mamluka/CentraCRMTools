@@ -1,22 +1,25 @@
-<div>
+<div id="notes">
   <link href="<%= @base_url %>/crm/notes/css/app.css" rel="stylesheet">
   <link href="<%= @base_url %>/crm/notes/css/bootstrap.css" rel="stylesheet">
 
   <div class="fluent-container">
-    <link href="/crm/notes/app.js" rel="stylesheet">
+    <h1>Please add a note, logging your action</h1>
 
-    <h3>Please add a note, logging your action</h3>
+    <p>
+      Centra wants to help convergence and lead support,
+      <br/>
+      we would like you to fill in as much details as possible
+    </p>
 
-    <p>Centra wants to help convergence and lead support, we would like you to fill in as much details as possible</p>
-
-    <form action="/crm/note/log" method="post" class="form-horizontal">
-
+    <form action="<%= @base_url %>/crm/notes/log" method="post" class="form-horizontal" id="noteForm">
+      <input type="hidden" name="id" value=<%= @id %> />
 
       <div class="control-group">
         <label class="control-label">Pre-fill subject:</label>
 
         <div class="controls">
-          <select id="subjectList">
+          <select id="subjectList" class="input-xlarge">
+            <option>Choose a pre fill</option>
             <option>Scheduled another call</option>
             <option>Lead is not interested</option>
             <option>Offered to make a website</option>
@@ -29,7 +32,7 @@
         <label class="control-label">Subject:</label>
 
         <div class="controls">
-          <input type="text" name="subject" placeholder="Subject"/>
+          <input type="text" name="subject" placeholder="Subject" class="required input-xlarge"/>
         </div>
       </div>
 
@@ -37,13 +40,23 @@
         <label class="control-label">Note:</label>
 
         <div class="controls">
-          <textarea rows="10" name="note" placeholder="Your note"/>
+          <textarea rows="8" name="note" placeholder="Your note" class="required input-xlarge"></textarea>
         </div>
       </div>
 
-      <input type="submit" value="submit" class="btn btn-primary">
+      <div class="control-group">
+
+        <div class="controls">
+          <input type="submit" value="submit" class="btn btn-primary">
+        </div>
+      </div>
+
+
     </form>
   </div>
-
-  <link href="/crm/notes/app.js" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <script src="https://raw.github.com/malsup/form/master/jquery.form.js"></script>
+  <script src="https://raw.github.com/daepark/postmessage/master/postmessage.js"></script>
+  <script src="<%= @base_url %>/crm/notes/js/app.js"></script>
 </div>

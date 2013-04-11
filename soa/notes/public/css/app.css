@@ -1,0 +1,16 @@
+#notes p {
+    font-size: 1.4em;
+}
+
+label.error {
+    display: none;
+}
+
+textarea.valid, input.valid {
+    background: url(http://cdn.dustball.com/accept.png) top right no-repeat;
+}
+
+textarea.error, input.error {
+    background: url(http://cdn.dustball.com/cross.png) top right no-repeat;
+}
+
