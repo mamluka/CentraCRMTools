@@ -17,7 +17,7 @@ class JobsTestBase < TestsBase
   end
 
   def load_job(job_file)
-    load @@current_dir + '/../../../jobs/' + job_file +'.rb'
+    load @@current_dir + '/../../../jobs/jobs/' + job_file +'.rb'
   end
 
   def lead_with

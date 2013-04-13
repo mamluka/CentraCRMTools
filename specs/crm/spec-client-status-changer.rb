@@ -27,9 +27,11 @@ class TestMini < CrmTestBase
     assert_note_added lead.id, "Client status was assigned by David MZ"
   end
 
-  def test_when_lead_is_assgined_and_a_save_is_made_should_move_to_follow_ip
+  def test_when_lead_is_assgined_with_preview_sent_and_a_save_is_made_should_move_to_follow_ip
     lead = CrmLead.new @driver, {
-        :email => "email crmtesting@centracorporation.com"
+        :email => "email crmtesting@centracorporation.com",
+        :mobile_preview_email_sent_c => today_crm_date
+
     }
 
     lead.edit :status => 'select Assigned'

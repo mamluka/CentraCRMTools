@@ -73,6 +73,11 @@ class TestsBase < MiniTest::Unit::TestCase
     ActiveRecord::Base.connection.execute("DELETE FROM leads_cstm;")
     ActiveRecord::Base.connection.execute("DELETE FROM email_addresses;")
     ActiveRecord::Base.connection.execute("DELETE FROM email_addr_bean_rel;")
+
+    ActiveRecord::Base.establish_connection 'otrs'
+
+    ActiveRecord::Base.connection.execute("DELETE FROM customer_user;")
+
   end
 
   def load_database

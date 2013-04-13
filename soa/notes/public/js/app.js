@@ -1,8 +1,10 @@
 $.validator.messages.required = '';
 $('#noteForm').validate({
     submitHandler: function () {
+        $('input[type=submit]').prop('disabled');
+
         $('#noteForm').ajaxSubmit(function () {
-            $.pm({target: window.parent, type: 'close-dialog'})
+            $.pm({target: window.parent, type: 'close-dialog'});
         });
     }
 });
