@@ -8,7 +8,6 @@ require File.expand_path("../echosign/echosign-api.rb", __FILE__)
 require File.expand_path("../emails/emails-api.rb", __FILE__)
 require File.expand_path("../forms/forms.rb", __FILE__)
 require File.expand_path("../support/support.rb", __FILE__)
-require File.expand_path("../leadgen/leadgen.rb", __FILE__)
 
 map '/api/crm2excel' do
   run Crm2ExcelApi
@@ -32,10 +31,6 @@ end
 
 map '/support' do
   run Support.new
-end
-
-map '/leadgen' do
-  run LeadGen.new
 end
 
 map '/crm/notes' do
