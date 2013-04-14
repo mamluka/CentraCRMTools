@@ -1,8 +1,8 @@
 <% if @ticket_count > 0 %>
     <span style="color:red">We have <%= @ticket_count %> ticket(s)</span>,
-    <a href="http://support.centracorporation.com/otrs/index.pl?Action=AgentCustomerInformationCenter;CustomerID=<%= @email %>" target="_blank">open
-      ticketing system</a>
 <% else %>
     No support tickets
 <% end %>
+<a href="http://support.centracorporation.com/otrs/index.pl?Action=AgentCustomerInformationCenter;CustomerID=<%= @email %>" target="_blank">open
+  ticketing system</a>
 
