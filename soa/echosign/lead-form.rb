@@ -43,10 +43,17 @@ class LeadForm
       custom_data.mobileweb_echosign_in_c = true
     end
 
+    custom_data.googlelocal_contract_status_c = "emailed"
+
     custom_data.save
 
     Note.add custom_data.lead.id, "Contract received by user"
 
+  end
+
+  def mark_as_viewed(document_id)
+    custom_data = get_custom_data_by_doc_id(document_id)
+    custom_data.googlelocal_contract_status_c = "viewed"
   end
 
   def get_custom_data_by_doc_id(document_id)
@@ -118,6 +125,8 @@ class LeadForm
       custom_data.mobileweb_sign_date_c = Time.now
       custom_data.mobileweb_echosign_signed_c = true
     end
+
+    custom_data.googlelocal_contract_status_c = "signed"
 
     if contract_for_product?(document_title, "local-listing")
       AnnouncementsEmails.local_listing_contract_signed(lead.id).deliver

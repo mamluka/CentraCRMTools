@@ -501,7 +501,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     lead.refresh
-    assert lead.get_list('googlelocal_contract_status_c'), "Emailed"
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "Emailed"
   end
 
   def test_when_echosign_contract_email_is_viewed_mark_status_as_viewed
@@ -513,24 +513,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     lead.refresh
-    assert lead.get_list('googlelocal_contract_status_c'), "Email was viewed"
-  end
-
-  def test_when_echosign_contract_is_opened_mark_as_opened
-
-    lead = CrmLead.new @driver, {
-        :email => "email crmtesting@centracorporation.com",
-        :googlelocal_check_c => 'check',
-        :googlelocal_contract_type_c => 'select Centra 99'
-    }
-
-
-    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
-
-    @driver.goto contract_url
-
-    lead.refresh
-    assert lead.get_list('googlelocal_contract_status_c'), "Contract was opened"
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "Email was viewed"
   end
 
   def test_when_echosign_contract_is_signed_mark_as_signed
@@ -565,7 +548,7 @@ class LocalListingFormTests < EchoSignTestsBase
     sleep 3
 
     lead.refresh
-    assert lead.get_list('googlelocal_contract_status_c'), "Contract signed"
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "Contract signed"
   end
 
   def test_when_no_contract_is_selected_notice_user

@@ -96,6 +96,14 @@ class EchoSignApi < Grape::API
 
       end
 
+      if params[:eventType] == "EMAIL_VIEWED"
+
+        document_key = params[:documentKey]
+        lead_form = LeadForm.new
+        lead_form.mark_as_viewed document_key
+
+      end
+
     rescue => exception
       exception.message
     end
