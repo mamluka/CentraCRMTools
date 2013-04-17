@@ -54,6 +54,8 @@ class LeadForm
   def mark_as_viewed(document_id)
     custom_data = get_custom_data_by_doc_id(document_id)
     custom_data.googlelocal_contract_status_c = "viewed"
+
+    custom_data.save
   end
 
   def get_custom_data_by_doc_id(document_id)
