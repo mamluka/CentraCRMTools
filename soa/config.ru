@@ -9,6 +9,9 @@ require File.expand_path("../emails/emails-api.rb", __FILE__)
 require File.expand_path("../forms/forms.rb", __FILE__)
 require File.expand_path("../support/support.rb", __FILE__)
 
+logger = Logger.new('log/app.log')
+use Rack::CommonLogger, logger
+
 map '/api/crm2excel' do
   run Crm2ExcelApi
 end
