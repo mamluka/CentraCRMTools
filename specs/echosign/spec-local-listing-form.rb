@@ -513,6 +513,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    @driver.goto contract_url
 
     lead.refresh
     assert_equal lead.get_list('googlelocal_contract_status_c'), "viewed"
