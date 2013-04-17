@@ -10,32 +10,39 @@ require File.expand_path("../forms/forms.rb", __FILE__)
 require File.expand_path("../support/support.rb", __FILE__)
 
 logger = Logger.new('log/app.log')
-use Rack::CommonLogger, logger
+
 
 map '/api/crm2excel' do
+  use Rack::CommonLogger, logger
   run Crm2ExcelApi
 end
 
 map '/api/crm' do
+  use Rack::CommonLogger, logger
   run CrmNotingApi
 end
 
 map '/api/echosign' do
+  use Rack::CommonLogger, logger
   run EchoSignApi
 end
 
 map '/api/emails' do
+  use Rack::CommonLogger, logger
   run EmailsApi
 end
 
 map '/forms' do
+  use Rack::CommonLogger, logger
   run Forms.new
 end
 
 map '/support' do
+  use Rack::CommonLogger, logger
   run Support.new
 end
 
 map '/crm/notes' do
+  use Rack::CommonLogger, logger
   run NotesForm.new
 end
