@@ -501,7 +501,7 @@ class LocalListingFormTests < EchoSignTestsBase
     }
 
     lead.refresh
-    assert_equal lead.get_list('googlelocal_contract_status_c'), "Emailed"
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "emailed"
   end
 
   def test_when_echosign_contract_email_is_viewed_mark_status_as_viewed
@@ -515,7 +515,7 @@ class LocalListingFormTests < EchoSignTestsBase
     contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
 
     lead.refresh
-    assert_equal lead.get_list('googlelocal_contract_status_c'), "Email was viewed"
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "viewed"
   end
 
   def test_when_echosign_contract_is_signed_mark_as_signed
@@ -550,7 +550,7 @@ class LocalListingFormTests < EchoSignTestsBase
     sleep 3
 
     lead.refresh
-    assert_equal lead.get_list('googlelocal_contract_status_c'), "Contract signed"
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "signed"
   end
 
   def test_when_no_contract_is_selected_notice_user
