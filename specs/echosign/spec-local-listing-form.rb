@@ -512,6 +512,8 @@ class LocalListingFormTests < EchoSignTestsBase
         :googlelocal_contract_type_c => 'select Centra 99'
     }
 
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+
     lead.refresh
     assert_equal lead.get_list('googlelocal_contract_status_c'), "Email was viewed"
   end
