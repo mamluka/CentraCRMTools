@@ -56,6 +56,8 @@ class LeadForm
     custom_data.googlelocal_contract_status_c = "viewed"
 
     custom_data.save
+
+    Notes.add custom_data.lead.id "Contract was viewed"
   end
 
   def get_custom_data_by_doc_id(document_id)
