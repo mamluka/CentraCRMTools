@@ -517,6 +517,7 @@ class LocalListingFormTests < EchoSignTestsBase
 
     lead.refresh
     assert_equal lead.get_list('googlelocal_contract_status_c'), "viewed"
+    assert_note_added lead.id,"contract viewed"
   end
 
   def test_when_echosign_contract_is_signed_mark_as_signed
