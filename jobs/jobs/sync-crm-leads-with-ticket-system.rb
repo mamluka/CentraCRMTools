@@ -15,7 +15,7 @@ class SyncTicketSystemJob < JobsBase
                                   owner_id: 2,
                                   first_name: lead.first_name,
                                   last_name: (lead.last_name.nil? ? 'unknown' : lead.last_name),
-                                  phone : lead.phone_work})
+                                  phone: lead.phone_work})
 
       begin
         customer.save
