@@ -444,7 +444,7 @@ class LocalListingFormTests < EchoSignTestsBase
     assert_signing(lead)
     assert_status lead
 
-    end
+  end
 
   def test_when_contract_is_signed_email_local_listing_email
 
@@ -490,6 +490,69 @@ class LocalListingFormTests < EchoSignTestsBase
 
     lead.refresh
     assert lead.is_checked('googlelocal_echosign_in_c')
+  end
+
+  def test_when_echosign_contract_sent_mark_status_as_emailed
+
+    lead = CrmLead.new @driver, {
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    lead.refresh
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "emailed"
+  end
+
+  def test_when_echosign_contract_email_is_viewed_mark_status_as_viewed
+
+    lead = CrmLead.new @driver, {
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    @driver.goto contract_url
+
+    lead.refresh
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "viewed"
+    assert_note_added lead.id, "Contract was viewed"
+  end
+
+  def test_when_echosign_contract_is_signed_mark_as_signed
+
+    lead = CrmLead.new @driver, {
+        :email => "email crmtesting@centracorporation.com",
+        :googlelocal_check_c => 'check',
+        :googlelocal_contract_type_c => 'select Centra 99'
+    }
+
+    contract_url = @email_client.get_first_email_body.match(/"(https:\/\/centra.echosign.com\/public\/esign.+?)"/).captures[0]
+    assert_includes @email_client.get_first_email_subject, "Mobile Web Presence Discount"
+
+    @driver.goto contract_url
+
+    fill_basic_info
+    fill_billing_info
+
+    not_same_billing_address
+    fill_billing_address
+
+    fill_client_details
+    fill_categories
+    fill_working_hours
+    fill_payment_types
+    full_mobile_web_information
+
+    fill_sign_details
+    sign_form
+
+
+    sleep 3
+
+    lead.refresh
+    assert_equal lead.get_list('googlelocal_contract_status_c'), "signed"
   end
 
   def test_when_no_contract_is_selected_notice_user

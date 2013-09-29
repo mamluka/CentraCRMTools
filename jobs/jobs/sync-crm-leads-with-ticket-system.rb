@@ -14,11 +14,14 @@ class SyncTicketSystemJob < JobsBase
       customer = create_customer({email: lead.email,
                                   owner_id: 2,
                                   first_name: lead.first_name,
-                                  last_name: lead.last_name,
+                                  last_name: (lead.last_name.nil? ? 'unknown' : lead.last_name),
                                   phone: lead.phone_work})
 
-
-      customer.save rescue ActiveRecord::RecordNotUnique puts logger.info 'Prevented duplication'
+      begin
+        customer.save
+      rescue ActiveRecord::RecordNotUnique
+        logger.info 'Prevented duplication'
+      end
 
       lead.custom_data.has_otrs_user_c = true
       lead.save
