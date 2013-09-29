@@ -22,7 +22,7 @@ class Support < Sinatra::Base
     lead = Lead.find(customer_id)
 
     @email = lead.email
-    @ticket_count = Ticket.count(:conditions => "customer_user_id = '#{@email}' and (ticket_state_id = 1 or ticket_state_id = 4)")
+    @ticket_count = Ticket.distinct.count(:conditions => "customer_user_id = '#{@email}' and (ticket_state_id = 1 or ticket_state_id = 4)")
 
     erb :crm_dashboard
   end

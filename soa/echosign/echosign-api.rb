@@ -5,7 +5,7 @@ require_relative 'echosign'
 require_relative 'lead-form'
 
 class EchoSignApi < Grape::API
-  format :json
+  format :txt
 
   helpers do
     def get_config
