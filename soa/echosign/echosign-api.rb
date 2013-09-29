@@ -39,9 +39,9 @@ class EchoSignApi < Grape::API
       contract_title = contract_title_by_id params[:contractId]
       send_contract params[:contractId], contract_title, params[:email]
 
-    rescue => exception
-      exception.message
-
+    rescue Exception => exception
+      Logger.new('echosign.log').error exception.message
+      'Error'
     end
   end
 
