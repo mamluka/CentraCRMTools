@@ -1,5 +1,6 @@
 require 'grape'
 require 'json'
+require 'logger'
 
 require_relative 'echosign'
 require_relative 'lead-form'
